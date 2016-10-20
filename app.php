@@ -12,7 +12,7 @@ $conn = new mysqli($server, $username, $password, $db);
 $result = $conn->query("SELECT * FROM tmp_users");
 
 print '<pre>';
-print_r($result);
+print_r(mysqli_fetch_all($result));
 
 
 ?>
