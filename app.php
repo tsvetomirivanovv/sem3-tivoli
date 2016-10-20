@@ -11,7 +11,7 @@ $conn = new mysqli($server, $username, $password, $db);
 
 $test = $conn->query("SELECT * FROM tmp_users");
 
-echo 'App page'
+echo 'App page';
 
 echo $test;
 
