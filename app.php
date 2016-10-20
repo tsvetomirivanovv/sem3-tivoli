@@ -9,10 +9,10 @@ $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
 
-$test = $conn->query("SELECT * FROM tmp_users");
+$result = $conn->query("SELECT * FROM tmp_users");
 
-echo 'App page';
+print '<pre>';
+print_r($result);
 
-echo $test;
 
 ?>
