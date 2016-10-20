@@ -1,0 +1,5 @@
+<?php
+
+echo 'App page'
+
+?>
