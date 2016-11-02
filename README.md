@@ -39,7 +39,7 @@ First, you'll need PHP 5.x installed. Type `php -v` and see if you have it insta
 
     ```
 
-* Access your application on [http://localhost:8080](http://localhost:8080)
+* Access your application on [http://localhost:9090](http://localhost:9090)
 
 
 
