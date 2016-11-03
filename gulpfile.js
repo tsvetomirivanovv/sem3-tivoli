@@ -80,7 +80,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', function(cb) {
-  sequence('bundle', 'sass', 'scripts', cb);
+  sequence(/*'bundle',*/ 'sass', 'scripts', cb);
 });
 
 gulp.task('default', ['build', 'watch']);
