@@ -85,7 +85,7 @@ module.exports = function (grunt) {
           'js/*.js',
           '!js/application.js'
         ],
-        dest: 'dist/js/<%= pkg.shortname %>.js'
+        dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
 
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       },
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: 'dist/js/<%= pkg.shortname %>.min.js'
+        dest: 'dist/js/<%= pkg.name %>.min.js'
       }
     },
 
@@ -105,11 +105,11 @@ module.exports = function (grunt) {
           strictMath: true,
           sourceMap: true,
           outputSourceFiles: true,
-          sourceMapURL: '<%= pkg.shortname %>.css.map',
-          sourceMapFilename: 'dist/css/<%= pkg.shortname %>.css.map'
+          sourceMapURL: '<%= pkg.name %>.css.map',
+          sourceMapFilename: 'dist/css/<%= pkg.name %>.css.map'
         },
         files: {
-          'dist/css/<%= pkg.shortname %>.css': 'less/<%= pkg.shortname %>.less'
+          'dist/css/<%= pkg.name %>.css': 'less/<%= pkg.name %>.less'
         }
       },
       compileDocs: {
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
         options: {
           map: true
         },
-        src: 'dist/css/<%= pkg.shortname %>.css'
+        src: 'dist/css/<%= pkg.name %>.css'
       },
       assets: {
         src: ['docs/assets/css/docs.css', 'docs/assets/css/demo.css']
@@ -167,7 +167,7 @@ module.exports = function (grunt) {
         'overqualified-elements': false
       },
       src: [
-        'dist/css/<%= pkg.shortname %>.css'
+        'dist/css/<%= pkg.name %>.css'
       ],
       assets: {
         options: {
@@ -185,7 +185,7 @@ module.exports = function (grunt) {
       },
       core: {
         files: {
-          'dist/css/<%= pkg.shortname %>.min.css': 'dist/css/<%= pkg.shortname %>.css'
+          'dist/css/<%= pkg.name %>.min.css': 'dist/css/<%= pkg.name %>.css'
         }
       }
     },
@@ -198,8 +198,8 @@ module.exports = function (grunt) {
         },
         files: {
           src: [
-            'dist/css/<%= pkg.shortname %>.css',
-            'dist/css/<%= pkg.shortname %>.min.css',
+            'dist/css/<%= pkg.name %>.css',
+            'dist/css/<%= pkg.name %>.min.css',
             'docs/assets/css/docs.css',
             'docs/assets/css/demo.css'
           ]
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/css/<%= pkg.shortname %>.css': 'dist/css/<%= pkg.shortname %>.css'
+          'dist/css/<%= pkg.name %>.css': 'dist/css/<%= pkg.name %>.css'
         }
       },
       assets: {
