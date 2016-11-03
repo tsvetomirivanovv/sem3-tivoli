@@ -1,6 +1,6 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<form method="post" id="insertFormID" action="../../core/functions/shifts/shifts.php">
+
+<form id="myForm">
 
     <div class="label-input-container">
         <label>Title</label>
@@ -37,8 +37,11 @@
         <input type="number" minlength="1" maxlength="3" max="100" name="shiftParticipants" required>
     </div>
 
-    <div class="submit">
-        <br><input type="submit" value="Create">
+    <div>
+        <br><input type="submit" name="submit" value="Create">
     </div>
     
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../core/functions/shifts/shifts.js"></script>
