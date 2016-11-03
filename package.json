@@ -4,7 +4,7 @@
   "description": "Tivoli hotel shifts web aplication",
   "main": "index.php",
   "scripts": {
-    "test": "npm test"
+    "heroku-prebuild": "npm install && bower install && gulp build"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,15 @@
   },
   "homepage": "https://github.com/moonflare/TivoliApp.gi#readme",
   "dependencies": {
-      "gulp": "^3.8.10"
-  },
-  "devDependencies": {
-      "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-bundle-assets": "^2.27.1",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^2.2.0"
   }
 }
