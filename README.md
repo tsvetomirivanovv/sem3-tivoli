@@ -26,7 +26,7 @@ First, you'll need PHP 5.x installed. Type `php -v` and see if you have it insta
     ```
 
     ```shell
-    heroku config:pull
+    heroku config:pull --app tivoliapp
 
     ```
 

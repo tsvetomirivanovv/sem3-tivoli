@@ -1,5 +1,4 @@
 <?php
-
 echo 'Login page';
 echo "<br>";
 echo 'Petru was here!';
