@@ -4,8 +4,10 @@
         <meta charset="utf-8">
         <title>Homepage - Tivoli app</title>
 
-        <link href="../vendor/Flat-UI/dist/css/flat-ui.min.css" rel="stylesheet">
-        <link href="../vendor/Flat-UI/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../vendor/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
+        <link href="../dist/app.min.css" rel="stylesheet">
+        <script src="./dist/vendor.js" charset="utf-8"></script>
 
     </head>
     <body>
