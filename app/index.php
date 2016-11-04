@@ -20,7 +20,7 @@
                     $loggedin = false;
 
                     if($loggedin) {
-                        require 'views/shifts/shifts.php';
+                        require 'views/shifts/shiftCards.php';
                     } else {
                         require 'views/login/login.php';
                     }

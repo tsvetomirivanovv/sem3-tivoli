@@ -3,7 +3,7 @@ $('form').on('submit', function(e){
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/app/core/functions/shifts/shifts.php',
+        url: 'http://localhost:8080/app/core/functions/shifts/createShift.php',
         data: $('form').serialize(),
         success:function () {
             $('#myForm')[0].reset();
