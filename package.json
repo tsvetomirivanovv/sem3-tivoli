@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Tivoli hotel shifts web aplication",
   "main": "index.php",
-  "scripts": {
-    "heroku-prebuild": "npm install && bower install && gulp build"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/moonflare/TivoliApp.gi.git"
