@@ -8,8 +8,7 @@
 	},
 	"scripts": {
 		"compile": [
-			"bower install",
-			"gulp build"
+			"bower install"
 		]
 	}
 }
