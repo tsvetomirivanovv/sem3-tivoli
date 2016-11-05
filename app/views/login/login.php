@@ -21,10 +21,8 @@
 
 <script type="text/javascript">
 
-            $('.login-button').click(function() {
-                $.growl.error({ title: "Error", message: '<?php print_r($errors[0]); ?>' });
-            });
-
-
+    $('.login-button').click(function() {
+        $.growl.error({ title: "Error", message: "<?php print_r($errors[0]); ?>" });
+    });
 
 </script>
