@@ -6,7 +6,7 @@ Tivoli shifts schedule web application
 
 ## Developer install
 
-First, you'll need PHP 5.x installed. Type `php -v` and see if you have it installed.
+First, you'll need PHP 5.x installed and [NodeJS](https://nodejs.org/en/download/). Type (`php -v`) and (`node -v`)  to see if you have them installed.
 
 * Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line#download-and-install)
 
@@ -32,6 +32,24 @@ First, you'll need PHP 5.x installed. Type `php -v` and see if you have it insta
 
 * Download [Procfile.local](https://drive.google.com/open?id=0Bx8RJQBMj41PbS16Q1hDamVSR3c) and add it in the project directory.
 
+* Install npm dependencies
+
+    ```shell
+    npm install
+    ```
+
+* Install bower dependencies
+
+    ```shell
+    bower install
+    ```
+
+* Run gulp tasks to compile all the SCSS/JS/ ( + vendor ) files.
+
+    ```shell
+    gulp
+    ```
+
 * Run the application on your local machine
 
     ```shell
@@ -39,7 +57,7 @@ First, you'll need PHP 5.x installed. Type `php -v` and see if you have it insta
 
     ```
 
-* Access your application on [http://localhost:9090](http://localhost:9090)
+* Access your application on [http://localhost:9090](http://localhost:9090) (You can select your own port and is the one from `Procfile.local` file)
 
 
 
