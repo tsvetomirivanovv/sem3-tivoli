@@ -7,6 +7,14 @@ $("#viewShiftsButtonID").click(function () {
         success: function (response) {
             // GET ALL THE DATA FROM THE PHP FILE AND PUTS IT INTO THE PAGE CONTAINER
             $("#shiftContainer").html(response);
+            $("#shiftContainer").easyPaginate({
+
+                paginateElement: 'li',
+                elementsPerPage: 4,
+                effect: 'climb'
+
+            });
         }
     });
 });
+

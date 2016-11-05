@@ -22,7 +22,7 @@ while ($data = mysqli_fetch_row($result))
     // VARIABLE CONTAINING THE HTML ELEMENTS + DATA FROM THE DATABASE
     $shiftCard =
         <<<HTML
-   
+    <li style="list-style-type: none">
     <div style="border: groove" >
         
         <div>
@@ -40,6 +40,7 @@ while ($data = mysqli_fetch_row($result))
         <div style="clear:both"></div>
         
 </div><br>
+</li>
 HTML;
 
     // ECHO BACK THE VARIABLE TO THE JAVASCRIPT
