@@ -11,8 +11,21 @@
             <label class="login-field-icon fui-lock" for="login-pass"></label>
         </div>
 
-        <button class="btn btn-primary btn-lg btn-block" type="submit"  href="login.php">Log in</button>
+        <button class="btn btn-primary btn-lg btn-block login-button" type="submit" href="login.php">Log in</button>
         <a class="login-link" href="#">Lost your password?</a>
         </form>
     </div>
 </div>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js' type='text/javascript'></script>
+<script src='../assets/js/notifications/jquery.growl.js' type='text/javascript'></script>
+
+<script type="text/javascript">
+
+            $('.login-button').click(function() {
+                $.growl.error({ title: "Error", message: '<?php print_r($errors[0]); ?>' });
+            });
+
+
+
+</script>
