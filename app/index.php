@@ -2,6 +2,21 @@
     include 'core/init.php';
     include 'views/shared/index-header.php';
 ?>
-<h3>Test</h3>
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="row">
+        <?php
+        if (logged_in() === true){
+            include 'views/shifts/shifts.php';
+            include 'views/login/logged-in.php';
+        } else {
+            include 'views/login/description.php';
+            include 'views/login/login.php';
+        }
+        ?>
+    </div>
+
+</div>
 
 <?php include 'views/shared/index-footer.php'; ?>
