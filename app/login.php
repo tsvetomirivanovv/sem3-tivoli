@@ -1,5 +1,6 @@
 <?php
 include 'core/init.php';
+
 if (empty($_POST) === false) {
     $username = $_POST['login-name'];
     $password = $_POST['login-pass'];
@@ -13,9 +14,6 @@ if (empty($_POST) === false) {
     } else if (user_active($username) === false) {
         $errors[] = 'You haven\'t activated your account';
     } else {
-        if (strlen($password) > 32) {
-            $errors[] = 'Password is too long';
-        }
         $login = login($username, $password);
         if ($login === false) {
             $errors[] = 'That username/password combination is incorrect';
@@ -28,6 +26,7 @@ if (empty($_POST) === false) {
 } else {
     $errors[] = 'No data received';
 }
+
 
 include 'views/shared/index-header.php';
 

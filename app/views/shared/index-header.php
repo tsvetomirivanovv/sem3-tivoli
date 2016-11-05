@@ -11,12 +11,13 @@
         <?php include 'views/site-description/description.php'; ?>
         <?php
         if (logged_in() === true){
-            echo 'Logged in';
+            include 'views/login/logged-in.php';
         }else {
             include 'views/login/login.php';
         }
         ?>
 
     </div>
+
 </div>
 
