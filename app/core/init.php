@@ -14,6 +14,6 @@
             exit();
         }
     }
-    $errors = array();
+    $errors = '';
 
 ?>

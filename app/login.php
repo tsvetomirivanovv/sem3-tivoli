@@ -6,17 +6,17 @@ if (empty($_POST) === false) {
     $password = $_POST['login-pass'];
 
     if (empty($username) === true) {
-        $errors[] = 'You need to enter a username';
+        $errors = 'You need to enter a username';
     } else if (empty($password) === true) {
-        $errors[] = 'You need to enter a password';
+        $errors = 'You need to enter a password';
     } else if (user_exists($username) === false) {
-        $errors[] = 'Username not found';
+        $errors = 'Username not found';
     } else if (user_active($username) === false) {
-        $errors[] = 'You haven\'t activated your account';
+        $errors = 'You haven\'t activated your account';
     } else {
         $login = login($username, $password);
         if ($login === false) {
-            $errors[] = 'That username/password combination is incorrect';
+            $errors = 'That username/password combination is incorrect';
         } else {
             $_SESSION['user_id'] = $login;
             header('Location: index.php');
@@ -24,7 +24,7 @@ if (empty($_POST) === false) {
         }
     }
 } else {
-    $errors[] = 'No data received';
+    $errors = 'I was here';
 }
 
 
