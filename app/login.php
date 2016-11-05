@@ -19,7 +19,7 @@ if (empty($_POST) === false) {
             $errors[] = 'That username/password combination is incorrect';
         } else {
             $_SESSION['user_id'] = $login;
-            header('location: index.php');
+            header('Location: index.php');
             exit();
         }
     }
