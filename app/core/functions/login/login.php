@@ -1,9 +1,9 @@
 <?php
-include 'core/init.php';
+include '../../init.php';
 
 if (empty($_POST) === false) {
-    $username = $_POST['login-name'];
-    $password = $_POST['login-pass'];
+    $username = $_POST['login_name'];
+    $password = $_POST['login_pass'];
 
     if (empty($username) === true) {
         $errors = 'You need to enter a username';
@@ -19,15 +19,18 @@ if (empty($_POST) === false) {
             $errors = 'That username/password combination is incorrect';
         } else {
             $_SESSION['user_id'] = $login;
-            header('Location: index.php');
-            exit();
         }
     }
 } else {
-    $errors = 'I was here';
+    $errors = 'No data received';
 }
 
+if(strlen($errors)) {
+    $result = array('success' => false, 'message' => $errors);
+} else {
+    $result = array('success' => true, 'message' => 'You successfuly logged in!');
+}
 
-include 'views/shared/index-header.php';
-include 'views/shared/index-footer.php';
+echo json_encode($result);
+
 ?>
