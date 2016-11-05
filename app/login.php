@@ -29,12 +29,5 @@ if (empty($_POST) === false) {
 
 
 include 'views/shared/index-header.php';
-
-
-if (empty($errors) === false) {
-?>
-    <button onclick="api_type('danger', '<?php echo output_errors($errors) ?>')">Notify</button>
-<?php
-}
 include 'views/shared/index-footer.php';
 ?>
