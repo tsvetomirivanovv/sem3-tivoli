@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //error_reporting(E_ALL);
+    error_reporting(E_ALL);
     require 'database/connect-test.php';
     require 'functions/general.php';
     require 'functions/users.php';
