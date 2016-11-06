@@ -1,6 +1,6 @@
 <?php
     include 'core/init.php';
-    include 'views/shared/index-header.php';
+    include 'views/shared/header.php';
 ?>
 
 <!-- CONTENT -->
@@ -16,7 +16,6 @@
         }
         ?>
     </div>
-
 </div>
 
-<?php include 'views/shared/index-footer.php'; ?>
+<?php include 'views/shared/footer.php'; ?>
