@@ -1,4 +1,14 @@
 <?php
+    function change_password($user_id, $password){
+        $conn = getConnection();
+        $user_id = (int)$user_id;
+        $password = md5($password);
+        mysqli_query($conn, "UPDATE users SET password = '$password' WHERE user_id = $user_id");
+    }
+    function user_count(){
+        $conn = getConnection();
+        return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 1"))[0];
+    }
     function user_data($user_id){
         $conn = getConnection();
         $data = array();
@@ -19,6 +29,13 @@
         $conn = getConnection();
         $username = sanitize($username);
         $query = mysqli_query($conn,"SELECT COUNT(user_id) FROM users WHERE username = '$username'");
+        $row = mysqli_fetch_assoc($query);
+        return ($row['COUNT(user_id)'] == 1) ? true : false;
+    }
+    function email_exists($email){
+        $conn = getConnection();
+        $email = sanitize($email);
+        $query = mysqli_query($conn,"SELECT COUNT(user_id) FROM users WHERE username = '$email'");
         $row = mysqli_fetch_assoc($query);
         return ($row['COUNT(user_id)'] == 1) ? true : false;
     }

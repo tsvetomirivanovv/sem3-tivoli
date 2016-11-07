@@ -10,6 +10,7 @@
         if (logged_in() === true){
             include 'views/shifts/shifts.php';
             include 'views/login/logged-in.php';
+            include 'views/users/user-count.php';
         } else {
             include 'views/login/description.php';
             include 'views/login/login.php';

@@ -4,6 +4,8 @@
         <li>
             <a href="logout.php">Log out</a>
         </li>
-
+        <li>
+            <a href="change-password.php">Change Password</a>
+        </li>
     </ul>
 </div>
