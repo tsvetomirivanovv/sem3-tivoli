@@ -1,12 +1,16 @@
+// 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
+// '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
+
+
 $('form').on('submit', function(e){
     e.preventDefault();
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/app/core/functions/shifts/createShift.php',
+        url: '',
         data: $('form').serialize(),
         success:function () {
-            $('#myForm')[0].reset();
+            $('#createShiftForm')[0].reset();
         }
     });
 });

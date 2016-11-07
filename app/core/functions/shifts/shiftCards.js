@@ -2,7 +2,7 @@
 $("#viewShiftsButtonID").click(function () {
     $.ajax({
         type: "POST",
-        url: 'http://localhost:8080/app/core/functions/shifts/shiftCards.php',
+        url: '',
         dataType: "html",   //expect html to be returned
         success: function (response) {
             // GET ALL THE DATA FROM THE PHP FILE AND PUTS IT INTO THE PAGE CONTAINER
