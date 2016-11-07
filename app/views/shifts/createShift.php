@@ -1,6 +1,6 @@
 
 
-<form id="myForm">
+<form id=" createShiftForm">
 
     <div class="label-input-container">
         <label>Title</label>

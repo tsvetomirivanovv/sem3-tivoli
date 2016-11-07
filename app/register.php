@@ -1,9 +1,10 @@
 <?php
-$passwordErr = $usernameErr ="";
+$passwordErr = "";
+$usernameErr ="";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    require 'C:\xampp\htdocs\TivoliApp\app\core\database\connect.php';
+    require 'core\database\connect.php';
 
 // CHECK IF THERE IS ERROR
     if ($conn->connect_error) {
@@ -74,14 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         City:*<br>
         <input type="text" name="city" /><br><br>
         <!--CV:*<br>
+        <br><br>-->
+
         <br><br>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
         Select image to upload:<br>
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit">
-        </form>
-        <br><br>-->
-        <input type="submit" name="submit" value="Submit" />
     </form>
 </div>
 
