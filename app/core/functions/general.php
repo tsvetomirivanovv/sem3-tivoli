@@ -1,6 +1,6 @@
 <?php
 function sanitize($data){
-    $conn = db();
+    $conn = getConnection();
     return mysqli_real_escape_string($conn, $data);
 }
 
