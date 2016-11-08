@@ -15,8 +15,10 @@ $('form').on('submit', function(e){
     });
 });
 
+
+
 // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
-$("#viewShiftsButtonID").click(function () {
+$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: 'core/functions/shifts/shiftCards.php',
@@ -34,5 +36,3 @@ $("#viewShiftsButtonID").click(function () {
         }
     });
 });
-
-
