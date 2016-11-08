@@ -1,6 +1,6 @@
 <?php
-    include 'core/init.php';
-    include 'views/shared/header.php';
+include 'core/init.php';
+include 'views/shared/header.php';
 ?>
 
 <!-- CONTENT -->
@@ -8,7 +8,7 @@
     <div class="row">
         <?php
         if (logged_in() === true){
-            include 'views/shifts/shifts.php';
+            include 'views/shifts/shiftCards.php';
             include 'views/login/logged-in.php';
         } else {
             include 'views/login/description.php';
@@ -19,3 +19,4 @@
 </div>
 
 <?php include 'views/shared/footer.php'; ?>
+
