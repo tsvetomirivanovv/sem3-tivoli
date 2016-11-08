@@ -107,9 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
 
         if ($connectionOk == 1 && $cvFileOk == 1 && $pictureFileOk == 1) {
-            $sql = "INSERT INTO users VALUES (NULL , '$username', '$password', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', '$active')";
+            $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active, email) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
             if ($conn->query($sql) === TRUE) {
                 echo "New record created successfully";
+            } else {
+                echo "New record failed!";
             }
         } else {
             echo "Account not created. Please complete the required fields.";
