@@ -3,16 +3,10 @@
 </div>
 <button id="viewShiftsButtonID">View all Shifts!</button>
 
-<div id="shiftCardsConteiner" >
-
+<div id="shiftCardsConteiner">
     <div id="shiftContainer">
-
     </div>
-
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="../../../vendor/jquery.easyPaginate.js"></script>
-<script src="../../core/functions/shifts/shiftCards.js"></script>
 

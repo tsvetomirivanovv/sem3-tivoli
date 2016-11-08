@@ -2,7 +2,7 @@
 
 // GET DB CONNECTION
 require '../../database/connect.php';
-
+$conn = getConnection();
 // CHECK IF THERE IS ERROR
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
@@ -26,7 +26,7 @@ while ($data = mysqli_fetch_row($result))
     <div style="border: groove" >
         
         <div>
-            <img src="../../../../assets/images/dummy-image.jpg" style="float:left;width:100px;height:200px; border-style:groove ">
+            <img src="../../../../assets/images/logo.png" style="float:left;width:210px;height:150px; border-style:groove ">
         </div>
         
         <div>

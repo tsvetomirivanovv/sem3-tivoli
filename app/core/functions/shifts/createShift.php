@@ -2,7 +2,8 @@
 
 // GET DB CONNECTION
 require '../../database/connect.php';
-
+error_reporting(E_ALL);
+$conn = getConnection();
 // CHECK IF THERE IS ERROR
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
