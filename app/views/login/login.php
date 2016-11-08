@@ -12,6 +12,8 @@
 
             <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Log in</button>
             <a class="login-link" href="#">Lost your password?</a>
+            <a class="login-link" href="http://localhost:9090/app/register.php">Sign up</a>
+
     </div>
 </div>
 
