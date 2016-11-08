@@ -80,8 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $city = $_POST['city'];
 
         $active = 0;
+        $conn = getConnection();
         $sql = "SELECT username FROM users WHERE username='$username'";
+
         $result = $conn->query($sql);
+
         $emailSql = "SELECT email FROM users WHERE email='$email'";
         $emailResult = $conn->query($emailSql);
 
