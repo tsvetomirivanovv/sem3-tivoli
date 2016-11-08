@@ -7,7 +7,7 @@ $emailErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    require 'core\database\connect.php';
+    require 'core/database/connect.php';
 
 // CHECK IF THERE IS ERROR
     if ($conn->connect_error) {
