@@ -1,9 +1,9 @@
 <?php
     session_start();
     error_reporting(E_ALL);
-    require 'core/database/connect.php';
-    require 'core/functions/general.php';
-    require 'core/functions/users.php';
+    require 'database/connect.php';
+    require 'functions/general.php';
+    require 'functions/users.php';
 
     if (logged_in()){
         $session_user_id = $_SESSION['user_id'];
