@@ -1,10 +1,21 @@
 <?php
-echo 'Login page';
-echo "<br>";
-echo 'Petru was here!';
-echo "<br>";
-echo 'Dan remember to put semicolon after the statements';
-echo "<br>";
-echo "Hi there <br>";
-echo "Fuck you, Kay! <br>";
+include 'core/init.php';
+include 'views/shared/header.php';
 ?>
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="row">
+        <?php
+        if (logged_in() === true){
+            include 'views/shifts/shiftCards.php';
+            include 'views/login/logged-in.php';
+        } else {
+            include 'views/login/description.php';
+            include 'views/login/login.php';
+        }
+        ?>
+    </div>
+</div>
+
+<?php include 'views/shared/footer.php'; ?>

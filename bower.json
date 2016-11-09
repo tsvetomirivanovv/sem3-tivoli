@@ -1,0 +1,17 @@
+{
+  "name": "tivoliapp",
+  "description": "Tivoli hotel shifts web aplication",
+  "main": "index.php",
+  "authors": [
+    "KeaDevs"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/moonflare/TivoliApp",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "flat-ui": "^2.3.0",
+    "jquery": "^3.1.1",
+    "growl": "^1.3.2",
+    "jquery.easyPaginate": "git://github.com/st3ph/jquery.easyPaginate.git"
+  }
+}

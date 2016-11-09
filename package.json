@@ -1,0 +1,28 @@
+{
+  "name": "tivoliapp",
+  "version": "1.0.0",
+  "description": "Tivoli hotel shifts web aplication",
+  "main": "index.php",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonflare/TivoliApp.gi.git"
+  },
+  "author": "KeaDevs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moonflare/TivoliApp.gi/issues"
+  },
+  "homepage": "https://github.com/moonflare/TivoliApp.gi#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-bundle-assets": "^2.27.1",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^2.2.0"
+  }
+}
