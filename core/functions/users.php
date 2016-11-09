@@ -17,13 +17,14 @@
 
         $mail->Subject = $subject;
         $mail->Body = $message;
+        $mail->send();
     }
     function recover ($email){
         $email = sanitize($email);
         $user_data = user_data(user_id_from_email($email),'user_id', 'first_name', 'username');
         $generated_password = substr(md5(rand(999, 999999)), 0, 10);
         change_password($user_data['user_id'], $generated_password);
-        sendMail($email, 'Tivoli password recovery',"Hello " . $user_data['first_name'] . ",\n\nYour new password is: " . $generated_password . "\n\nTivoli Hotel & Congress Center");
+        sendMail($email, 'Tivoli password recovery',"Hello " . $user_data['first_name'] . ",\n\nYour new password is: " . $generated_password . "\n\nTivoli Hotel and Congress Center");
     }
     function change_password($user_id, $password){
         $conn = getConnection();
