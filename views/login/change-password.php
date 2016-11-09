@@ -31,7 +31,7 @@
             .done(function (response) {
                 if (response.success) {
                     $.growl.notice({title: "Success", message: response.message});
-                    window.location.href  = "change-password.php";
+                    window.location.href  = "change-password.php?success";
                 } else {
                     $.growl.error({title: "Error", message: response.message});
                 }
