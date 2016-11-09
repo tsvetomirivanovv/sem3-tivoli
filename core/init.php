@@ -6,8 +6,8 @@
     require 'functions/general.php';
     require 'functions/users.php';
 
-$current_file = explode('/', $_SERVER['SCRIPT_NAME']);
-$current_file = end($current_file);
+    $current_file = explode('/', $_SERVER['SCRIPT_NAME']);
+    $current_file = end($current_file);
 
     if (logged_in()){
         $session_user_id = $_SESSION['user_id'];
