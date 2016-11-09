@@ -2,7 +2,7 @@
     session_start();
     error_reporting(E_ALL);
     require 'database/connect.php';
-    require('phpmailer/PHPMailerAutoload.php');
+    //require('phpmailer/PHPMailerAutoload.php');
     require 'functions/general.php';
     require 'functions/users.php';
 

@@ -12,6 +12,7 @@
     "flat-ui": "^2.3.0",
     "jquery": "^3.1.1",
     "growl": "^1.3.2",
-    "jquery.easyPaginate": "git://github.com/st3ph/jquery.easyPaginate.git"
+    "jquery.easyPaginate": "git://github.com/st3ph/jquery.easyPaginate.git",
+    "font-awesome": "fontawesome#^4.7.0"
   }
 }
