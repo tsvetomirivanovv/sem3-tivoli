@@ -19,18 +19,28 @@
         $mail->Body = $message;
         $mail->send();
     }
+    function update_user($user_id, $update_data){
+        $conn = getConnection();
+        $update = array();
+        array_walk($update_data, 'array_sanitize');
+        foreach ($update_data as $field=>$data){
+            $update[] = '`' . $field . '` = \'' . $data . '\'';
+        }
+        mysqli_query($conn, "UPDATE users SET " . implode (', ', $update) . " WHERE user_id = $user_id");
+    }
     function recover ($email){
         $email = sanitize($email);
         $user_data = user_data(user_id_from_email($email),'user_id', 'first_name', 'username');
         $generated_password = substr(md5(rand(999, 999999)), 0, 10);
         change_password($user_data['user_id'], $generated_password);
+        update_user($user_data['user_id'], array('password_recover' => '1'));
         sendMail($email, 'Tivoli password recovery',"Hello " . $user_data['first_name'] . ",\n\nYour new password is: " . $generated_password . "\n\nTivoli Hotel and Congress Center");
     }
     function change_password($user_id, $password){
         $conn = getConnection();
         $user_id = (int)$user_id;
         $password = md5($password);
-        mysqli_query($conn, "UPDATE users SET password = '$password' WHERE user_id = $user_id");
+        mysqli_query($conn, "UPDATE users SET password = '$password', password_recover = 0 WHERE user_id = $user_id");
     }
     function user_count(){
         $conn = getConnection();
