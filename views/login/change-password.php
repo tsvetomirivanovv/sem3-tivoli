@@ -14,30 +14,7 @@
                    name="confirm-pass"/>
 
         </div>
-        <input type="submit" value="Change Password" class="btn btn-block btn-lg btn-default"/>
+        <input id="changePassword" type="submit" value="Change Password" class="btn btn-block btn-lg btn-default"/>
 
     </div>
 </div>
-
-<script type="text/javascript">
-
-    $('.btn-default').click(function () {
-        $.ajax('core/functions/login/change-password.php', {
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                current_pass: $('#current-pass').val(),
-                new_pass: $('#new-pass').val(),
-                confirm_pass: $('#confirm-pass').val()
-            }
-        })
-            .done(function (response) {
-                if (response.success) {
-                    $.growl.notice({title: "Success", message: response.message});
-                    window.location.href = "change-password.php?success";
-                } else {
-                    $.growl.error({title: "Error", message: response.message});
-                }
-            })
-    });
-</script>

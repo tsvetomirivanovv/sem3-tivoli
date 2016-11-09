@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $root = $_ENV["PWD"];
+    $root = getenv('PWD');
     error_reporting(E_ALL);
     require $root . '/core/database/connect.php';
     require $root . '/core/functions/general.php';

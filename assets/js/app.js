@@ -1,24 +1,5 @@
-// 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
-// '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
-
-
-$('form').on('submit', function(e){
-    e.preventDefault();
-
-    $.ajax({
-        type: 'POST',
-        url: 'core/functions/shifts/createShift.php',
-        data: $('form').serialize(),
-        success:function () {
-            $('#createShiftForm')[0].reset();
-        }
-    });
-});
-
-
-
-// AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
 $(document).ready(function () {
+    // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
         url: 'core/functions/shifts/shiftCards.php',
@@ -56,5 +37,81 @@ $(document).ready(function () {
         } else {
             console.error('Shifts unsuccessfuly fetched');
         }
+    });
+    // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
+    // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
+    $('form').on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/shifts/createShift.php',
+            data: $('form').serialize(),
+            success:function () {
+                $('#createShiftForm')[0].reset();
+            }
+        });
+    });
+
+    $('#loginButton').click(function() {
+        $.ajax('core/functions/login/login.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                login_name: $('#login-name').val(),
+                login_pass: $('#login-pass').val()
+            }
+        })
+            .done(function(response) {
+                if(response.success) {
+                    $.growl.notice({ title: "Success", message: response.message });
+                    // delay with 5s to let the notification be displayed
+                    window.setTimeout(function () {
+                        window.location.href  = "";
+                    }, 5000);
+                } else {
+                    $.growl.error({ title: "Error", message: response.message });
+                }
+            })
+    });
+    $('#changePassword').click(function () {
+        $.ajax('core/functions/login/change-password.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                current_pass: $('#current-pass').val(),
+                new_pass: $('#new-pass').val(),
+                confirm_pass: $('#confirm-pass').val()
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    $.growl.notice({title: "Success", message: response.message});
+                    window.setTimeout(function () {
+                        window.location.href  = "change-password.php?success";
+                    }, 5000);
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
+    $('#recoverButton').click(function () {
+        $.ajax('core/functions/login/recover.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                email_address: $('#email-address').val()
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    $.growl.notice({title: "Success", message: response.message});
+                    window.setTimeout(function () {
+                        window.location.href  = "index.php";
+                    }, 5000);
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
     });
 });

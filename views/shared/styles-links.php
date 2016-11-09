@@ -8,9 +8,10 @@
 
  -->
 
- <link href="../bundle/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
- <link href="../bundle/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
- <link href="../bundle/growl/stylesheets/jquery.growl.css" rel="stylesheet">
- <link href="../dist/app.min.css" rel="stylesheet">
- <script src="./dist/vendor.js" charset="utf-8"></script>
- <script src="./dist/app.min.js" charset="utf-8"></script>
+<link href="../bundle/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../bundle/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
+<link href="../bundle/growl/stylesheets/jquery.growl.css" rel="stylesheet">
+<link href="../bundle/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="../dist/app.min.css" rel="stylesheet">
+<script src="./dist/vendor.js" charset="utf-8"></script>
+<script src="./dist/app.min.js" charset="utf-8"></script>
