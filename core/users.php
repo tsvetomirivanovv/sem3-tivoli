@@ -35,7 +35,7 @@
     function email_exists($email){
         $conn = getConnection();
         $email = sanitize($email);
-        $query = mysqli_query($conn,"SELECT COUNT(user_id) FROM users WHERE username = '$email'");
+        $query = mysqli_query($conn,"SELECT COUNT(user_id) FROM users WHERE email = '$email'");
         $row = mysqli_fetch_assoc($query);
         return ($row['COUNT(user_id)'] == 1) ? true : false;
     }

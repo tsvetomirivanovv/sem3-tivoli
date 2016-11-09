@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 if(strlen($errors)) {
     $result = array('success' => false, 'message' => $errors);
 } else {
-    $result = array('success' => true, 'message' => 'You successfuly logged in!');
+    $result = array('success' => true, 'message' => 'You successfully logged in!');
 }
 
 echo json_encode($result);
