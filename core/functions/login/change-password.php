@@ -1,12 +1,11 @@
 <?php
 include '../../init.php';
-protect_page();
 
 if (!empty($_POST)) {
     $required_fields = array('current_pass', 'new_pass', 'confirm_pass');
     foreach ($_POST as $key => $value) {
         if (empty($value) && in_array($key, $required_fields)) {
-            $errors[] = 'Fields marked with an * are required';
+            $errors[] = 'You have to fill all fields';
             break 1;
         }
     }
