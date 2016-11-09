@@ -7,7 +7,10 @@ include 'views/shared/header.php';
 <!-- CONTENT -->
 <div class="container">
     <div class="row">
-        <?php include 'views/login/change-password.php';?>
+        <?php
+            include 'views/login/change-password.php';
+            include 'views/login/logged-in.php';
+        ?>
     </div>
 </div>
 
