@@ -26,7 +26,7 @@ First, you'll need PHP 5.x installed and [NodeJS](https://nodejs.org/en/download
     ```
 
     ```shell
-    heroku config:pull
+    heroku config:pull --app tivoliapp
 
     ```
 
