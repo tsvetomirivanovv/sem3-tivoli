@@ -15,7 +15,7 @@ var src =  {
     dist: 'dist/',
     scripts: {
       all: ['assets/js/**/*.js'],
-      in: 'assets/js/boot.js',
+      in: 'assets/js/app.js',
       out: 'app.min.js',
     },
     styles: {
