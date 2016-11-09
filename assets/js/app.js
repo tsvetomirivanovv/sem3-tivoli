@@ -68,7 +68,7 @@ $(document).ready(function () {
                     // delay with 5s to let the notification be displayed
                     window.setTimeout(function () {
                         window.location.href  = "";
-                    }, 5000);
+                    }, 3000);
                 } else {
                     $.growl.error({ title: "Error", message: response.message });
                 }
@@ -88,7 +88,7 @@ $(document).ready(function () {
                 if (response.success) {
                     $.growl.notice({title: "Success", message: response.message});
                     window.setTimeout(function () {
-                        window.location.href  = "change-password.php?success";
+                        window.location.href  = "index.php";
                     }, 5000);
                 } else {
                     $.growl.error({title: "Error", message: response.message});
