@@ -1,10 +1,11 @@
 <?php
     session_start();
+    $root = $_ENV["PWD"];
     error_reporting(E_ALL);
-    require 'database/connect.php';
-    require('phpmailer/PHPMailerAutoload.php');
-    require 'functions/general.php';
-    require 'functions/users.php';
+    require $root . '/core/database/connect.php';
+    require $root . '/core/functions/general.php';
+    require $root . '/core/functions/users.php';
+    require $root . '/vendor/autoload.php';
 
     $current_file = explode('/', $_SERVER['SCRIPT_NAME']);
     $current_file = end($current_file);
