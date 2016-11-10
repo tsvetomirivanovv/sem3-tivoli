@@ -1,4 +1,5 @@
 <?php
+
     function change_password($user_id, $password){
         $conn = getConnection();
         $user_id = (int)$user_id;
