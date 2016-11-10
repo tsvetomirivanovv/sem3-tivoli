@@ -1,6 +1,3 @@
-<head>
-    <?php include 'views/shared/head.php'; ?>
-</head>
 <h1>Sign Up</h1>
 <div>
     <div class="errorDiv"></div>
