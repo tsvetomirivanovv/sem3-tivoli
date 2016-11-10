@@ -3,4 +3,5 @@
 Procfile.local
 node_modules
 bundle
+vendor
 dist

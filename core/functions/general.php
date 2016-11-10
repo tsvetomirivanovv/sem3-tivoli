@@ -13,13 +13,12 @@ function protect_page(){
 }
 function array_sanitize(&$item){
     $conn = getConnection();
-    $item = mysqli_real_escape_string($conn, $item);
+    $item = htmlentities(strip_tags(mysqli_real_escape_string($conn, $item)));
 }
 function sanitize($data){
     $conn = getConnection();
-    return mysqli_real_escape_string($conn, $data);
+    return htmlentities(strip_tags(mysqli_real_escape_string($conn, $data)));
 }
-
 function output_errors($errors){
     $output = array();
     foreach ($errors as $error) {
