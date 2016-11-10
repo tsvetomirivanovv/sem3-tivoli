@@ -1,6 +1,6 @@
 <?php
-function doFct()
-{
+    $errors = "";
+
     $passwordErr = "";
     $usernameErr = "";
     $cvErr = "";
@@ -8,7 +8,6 @@ function doFct()
     $emailErr = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        include '../../init.php';
         $conn = getConnection();
 // CHECK IF THERE IS ERROR
         if ($conn->connect_error) {
@@ -21,19 +20,16 @@ function doFct()
             $cvFile = $_FILES["cvFile"];
             if ($cvFile["error"] !== UPLOAD_ERR_OK) {
                 $cvErr = "An error occurred while uploading your CV";
+                $errors .= "An error occurred while uploading your CV ";
                 $cvFileOk = 0;
             }
             // Check file size
             if ($_FILES["cvFile"]["size"] > 500000) {
                 $cvErr = "Your CV file is too large.";
+                $errors .= "Your CV file is too large.";
                 $cvFileOk = 0;
             }
-            /*$cvType = exif_imagetype($_FILES["pictureFile"]["tmp_name"]);
-            $allowed = array(FILETYPE_PDF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
-            if (!in_array($cvType, $allowed) && !empty($cvFile)) {
-                $cvErr = "File type is not permitted";
-                $pictureFileOk = 0;
-            }*/
+
             $cvName = preg_replace("/[^A-Z0-9._-]/i", "_", $cvFile["name"]);
             // preserve file from temporary directory
             $success = move_uploaded_file($cvFile["tmp_name"], $_POST['username'] . $cvName);
@@ -56,12 +52,6 @@ function doFct()
             // Check file size max 500KB
             if ($_FILES["pictureFile"]["size"] > 500000) {
                 $imageErr = "Your picture file is too large";
-                $pictureFileOk = 0;
-            }
-            $fileType = exif_imagetype($_FILES["pictureFile"]["tmp_name"]);
-            $allowed = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
-            if (!in_array($fileType, $allowed) && !empty($pictureFile)) {
-                $imageErr = "File type is not permitted";
                 $pictureFileOk = 0;
             }
             $pictureName = preg_replace("/[^A-Z0-9._-]/i", "_", $pictureFile["name"]);
@@ -100,6 +90,8 @@ function doFct()
             $connectionOk = 1;
             if ($password != $verifyPassword) {
                 $passwordErr = "Password not the same";
+                $errors = "pass not the same!!!";
+                //echo "<script>$('#verifyPassword').after('<div class=\"error\">Passwords not the same</div>')</script>";
                 $connectionOk = 0;
             }
             if (strlen($password) >= 20 || strlen($password) <= 5) {
@@ -118,26 +110,26 @@ function doFct()
             if ($connectionOk == 1 && $cvFileOk == 1 && $pictureFileOk == 1) {
                 $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
                 if ($conn->query($sql) === TRUE) {
-                    //echo "New record created successfully";
-                    $result = array('success' => true, 'message' => 'Account created!');
+                    header('Location: http://localhost:9090/index.php');
                 } else {
-                    //echo "New record failed!";
-                    //$result = array('success' => false, 'message' => $passwordErr . $usernameErr . $cvErr . $imageErr . $emailErr);
-                    $result = $passwordErr . $usernameErr . $cvErr . $imageErr . $emailErr;
+                    echo "New record failed!";
+
                 }
             } else {
-                //echo "Account not created. Please complete the required fields.";
-                $result = array('success' => false, 'message' => $passwordErr);
+                function form_errors($errors) {
+                    $output = "";
+                    if (!empty($errors)) {
+                        $output .= "<div class=\"error\">";
+                        $output .= "Account not created. Please fix the following errors";
+                        $output .= "</div>";
+                    }
+                    return $output;
+                }
+                //echo $errors.appendTo(".errorDiv");
+                echo form_errors($errors);
 
-                /*$error =
-                    "<div class='err'>" .
-                    "$passwordErr" .
-                    "</div>";
-
-                $passwordErr.appendTo(".errorDiv");*/
             }
-            echo json_encode($result);
         }
-    }
+
 }
 ?>
