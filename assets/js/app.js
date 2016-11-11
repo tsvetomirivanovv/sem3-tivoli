@@ -35,12 +35,12 @@ $(document).ready(function () {
                     effect: 'climb'
                 });
             } else {
-                console.error('Shifts unsuccessfuly fetched');
+                console.error('Shifts unsuccessfully fetched');
             }
         });
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
     // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
-    $('form').on('submit', function (e) {
+    $('#createShiftForm').on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function () {
                     $.growl.notice({title: "Success", message: response.message});
                     // delay with 5s to let the notification be displayed
                     window.setTimeout(function () {
-                        window.location.href = "";
+                            window.location.href = "";
                     }, 3000);
                 } else {
                     $.growl.error({title: "Error", message: response.message});
@@ -144,4 +144,43 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/login/view-all-accounts.php',
+            dataType: "json",
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var accounts = '';
+                    response.accounts.forEach(function (accountData) {
+                        accounts += '<tr>' +
+                                    '   <th>' +
+                                    '       <div>' +
+                                    '           <span>' +
+                                    '               <a href="#">' +
+                                    '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
+                                    '               </a>' +
+                                    '           </span>' +
+                                    '       </div>' +
+                                    '   </th>' +
+                                    '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                                    '   <td>' + accountData['email'] + '</td>' +
+                                    '   <td><span class="' + accountData['dotColor'] +  '"><span class="' + accountData['dotClass'] +'"></span>' + accountData['isOnline'] + '</span>' +
+                                    '       <button class="btn updateButtonPos" href="#">Update</button>' +
+                                    '   </td>' +
+                                    '</tr>';
+                    });
+
+                    $("#tableBody").append(accounts);
+                    window.setTimeout(function () {
+                        $('#usersTable').DataTable()
+                    }, 5000);
+                } else {
+                    console.error('Accounts unsuccessfully fetched');
+                }
+            });
+
+
+
 });
