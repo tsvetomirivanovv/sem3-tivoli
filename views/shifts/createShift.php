@@ -112,4 +112,3 @@ include 'manageShiftMenu.php';
     </div>
 
 </form>
-

@@ -144,4 +144,9 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
+
+    $(function () {
+        $('.date').datetimepicker();
+    });
+
 });
