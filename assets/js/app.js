@@ -42,7 +42,6 @@ $(document).ready(function () {
     // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
     $('#createShiftForm').on('submit', function (e) {
         e.preventDefault();
-
         $.ajax({
             type: 'POST',
             url: 'core/functions/shifts/createShift.php',
@@ -146,7 +145,10 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $('.date').datetimepicker();
+        $('.date').datetimepicker({
+             format: 'YYYY-MM-DD hh:mm',
+             sideBySide: true
+        });
     });
 
 });

@@ -9,7 +9,9 @@ module.exports = {
           './bundle/growl/javascripts/jquery.growl.js',
           './bundle/jquery.easyPaginate/lib/jquery.easyPaginate.js',
           './bundle/moment/moment.js',
-          './bundle/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js'
+          './bundle/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+          './/bundle/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+
       ],
       options: {
         rev: false

@@ -8,6 +8,7 @@ include 'views/shared/header.php';
     <div class="row">
         <?php
         if (logged_in() === true){
+            include 'views/shifts/createShift.php';
             include 'views/shifts/shiftCards.php';
             include 'views/login/logged-in.php';
         } else {
