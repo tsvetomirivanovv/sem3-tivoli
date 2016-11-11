@@ -7,6 +7,9 @@
         <li>
             <a href="change-password.php">Change Password</a>
         </li>
+        <li>
+            <a href="edit-profile.php">Edit Profile</a>
+        </li>
     </ul>
 
     <h3>Users</h3>
