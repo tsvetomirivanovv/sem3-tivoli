@@ -10,8 +10,9 @@ module.exports = {
           './bundle/jquery.easyPaginate/lib/jquery.easyPaginate.js',
           './bundle/moment/moment.js',
           './bundle/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-          './bundle/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-
+          './bundle/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+          './bundle/datatables.net/js/jquery.dataTables.min.js',
+          './bundle/datatables.net-bs/js/dataTables.bootstrap.min.js'
       ],
       options: {
         rev: false

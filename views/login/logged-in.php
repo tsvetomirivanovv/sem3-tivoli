@@ -10,13 +10,8 @@
         <li>
             <a href="edit-profile.php">Edit Profile</a>
         </li>
+        <li>
+            <a href="view-all-accounts.php">Users</a>
+        </li>
     </ul>
-
-    <h3>Users</h3>
-    <?php
-        $user_count = user_count();
-        $suffix = ($user_count != 1) ? 's' : '';
-    ?>
-    We currently have <?php echo user_count(); ?> registered user<?php echo $suffix; ?>.
-
 </div>
