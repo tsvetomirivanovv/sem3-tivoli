@@ -48,6 +48,7 @@ $(document).ready(function () {
             data: $('form').serialize(),
             success: function () {
                 $('#createShiftForm')[0].reset();
+                $.growl.notice({title: "Success", message: "You successfully created the shift!"});
             }
         });
     });
