@@ -1,6 +1,6 @@
 <div class="col-xs-9">
-    <div class="jumbotron" id="jumbo">
-        <div class="page-header" id="map"><h3 id="usersH3">All Users</h3></div>
+    <div class="jumbotron jumboFix">
+        <div class="page-header headerFix"><h3 class="h3Fix">All Users</h3></div>
         <div class="col-sm-9">
             <?php
                 $user_count = user_count();
