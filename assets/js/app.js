@@ -146,8 +146,8 @@ $(document).ready(function () {
 
     $(function () {
         $('.date').datetimepicker({
-             format: 'YYYY-MM-DD hh:mm',
-             sideBySide: true
+            format: 'YYYY-MM-DD HH:mm',
+            sideBySide: true
         });
     });
 

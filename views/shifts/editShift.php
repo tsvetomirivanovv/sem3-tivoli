@@ -8,7 +8,7 @@ include 'manageShiftMenu.php';
     <div class="form-group row">
         <label class="col-xs-2 text-center">Title:*</label>
         <div class="col-xs-3">
-            <input  class="form-control" type="text" placeholder="200 characters" name="shiftTitle" value="EDIT SELECTED SHIFT VALUE" required>
+            <input class="form-control" type="text" placeholder="200 characters" name="shiftTitle" value="EDIT SELECTED SHIFT VALUE" required>
         </div>
     </div>
 
