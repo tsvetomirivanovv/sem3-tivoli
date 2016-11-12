@@ -185,4 +185,7 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
+    $('#editProf').click(function () {
+        window.location.href='edit-profile.php';
+    });
 });

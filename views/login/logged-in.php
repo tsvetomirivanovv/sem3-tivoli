@@ -13,5 +13,8 @@
         <li>
             <a href="view-all-accounts.php">Users</a>
         </li>
+        <li>
+            <a href="profile-page.php">Profile</a>
+        </li>
     </ul>
 </div>
