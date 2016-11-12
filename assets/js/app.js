@@ -143,12 +143,8 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
-
-    $(function () {
-        $('.date').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
-            sideBySide: true
-        });
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
     });
-
 });
