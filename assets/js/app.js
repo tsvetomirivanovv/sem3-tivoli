@@ -1,3 +1,22 @@
+function timeLeadingZeros(value) {
+    if(value < 10) {
+        return '0' + value;
+    } else {
+        return value;
+    }
+}
+function parseTimestamp(date) {
+    var now = new Date(date);
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    var day = days[now.getDay()];
+    var month = months[now.getMonth()];
+    var h = now.getHours();
+    var m = now.getMinutes();
+
+    return day + ", " + now.getDate() + ". " + month + " " +  now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+}
 $(document).ready(function () {
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
@@ -18,8 +37,11 @@ $(document).ready(function () {
                         "       </div>" +
                         "       <div>" +
                         "           <a href=''>Title: " + shiftData['title'] + "</a><br>" +
-                        "           <label>Start date: " + shiftData['begin'] + "</label><br>" +
-                        "           <label>Closing date: " + shiftData['close'] + "</label><br>" +
+                        "           <label>Start date: " + parseTimestamp(shiftData['begin']) + "</label><br>" +
+                        "           <div class='progress'>" +
+                        "<div class='progress-bar' style='width: 45%;'></div>" +
+                        "</div> " +
+                        "           <label>Closing date: " + parseTimestamp(shiftData['close']) + "</label><br>" +
                         "           <label>Manager: " + shiftData['duty_manager'] + "</label><br>" +
                         "           <label>Category: " + shiftData['category'] + "</label><br>" +
                         "       </div>" +

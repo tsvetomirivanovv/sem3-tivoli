@@ -1,0 +1,97 @@
+.mat_small {
+  font-size: 90%
+}
+
+.mat_single_event_holder {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  display: block;
+  clear: both;
+  border-bottom: 1px dotted #ccc
+}
+
+.mat_single_event_holder_inner {
+  padding: 20px 5px;
+  display: table;
+  width: 100%
+}
+
+.mat_single_even {
+  background: #f1f1f1
+}
+
+.mat_event_image {
+  min-width: 32px;
+  max-width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  position: static
+}
+
+.mat_event_image_inner {
+  position: relative;
+  top: -50%;
+  margin-right: 10px
+}
+
+.mat_event_content {
+  position: relative;
+  display: table-cell;
+  width: auto
+}
+
+.mat_event_content h3 {
+  margin: 0 0 10px 0 !important
+}
+
+.mat_event_short_description {
+  padding: 5px 0
+}
+
+.mat_event_short_description {
+  max-width: 80%
+}
+
+.mat_event_show_bookings {
+  float: left;
+  margin-right: 3px
+}
+
+.mat_event_show_bookings span {
+  padding: 4px 6px;
+  margin-top: 4px
+}
+.current {
+  padding: 6px 6px 6px 6px;
+  border: 1px solid #ccc;
+}
+.h4_shift_link {
+  margin-top: -10px; margin-bottom: 1px;
+}
+.a_link_title_color {
+  color:#2980b9;
+}
+.a_link_tivoli_location {
+  color: #1abc9c;
+}
+.participants_count {
+  text-align: center;
+}
+.progress_bar_margin {
+  margin-top: 2px;
+}
+.closing_date {
+  padding-left: 0;
+}
+.duty_manager {
+  padding-left: 0;
+  padding-right: 0;
+}
+.edit_shift_glyphicon {
+  font-size: 30px;
+}
+.cancel_shift_glyphicon {
+  font-size: 30px;
+  padding-left: 20px;
+}

@@ -15,12 +15,12 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="all_Shifts">
                     <?php
-                    include 'shiftCards.php';
+                    include 'card.php';
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="my_Shifts">
                     <?php
-                    echo "Surprise modafuka";
+
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="create_Shift">

@@ -1,5 +1,5 @@
 <div class="clearfix">
-<div class="col-xs-9">
+<div class="col-xs-9" style="background: whitesmoke; border-radius: 7px;">
     <div class="col-xs-12">
         <h3></h3>
         <form id="createShiftForm">
@@ -53,7 +53,7 @@
             </tr>
         </table>
             <span>
-                <input id="createShift" type="submit" value="Create" class="btn"/>
+                <input id="createShift" type="submit" value="Create" style="float: right;margin-bottom: 20px" class="btn btn-default"/>
             </span>
         </form>
     </div>
