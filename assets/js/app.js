@@ -35,12 +35,12 @@ $(document).ready(function () {
                     effect: 'climb'
                 });
             } else {
-                console.error('Shifts unsuccessfully fetched');
+                console.error('Shifts unsuccessfuly fetched');
             }
         });
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
     // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
-    $('#createShiftForm').on('submit', function (e) {
+    $('form').on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -144,45 +144,4 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
-    $.ajax({
-        type: "POST",
-        url: 'core/functions/login/view-all-accounts.php',
-        dataType: "json",
-    })
-        .done(function (response) {
-            if (response.success) {
-                var accounts = '';
-                var oddOrEven = 1;
-                var oddOrEvenText = '';
-                response.accounts.forEach(function (accountData) {
-                    if (oddOrEven % 2 == 1) {
-                        oddOrEvenText = 'odd';
-                    } else {
-                        oddOrEvenText = 'even';
-                    }
-                    accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
-                                '   <th class="sorting_1">' +
-                                '       <div>' +
-                                '           <span>' +
-                                '               <a href="#">' +
-                                '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
-                                '               </a>' +
-                                '           </span>' +
-                                '       </div>' +
-                                '   </th>' +
-                                '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                                '   <td>' + accountData['email'] + '</td>' +
-                                '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
-                                '       <button class="btn updateButtonPos" href="#">Update</button>' +
-                                '   </td>' +
-                                '</tr>';
-                    oddOrEven++;
-                });
-                $("#tableBody").append(accounts);
-
-            } else {
-                console.error('Accounts unsuccessfully fetched');
-            }
-            $('#usersTable').DataTable();
-        });
 });

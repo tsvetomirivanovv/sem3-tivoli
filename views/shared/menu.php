@@ -3,7 +3,7 @@
     <div class="row">
         <ul>
             <li>Home</li>
-            <li>Shifts</li>
+            <a href="../../shifts.php">Shifts</a>
             <li>Contact</li>
         </ul>
     </div>
