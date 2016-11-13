@@ -65,6 +65,7 @@
 .current {
   padding: 6px 6px 6px 6px;
   border: 1px solid #ccc;
+  background: white;
 }
 .h4_shift_link {
   margin-top: -10px; margin-bottom: 1px;
@@ -100,4 +101,4 @@
 #easyPaginate img {display:block;margin-bottom:15px;}
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline; border:none; color:dodgerblue;}
-.easyPaginateNav {margin-left: 250px;}
+.easyPaginateNav {text-align: center; margin-top: 10px;}
