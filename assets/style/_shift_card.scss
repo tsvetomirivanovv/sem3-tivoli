@@ -95,3 +95,9 @@
   font-size: 30px;
   padding-left: 20px;
 }
+
+#easyPaginate {width:400px;}
+#easyPaginate img {display:block;margin-bottom:15px;}
+.easyPaginateNav a {padding:5px;}
+.easyPaginateNav a.current {font-weight:bold;text-decoration:underline; border:none; color:dodgerblue;}
+.easyPaginateNav {margin-left: 250px;}

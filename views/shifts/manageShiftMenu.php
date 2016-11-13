@@ -20,7 +20,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="my_Shifts">
                     <?php
-
+                    include 'shiftCards.php';
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="create_Shift">
