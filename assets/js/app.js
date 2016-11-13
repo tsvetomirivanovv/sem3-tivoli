@@ -92,7 +92,7 @@ $(document).ready(function () {
 
                 });
             } else {
-                console.error('Shifts unsuccessfully fetched');
+                console.error('Shifts unsuccessfuly fetched');
             }
         });
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
