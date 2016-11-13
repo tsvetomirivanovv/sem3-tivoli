@@ -1,5 +1,5 @@
 <div class="current">
-    <div class="mat_single_event_holder mat_single_even">
+    <div class="mat_single_event_holder mat_single_odd">
         <div class="mat_single_event_holder_inner">
             <div class="mat_event_image">
                 <div class="mat_event_image_inner">
