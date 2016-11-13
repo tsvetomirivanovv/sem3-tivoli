@@ -1,6 +1,12 @@
 <?php
 include '../../init.php';
+if (isset($_POST['edit_user_type'])){
+    echo 'is set';
+}else {
+    echo 'is not';
 
+}
+die;
 if (!empty($_POST)) {
     $required_fields = array('edit_first_name', 'edit_email', 'edit_phone');
     foreach ($_POST as $key => $value) {
@@ -24,7 +30,8 @@ if (!empty($_POST) && empty($errors)) {
         'phone' => $_POST['edit_phone'],
         'address' => $_POST['edit_address'],
         'zip_code' => $_POST['edit_zip_code'],
-        'city' => $_POST['edit_city']
+        'city' => $_POST['edit_city'],
+        'type' => $_POST['edit_user_type']
     );
     if(!empty($_POST['edit_cv'])){
         $update_data['cv'] = $_POST['edit_cv'];

@@ -164,7 +164,7 @@ $(document).ready(function () {
                                 '   <th class="sorting_1">' +
                                 '       <div>' +
                                 '           <span>' +
-                                '               <a href="#">' +
+                                '               <a href="profile-page.php?username='+ accountData['username']+'">' +
                                 '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
                                 '               </a>' +
                                 '           </span>' +
@@ -173,7 +173,7 @@ $(document).ready(function () {
                                 '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
                                 '   <td>' + accountData['email'] + '</td>' +
                                 '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
-                                '       <button class="btn updateButtonPos" href="#">Update</button>' +
+                                '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
                                 '   </td>' +
                                 '</tr>';
                     oddOrEven++;
@@ -185,7 +185,4 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
-    $('#editProf').click(function () {
-        window.location.href='edit-profile.php';
-    });
 });

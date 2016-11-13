@@ -2,6 +2,7 @@
 include 'core/init.php';
 protect_page();
 include 'views/shared/header.php';
+include 'core/functions/login/profile-page.php';
 ?>
 
     <!-- CONTENT -->

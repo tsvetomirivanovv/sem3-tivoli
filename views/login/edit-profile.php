@@ -4,43 +4,43 @@
         <table>
             <tr class="spaceUnder">
                 <td><label for="edit_first_name">First Name*</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['first_name']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['first_name']; ?>"
                            name="edit_first_name"
                            id="edit-first-name"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_last_name">Last Name</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['last_name']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['last_name']; ?>"
                            name="edit_last_name"
                            id="edit-last-name"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_email">Email*</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['email']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['email']; ?>"
                            name="edit_email"
                            id="edit-email"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_phone">Mobile nr*</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['phone']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['phone']; ?>"
                            name="edit_phone"
                            id="edit-phone"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_address">Address</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['address']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['address']; ?>"
                            name="edit_address"
                            id="edit-address"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_zip_code">Zip Code</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['zip_code']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['zip_code']; ?>"
                            name="edit_zip_code"
                            id="edit-zip-code"/></td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_city">City</label></td>
-                <td><input type="text" class="form-control" value="<?php echo $user_data['city']; ?>"
+                <td><input type="text" class="form-control" value="<?php echo $profile_data['city']; ?>"
                            name="edit_city"
                            id="edit-city"/></td>
             </tr>
@@ -54,10 +54,17 @@
                            id="edit-profile-picture"/></td>
             </tr>
             <tr class="spaceUnder">
-                <td><label>User status</label></td>
-                <td><i>(You are not authorized to change status.)</i></td>
+                <td><label for="edit-user-type">User status</label></td>
+                <td>
+                    <select class="select" id="edit-user-type" name="edit_user_type">
+                        <option value="0">A-waiter</option>
+                        <option value="1">B-waiter</option>
+                        <option value="2">Manager</option>
+                    </select>
+                </td>
             </tr>
         </table>
+
         <span>
             <input id="updateAccount" type="submit" value="Update Account" class="btn"/>
             <input id="cancelUpdateAccount" type="submit" value="Cancel" class="btn"/>
