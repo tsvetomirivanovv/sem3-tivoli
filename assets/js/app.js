@@ -205,46 +205,6 @@ $(document).ready(function () {
         format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
     });
-
-
-        $.ajax({
-            type: "POST",
-            url: 'core/functions/login/view-all-accounts.php',
-            dataType: "json",
-        })
-            .done(function (response) {
-                if (response.success) {
-                    var accounts = '';
-                    response.accounts.forEach(function (accountData) {
-                        accounts += '<tr>' +
-                                    '   <th>' +
-                                    '       <div>' +
-                                    '           <span>' +
-                                    '               <a href="#">' +
-                                    '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
-                                    '               </a>' +
-                                    '           </span>' +
-                                    '       </div>' +
-                                    '   </th>' +
-                                    '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                                    '   <td>' + accountData['email'] + '</td>' +
-                                    '   <td><span class="' + accountData['dotColor'] +  '"><span class="' + accountData['dotClass'] +'"></span>' + accountData['isOnline'] + '</span>' +
-                                    '       <button class="btn updateButtonPos" href="#">Update</button>' +
-                                    '   </td>' +
-                                    '</tr>';
-                    });
-
-                    $("#tableBody").append(accounts);
-                    window.setTimeout(function () {
-                        $('#usersTable').DataTable()
-                    }, 5000);
-                } else {
-                    console.error('Accounts unsuccessfully fetched');
-                }
-            });
-
-
-
     $.ajax({
         type: "POST",
         url: 'core/functions/login/view-all-accounts.php',
@@ -262,21 +222,21 @@ $(document).ready(function () {
                         oddOrEvenText = 'even';
                     }
                     accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
-                                '   <th class="sorting_1">' +
-                                '       <div>' +
-                                '           <span>' +
-                                '               <a href="#">' +
-                                '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
-                                '               </a>' +
-                                '           </span>' +
-                                '       </div>' +
-                                '   </th>' +
-                                '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                                '   <td>' + accountData['email'] + '</td>' +
-                                '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
-                                '       <button class="btn updateButtonPos" href="#">Update</button>' +
-                                '   </td>' +
-                                '</tr>';
+                        '   <th class="sorting_1">' +
+                        '       <div>' +
+                        '           <span>' +
+                        '               <a href="profile-page.php?username='+ accountData['username']+'">' +
+                        '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
+                        '               </a>' +
+                        '           </span>' +
+                        '       </div>' +
+                        '   </th>' +
+                        '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                        '   <td>' + accountData['email'] + '</td>' +
+                        '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
+                        '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
+                        '   </td>' +
+                        '</tr>';
                     oddOrEven++;
                 });
                 $("#tableBody").append(accounts);
