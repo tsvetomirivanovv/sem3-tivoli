@@ -46,12 +46,25 @@
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_cv">CV</label></td>
-                <td><input type="file" class="form-control" name="edit_cv" id="edit-cv"/></td>
+                <td>
+                    <div class="form-control">
+                        <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+                        <input type="filepicker" name="edit_cv" id="edit-cv" data-fp-button-text="Choose file" data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-mimetypes="*/*" data-fp-container="modal" data-fp-services="COMPUTER" onchange="getFileLink(event.fpfile.url, 'edit-cv')">
+                        <p class="fileName" id="edit-cv-link">
+                            <?php if(isset($user_data['cv'])) { echo $user_data['cv']; } else { echo 'No file chosen'; } ?>
+                        </p>
+                    </div>
+                </td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit_profile_picture">Profile Picture</label></td>
-                <td><input type="file" class="form-control" name="edit_profile_picture"
-                           id="edit-profile-picture"/></td>
+                <td> <div class="form-control">
+                           <input type="filepicker" name="edit_profile_picture" id="edit-profile-picture" data-fp-button-text="Choose file" data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-services="COMPUTER" onchange="getFileLink(event.fpfile.url, 'edit-profile-picture')">
+                           <p class="fileName" id="edit-profile-picture-link">
+                               <?php if(isset($user_data['profile_picture'])) { echo $user_data['profile_picture']; } else { echo 'No file chosen'; } ?>
+                           </p>
+                       </div>
+                </td>
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit-user-type">User status</label></td>
@@ -69,6 +82,9 @@
             <input id="updateAccount" type="submit" value="Update Account" class="btn"/>
             <input id="cancelUpdateAccount" type="submit" value="Cancel" class="btn"/>
         </span>
+    </div>
+    <div class="col-xs-4">
+        <img class="profilePicture" src="<?php echo $user_data['profile_picture']; ?>" alt="" />
     </div>
 </div>
 <script type="text/javascript">

@@ -246,3 +246,10 @@ $(document).ready(function () {
             $('#usersTable').DataTable();
         });
 });
+
+function getFileLink(url, elementId) {
+    var inputId = '#' +  elementId;
+    var linkId = '#' +  elementId + '-link';
+    $(inputId).val(url);
+    $(linkId).text(url);
+};
