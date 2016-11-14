@@ -2,10 +2,10 @@
     session_start();
     $root = getenv('PWD');
     error_reporting(E_ALL);
-    require $root . '/database/connect.php';
-    require $root . '/functions/general.php';
-    require $root . '/functions/users.php';
-    require $root . '/../vendor/autoload.php';
+    require $root . '/core/database/connect.php';
+    require $root . '/core/functions/general.php';
+    require $root . '/core/functions/users.php';
+    require $root . '/vendor/autoload.php';
 
     $current_file = explode('/', $_SERVER['SCRIPT_NAME']);
     $current_file = end($current_file);
