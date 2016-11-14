@@ -14,7 +14,7 @@
                     <?php if (!logged_in()){ ?>
                         <li><a href="index.php">Home</a></li>
                     <?php } else {?>
-                        <li><a href="index.php">Shifts</a></li>
+                        <li><a href="shifts.php">Shifts</a></li>
                     <?php } ?>
                         <li><a href="#fakelink">Contact</a></li>
                    </ul>

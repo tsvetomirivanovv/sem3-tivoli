@@ -1,5 +1,10 @@
+
 <div class="col-xs-9">
+
+    <div class="jumbotron jumbo_edit_profile">
+        <div class="clearfix">
     <div class="col-xs-7">
+
         <h3>Edit profile</h3>
         <table>
             <tr class="spaceUnder">
@@ -51,7 +56,7 @@
                         <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
                         <input type="filepicker" name="edit_cv" id="edit-cv" data-fp-button-text="Choose file" data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-mimetypes="*/*" data-fp-container="modal" data-fp-services="COMPUTER" onchange="getFileLink(event.fpfile.url, 'edit-cv')">
                         <p class="fileName" id="edit-cv-link">
-                            <?php if(isset($user_data['cv'])) { echo $user_data['cv']; } else { echo 'No file chosen'; } ?>
+                            <?php if(isset($profile_data['cv'])) { echo $profile_data['username'] . " - CV.pdf"; } else { echo 'No file chosen'; } ?>
                         </p>
                     </div>
                 </td>
@@ -61,7 +66,7 @@
                 <td> <div class="form-control">
                            <input type="filepicker" name="edit_profile_picture" id="edit-profile-picture" data-fp-button-text="Choose file" data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-services="COMPUTER" onchange="getFileLink(event.fpfile.url, 'edit-profile-picture')">
                            <p class="fileName" id="edit-profile-picture-link">
-                               <?php if(isset($user_data['profile_picture'])) { echo $user_data['profile_picture']; } else { echo 'No file chosen'; } ?>
+                               <?php if(isset($profile_data['profile_picture'])) { echo $profile_data['username'] . " - avatar"; } else { echo 'No file chosen'; } ?>
                            </p>
                        </div>
                 </td>
@@ -84,8 +89,10 @@
         </span>
     </div>
     <div class="col-xs-4">
-        <img class="profilePicture" src="<?php echo $user_data['profile_picture']; ?>" alt="" />
+        <img class="profilePicture" src="<?php echo $profile_data['profile_picture']; ?>" alt="" />
     </div>
+        </div>
+        </div>
 </div>
 <script type="text/javascript">
     var user_type = document.getElementById("user_category").getAttribute("class");
