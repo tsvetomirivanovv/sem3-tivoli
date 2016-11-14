@@ -172,6 +172,7 @@ $(document).ready(function () {
                 }
             })
     });
+
     $('#updateAccount').click(function () {
         $.ajax('core/functions/login/edit-profile.php', {
             type: 'POST',

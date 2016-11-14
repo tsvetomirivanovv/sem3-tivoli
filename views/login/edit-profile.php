@@ -55,10 +55,10 @@
             </tr>
             <tr class="spaceUnder">
                 <td><label for="edit-user-type">User status</label></td>
-                <td>
+                <td id="user_category" class="<?php echo $profile_data['type'];?>">
                     <select class="select" id="edit-user-type" name="edit_user_type">
-                        <option value="A-Waiter">A-Waiter</option>
                         <option value="B-Waiter">B-Waiter</option>
+                        <option value="A-Waiter">A-Waiter</option>
                         <option value="Manager">Manager</option>
                     </select>
                 </td>
@@ -71,3 +71,18 @@
         </span>
     </div>
 </div>
+<script type="text/javascript">
+    var user_type = document.getElementById("user_category").getAttribute("class");
+    switch (user_type){
+        case "A-Waiter":
+            $('#user_category').find('option[value="A-Waiter"]').attr('selected', 'selected');
+            break;
+        case "B-Waiter":
+            $('#user_category').find('option[value="B-Waiter"]').attr('selected', 'selected');
+            break;
+        case "Manager":
+            $('#user_category').find('option[value="Manager"]').attr('selected', 'selected');
+            break;
+    }
+
+</script>
