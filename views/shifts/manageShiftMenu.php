@@ -1,24 +1,40 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="collapse navbar-collapse" id="navbar-collapse-01">
-        <ul class="nav navbar-nav">
-            <li><a href="createShift.php">Create shift</a></li>
-            <li><a href="editShift.php">Edit shift</a></li>
-        </ul>
+<div class="col-xs-9">
+    <div class="jumbotron jumboFix">
+        <div class="page-header headerFix"><h3 class="h3Fix">Shifts</h3></div>
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="active"><a href="#all_Shifts" aria-controls="all_Sifts" role="tab" data-toggle="tab">All shifts</a></li>
+                <li role="presentation"><a href="#my_Shifts" aria-controls="my_Shifts" role="tab" data-toggle="tab">My shift(s)</a></li>
+                <li role="presentation"><a href="#create_Shift" aria-controls="create_Shift" role="tab" data-toggle="tab">Create shift</a></li>
+                <li role="presentation"><a href="#my_Offer" aria-controls="my_Offer" role="tab" data-toggle="tab">My offer(s)</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="all_Shifts">
+                    <?php
+                    include 'shiftCards.php';
+                    ?>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="my_Shifts">
+                    <?php
+
+                    ?>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="create_Shift">
+                    <?php
+                    include 'createShift.php';
+                    ?>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="my_Offer">
+                    <?php
+
+                    ?>
+                </div>
+            </div>
+
+        </div>
     </div>
-</nav>
-
-
-
-
-<!--// FOR STANDALONE TESTING OUTSIDE OF INDEX.php TO BE REMOVED LATER-->
-
-
-<link href="../../bundle/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../bundle/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
-<link href="../../bundle/growl/stylesheets/jquery.growl.css" rel="stylesheet">
-<link href="../../bundle/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="../../dist/app.min.css" rel="stylesheet">
-<link href="../../bundle/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-<link href="../../bundle/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="/dist/vendor.js" charset="utf-8"></script>
-<script src="/dist/app.min.js" charset="utf-8"></script>
+</div>

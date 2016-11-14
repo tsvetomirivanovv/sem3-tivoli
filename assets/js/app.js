@@ -1,3 +1,22 @@
+function timeLeadingZeros(value) {
+    if (value < 10) {
+        return '0' + value;
+    } else {
+        return value;
+    }
+}
+function parseTimestamp(date) {
+    var now = new Date(date);
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    var day = days[now.getDay()];
+    var month = months[now.getMonth()];
+    var h = now.getHours();
+    var m = now.getMinutes();
+
+    return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+}
 $(document).ready(function () {
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
@@ -10,29 +29,67 @@ $(document).ready(function () {
 
             if (response.success) {
                 var shifts = "";
+                var evenOdd = 1;
                 response.shifts.forEach(function (shiftData) {
-                    shifts += "<li style='list-style-type: none'>" +
-                        "   <div style='border: groove' >" +
-                        "       <div>" +
-                        "           <img src='../../../../assets/images/logo.png' style='float:left;width:210px;height:150px; border-style:groove'>" +
-                        "       </div>" +
-                        "       <div>" +
-                        "           <a href=''>Title: " + shiftData['title'] + "</a><br>" +
-                        "           <label>Start date: " + shiftData['begin'] + "</label><br>" +
-                        "           <label>Closing date: " + shiftData['close'] + "</label><br>" +
-                        "           <label>Manager: " + shiftData['duty_manager'] + "</label><br>" +
-                        "           <label>Category: " + shiftData['category'] + "</label><br>" +
-                        "       </div>" +
-                        "       <div style='clear:both'></div>" +
-                        "   </div><br>" +
-                        "</li>";
+
+                    var bgStyle;
+                    if (evenOdd % 2 == 1) {
+                        bgStyle = 'mat_single_odd';
+                    } else bgStyle = '';
+                    evenOdd++;
+
+                    shifts +=   "<li style='list-style-type: none'>" +
+                                "   <div class='mat_single_event_holder " + bgStyle + "'>" +
+                                "       <div class='mat_single_event_holder_inner'>" +
+                                "           <div class='mat_event_image'>" +
+                                "               <div class='mat_event_image_inner'>" +
+                                "                   <a title='" + shiftData['title'] + "' href='#'>" +
+                                "                       <img src='../../assets/images/logo.png' border='0'>" +
+                                "                   </a>" +
+                                "               </div>" +
+                                "           </div>" +
+                                "       <div class='mat_event_content'>" +
+                                "           <div class='mat_event_content_inner'>" +
+                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='#'>" + shiftData['title'] + "</a></h4>" +
+                                "                   <div class='mat_event_location'>" +
+                                "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> " + parseTimestamp(shiftData['begin']) + "</strong>" +
+                                "                   </div>" +
+                                "                   <div class='mat_small mat_booked participants_count'> 3 out of " + shiftData['participants'] + " participants  </div>" +
+                                "                       <div class='progress_bar_margin'>" +
+                                "                           <div class='progress'>" +
+                                "                               <div class='progress-bar' style='width: 45%;'></div>" +
+                                "                           </div>" +
+                                "                       </div>" +
+                                "                       <span class='mat_small mat_booked closing_date col-xs-10'>Closing date: " + parseTimestamp(shiftData['close']) + "</span>" +
+                                "                           <div class='mat_event_infoline duty_manager col-xs-8'>" +
+                                "                               <span class='mat_small'>" +
+                                "                               <span>Duty manager: " + shiftData['duty_manager'] + " - </span>Category: " + shiftData['category'] + " </span>" +
+                                "                           </div>" +
+                                "                       <a class='edit_shift_glyphicon' href='#'>" +
+                                "                           <div class='glyphicon glyphicon-edit'></div>" +
+                                "                       </a>" +
+                                "                       <a class='cancel_shift_glyphicon' href='#'>" +
+                                "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
+                                "                       </a>" +
+                                "                   </div>" +
+                                "               </div>" +
+                                "                   <div style='clear:both'></div>" +
+                                "       </div>" +
+                                "   </div>" +
+                                "</li>"
+
                 });
 
                 $("#shiftContainer").append(shifts);
                 $("#shiftContainer").easyPaginate({
                     paginateElement: 'li',
-                    elementsPerPage: 10,
-                    effect: 'climb'
+                    elementsPerPage: 3,
+                    effect: 'climb',
+                    firstButton: false,
+                    prevButtonText: 'Prev',
+                    nextButtonText: 'Next',
+                    lastButton: false
+
                 });
             } else {
                 console.error('Shifts unsuccessfully fetched');
@@ -49,6 +106,7 @@ $(document).ready(function () {
             data: $('form').serialize(),
             success: function () {
                 $('#createShiftForm')[0].reset();
+                $.growl.notice({title: "Success", message: "You successfully created the shift!"});
             }
         });
     });
