@@ -84,5 +84,4 @@
             $('#user_category').find('option[value="Manager"]').attr('selected', 'selected');
             break;
     }
-
 </script>
