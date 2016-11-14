@@ -69,6 +69,10 @@ function user_count() {
     $conn = getConnection();
     return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 1"))[0];
 }
+function user_not_approved() {
+    $conn = getConnection();
+    return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 0"))[0];
+}
 
 function user_data($user_id) {
     $conn = getConnection();

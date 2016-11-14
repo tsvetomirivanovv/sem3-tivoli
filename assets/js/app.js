@@ -245,6 +245,50 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/login/approve-accounts.php',
+        dataType: "json",
+    })
+        .done(function (response) {
+            if (response.success) {
+                var approve_accounts = '';
+                var oddOrEven = 1;
+                var oddOrEvenText = '';
+                response.accounts.forEach(function (accountData) {
+                    if (oddOrEven % 2 == 1) {
+                        oddOrEvenText = 'odd';
+                    } else {
+                        oddOrEvenText = 'even';
+                    }
+                    approve_accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
+                                '   <th class="sorting_1">' +
+                                '       <div>' +
+                                '           <span>' +
+                                '               <a href="profile-page.php?username='+ accountData['username']+'">' +
+                                '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
+                                '               </a>' +
+                                '           </span>' +
+                                '       </div>' +
+                                '   </th>' +
+                                '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                                '   <td>' + accountData['email'] + '</td>' +
+                                '   <td><span><a class="cvLink" href="' + accountData['cv'] + '">CV</a></span>' +
+                                '       <a href="approve.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-ok updateButtonPos"></span></a>' +
+                                '       <a href="delete-account.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-remove updateButtonPos"></span></a>' +
+                                '   </td>' +
+                                '</tr>';
+                    oddOrEven++;
+                });
+                $("#tableBodyApprove").append(approve_accounts);
+
+            } else {
+                console.error('Accounts unsuccessfully fetched');
+            }
+            $('#approveTable').DataTable();
+        });
+
+
 });
 
 function getFileLink(url, elementId) {

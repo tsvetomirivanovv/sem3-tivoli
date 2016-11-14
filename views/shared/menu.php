@@ -14,6 +14,7 @@
                     <?php if (!logged_in()){ ?>
                         <li><a href="index.php">Home</a></li>
                     <?php } else {?>
+                        <li><a href="manage.php">Manage</a></li>
                         <li><a href="shifts.php">Shifts</a></li>
                         <li><a href="view-all-accounts.php">Users</a></li>
                         <li><a href="profile-page.php?username=<?php echo $user_data['username'];?>">Profile</a></li>
