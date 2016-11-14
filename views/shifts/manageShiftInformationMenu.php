@@ -1,6 +1,6 @@
 <div class="col-xs-9">
     <div class="jumbotron jumboFix">
-        <div class="page-header headerFix"><h3 class="h3Fix">Shifts</h3></div>
+        <div class="page-header headerFix"><h3 class="h3Fix">Shift Details</h3></div>
         <div>
             <!-- Nav tabs -->
             <ul class="nav nav-pills" role="tablist">
