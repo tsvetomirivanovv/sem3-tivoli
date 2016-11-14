@@ -127,7 +127,8 @@ $(document).ready(function () {
                 edit_zip_code: $('#edit-zip-code').val(),
                 edit_city: $('#edit-city').val(),
                 edit_cv: $('#edit-cv').val(),
-                edit_profile_picture: $('#edit-profile-picture').val()
+                edit_profile_picture: $('#edit-profile-picture').val(),
+                edit_user_type: $('#edit-user-type').val()
             }
         })
             .done(function (response) {

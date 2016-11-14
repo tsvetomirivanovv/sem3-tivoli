@@ -57,9 +57,9 @@
                 <td><label for="edit-user-type">User status</label></td>
                 <td>
                     <select class="select" id="edit-user-type" name="edit_user_type">
-                        <option value="0">A-waiter</option>
-                        <option value="1">B-waiter</option>
-                        <option value="2">Manager</option>
+                        <option value="A-Waiter">A-Waiter</option>
+                        <option value="B-Waiter">B-Waiter</option>
+                        <option value="Manager">Manager</option>
                     </select>
                 </td>
             </tr>

@@ -1,12 +1,6 @@
 <?php
 include '../../init.php';
-if (isset($_POST['edit_user_type'])){
-    echo 'is set';
-}else {
-    echo 'is not';
 
-}
-die;
 if (!empty($_POST)) {
     $required_fields = array('edit_first_name', 'edit_email', 'edit_phone');
     foreach ($_POST as $key => $value) {
