@@ -95,6 +95,37 @@ $(document).ready(function () {
                 console.error('Shifts unsuccessfuly fetched');
             }
         });
+
+    //participants list
+   // $(".buttonFromChosenShift").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/participantsList.php',
+            dataType: "json",
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var participantRow = "";
+                    response.participants.forEach(function (participantData) {
+
+                        participantRow +=
+                            "<tr>"+
+                            "   <td>"+ participantData['name'] +"</td>"+
+                            "   <td>"+ participantData['phone'] +"</td>"+
+                            "   <td>"+ participantData['date_of_booking'] +"</td>"+
+                            "</tr>";
+                    });
+
+                    $("#participantsTable").append(participantRow);
+                } else {
+                    console.error('Participants unsuccessfuly fetched');
+                }
+            });
+
+  //  });
+
+
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
     // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
     $('#createShiftForm').on('submit', function (e) {
