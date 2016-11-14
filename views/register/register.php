@@ -29,8 +29,8 @@
         CV: <span>(pdf | max 500KB)</span>*<br>
         <input type="file" name="cvFile" id="cvFile" accept="application/pdf" required> <span class="error"> <?php echo $cvErr;?></span>
         <br><br>
-        Select image to upload: <span>(jpeg/png | max 500KB)</span>*<br>
-        <input type="file" name="pictureFile" id="pictureFile" accept="image/jpeg, image/png" required> <span class="error"> <?php echo $imageErr;?></span>
+        Select image to upload: <span>(jpeg/png | max 500KB)</span><br>
+        <input type="file" name="pictureFile" id="pictureFile" accept="image/jpeg, image/png" > <span class="error"> <?php echo $imageErr;?></span>
         <br><br>
         <button type="submit" name="submit" value="Submit" class="submitButton">Submit</button>
     </form>
