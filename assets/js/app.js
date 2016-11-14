@@ -172,7 +172,6 @@ $(document).ready(function () {
                 }
             })
     });
-
     $('#updateAccount').click(function () {
         $.ajax('core/functions/login/edit-profile.php', {
             type: 'POST',
@@ -274,8 +273,8 @@ $(document).ready(function () {
                                 '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
                                 '   <td>' + accountData['email'] + '</td>' +
                                 '   <td><span><a class="cvLink" href="' + accountData['cv'] + '">CV</a></span>' +
-                                '       <a href="approve.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-ok updateButtonPos"></span></a>' +
-                                '       <a href="delete-account.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-remove updateButtonPos"></span></a>' +
+                                '       <div class="updateButtonPos"><button class="approve_button" type="button" data-toggle="modal" data-target="#myModal" class="' + accountData['username'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></button>' +
+      /*to be changed*/         '       <a href="delete-account.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-remove" style="color: red;"></span></a></div>' +
                                 '   </td>' +
                                 '</tr>';
                     oddOrEven++;
@@ -287,7 +286,6 @@ $(document).ready(function () {
             }
             $('#approveTable').DataTable();
         });
-
 
 });
 
