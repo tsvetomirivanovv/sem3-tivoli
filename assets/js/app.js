@@ -205,4 +205,35 @@ $(document).ready(function () {
         format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
     });
+//register
+    $('#register').click(function(){
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/register/register.php',
+            dataType: 'json',
+            data: $('form').serialize(),
+            success: function () {
+               /* $.growl.notice({title: "Success", message: "Acc created"});*/
+                window.location.href = "http://localhost:9090/index.php";
+            }
+        });
+
+       /* $.ajax('core/functions/register/register.php', {
+            type: 'POST',
+            dataType: 'json',
+
+        })
+            .done(function (response) {
+                if (response.success) {
+                    $.growl.notice({title: "Success", message: "Acc created"});
+                    window.setTimeout(function () {
+                        window.location.href = "http://localhost:9090/index.php";
+                    }, 5000);
+                    console.log("acc created");
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })*/
+    });
 });

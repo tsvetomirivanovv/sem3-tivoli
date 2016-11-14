@@ -1,4 +1,5 @@
 <?php
+include '../../init.php';
     $errors = "";
 
     $passwordErr = "";
@@ -98,10 +99,15 @@
             if ($connectionOk == 1) {
                 $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
                 if ($conn->query($sql) === TRUE) {
-                    header('Location: http://localhost:9090/index.php');
+                    //header('Location: http://localhost:9090/index.php');
+                    $result = array('success' => true, 'message' => 'You successfully updated your account!');
+                    echo json_encode($result);
+
                 } else {
-                    echo "New record failed!";
+                   // echo "New record failed!";
+                    $result = array('success' => false, 'message' => 'msg');
                 }
+
             } else {
                 function form_errors() {
                     $output = "";
@@ -116,4 +122,5 @@
             }
         }
 }
+
 ?>
