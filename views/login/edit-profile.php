@@ -1,5 +1,4 @@
 <div class="col-xs-9">
-
     <div class="jumbotron jumbo_edit_profile">
         <div class="clearfix">
             <div class="col-xs-7">

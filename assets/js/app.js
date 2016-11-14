@@ -225,7 +225,7 @@ $(document).ready(function () {
                                 '       <div>' +
                                 '           <span>' +
                                 '               <a href="profile-page.php?username='+ accountData['username']+'">' +
-                                '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
+                                '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
                                 '               </a>' +
                                 '           </span>' +
                                 '       </div>' +
