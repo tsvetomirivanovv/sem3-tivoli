@@ -1,34 +1,61 @@
-<form id="createShiftForm">
-    <div class="label-input-container">
-        <label>Title</label>
-        <input type="text" maxlength="200" name="shiftTitle" required>
+<div class="clearfix">
+<div class="col-xs-9" style="background: whitesmoke; border-radius: 7px;">
+    <div class="col-xs-12">
+        <h3></h3>
+        <form id="createShiftForm">
+        <table>
+            <tr class="spaceUnder">
+                <td><label>Title*</label></td>
+                <td><input type="text" class="form-control" name="shiftTitle" id="shift-title" maxlength="200" placeholder="200 characters" required/></td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label>Begin date*</label></td>
+                <td><div class='input-group date'>
+                        <input type="text" class="form-control" name="shiftBeginDate" id="shift-begin-date" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label>End date*</label></td>
+                <td><div class='input-group date'>
+                        <input type="text" class="form-control" name="shiftEndDate" id="shift-end-date" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label>Closing date*</label></td>
+                <td><div class='input-group date'>
+                        <input type="text" class="form-control" name="shiftClosingDate" id="shift-closing-date" required >
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label for="edit_address">Duty manager*</label></td>
+                <td><input type="text" class="form-control" name="shiftDutyManager" id="shift-duty-manager" maxlength="50" placeholder="Name of the manager" required/></td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label>Category*</label></td>
+                <td> <select  class="form-control" name="shiftCategory" id="shift-category" required>
+                        <option>A-Waiter</option>
+                        <option>B-Waiter</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="spaceUnder">
+                <td><label for="edit_city">Maximum participants*</label></td>
+                <td><input type="number" class="form-control" name="shiftParticipants" id="shift-participants" minlength="1" maxlength="3" max="100" placeholder="1-100" required></td>
+            </tr>
+        </table>
+            <span>
+                <input id="createShift" type="submit" value="Create" style="float: right;margin-bottom: 20px" class="btn btn-default"/>
+            </span>
+        </form>
     </div>
-    <div class="label-input-container">
-        <br><label>Begin</label>
-        <input type="datetime-local" name="shiftBeginDate" required>
-    </div>
-    <div class="label-input-container">
-        <br><label>End</label>
-        <input type="datetime-local" name="shiftEndDate" required>
-    </div>
-    <div class="label-input-container">
-        <br><label>Closing Booking</label>
-        <input type="datetime-local" name="shiftClosingDate" required>
-    </div>
-    <div class="label-input-container">
-        <br><label>Duty Manager</label>
-        <input type="text" maxlength="20" name="shiftDutyManager" required>
-    </div>
-    <div class="label-input-container">
-        <br><label>Category</label>
-        <input type="text" maxlength="15" name="shiftCategory" required>
-    </div>
-    <div class="label-input-container">
-        <br><label>Number of Participants</label>
-        <input type="number" minlength="1" maxlength="3" max="100" name="shiftParticipants" required>
-    </div>
-    <div>
-        <br><input type="submit" name="submit" value="Create">
-    </div>
-</form>
-
+</div>
+</div>
