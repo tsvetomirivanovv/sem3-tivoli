@@ -50,7 +50,7 @@ $(document).ready(function () {
                                 "           </div>" +
                                 "       <div class='mat_event_content'>" +
                                 "           <div class='mat_event_content_inner'>" +
-                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php'>" + shiftData['title'] + "</a></h4>" +
+                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='"+shiftData['shift_id']+"'>" + shiftData['title'] + "</a></h4>" +
                                 "                   <div class='mat_event_location'>" +
                                 "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                                 "                   </div>" +
@@ -209,19 +209,22 @@ $(document).ready(function () {
 
     // WHEN CLICK ON TITLE, SET SES. STORAGE VAR
     $(document).on('click', '.a_link_title_color',function () {
-        var title = $(this).text();
-        sessionStorage.setItem("titleKey",title);
+        var titleID = $(this).attr('id');
+        var titleName = $(this).text();
+        sessionStorage.setItem("titleID",titleID);
+        sessionStorage.setItem("titleName",titleName)
     });
 
     // VAR TO RETRIEVE SES. STORAGE TITLE
-    var storageTitle = sessionStorage.getItem("titleKey");
+    var storageID = sessionStorage.getItem("titleID");
+    var storageName = sessionStorage.getItem("titleName");
 
     $.ajax({
         type: "POST",
         url: 'core/functions/shifts/shiftDetails.php',
         dataType: "json",
         data: {
-            shift_title_value: storageTitle
+            shift_id_value: storageID
         }
     })
         .done(function (response) {
@@ -285,5 +288,7 @@ $(document).ready(function () {
                 console.error('Shifts unsuccessfuly fetched');
             }
         });
+
+    $('.titleClass').html(sessionStorage.getItem("titleName"));
 
 });

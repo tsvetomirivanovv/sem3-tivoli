@@ -1,6 +1,21 @@
 <div class="col-xs-9">
     <div class="jumbotron jumboFix">
-        <div class="page-header headerFix"><h3 class="h3Fix">Shift Details</h3></div>
+        <div class="page-header headerFix">
+            <h3 class="h3Fix">
+
+                <span class="titleClass" style="width: 20% "> </span>
+
+                <a class='cancel_shift_glyphicon' style="float: right " href='#'>
+                    <div class='glyphicon glyphicon-remove-circle'></div>
+                </a>
+                <a class='edit_shift_glyphicon'  href='#'>
+                    <div class='glyphicon glyphicon-edit' style="float: right"></div>
+                </a>
+
+            </h3>
+
+
+        </div>
         <div>
             <!-- Nav tabs -->
             <ul class="nav nav-pills" role="tablist">
@@ -17,7 +32,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="shift_participants">
                     <?php
-
+                    include 'card.php';
                     ?>
                 </div>
             </div>

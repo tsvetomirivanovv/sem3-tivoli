@@ -9,12 +9,12 @@ if ($conn->connect_error) {
 }
 
 
-if (isset($_POST['shift_title_value'])) {
+if (isset($_POST['shift_id_value'])) {
 
-    $title = $_POST['shift_title_value'];
+    $id = $_POST['shift_id_value'];
 
 // BUILD QUERY
-    $query = "SELECT * FROM shifts WHERE title = '$title' ";
+    $query = "SELECT * FROM shifts WHERE shift_id = '$id' ";
 
 // EXECUTES QUERY
     $result = $conn->query($query);
