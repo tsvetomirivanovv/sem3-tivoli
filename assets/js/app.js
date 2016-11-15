@@ -52,7 +52,7 @@ $(document).ready(function () {
                                 "           <div class='mat_event_image'>" +
                                 "               <div class='mat_event_image_inner'>" +
                                 "                   <a title='" + shiftData['title'] + "' href='#'>" +
-                                "                       <img src='../../assets/images/logo.png' border='0'>" +
+                                "                       <img src='https://cdn.filestackcontent.com/FzeNGjAET2KXi936O7Lt' border='0'>" +
                                 "                   </a>" +
                                 "               </div>" +
                                 "           </div>" +

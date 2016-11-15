@@ -3,7 +3,7 @@
         <div class="clearfix">
             <div class="col-xs-7">
 
-                <h3>Edit profile</h3>
+                <div class="page-header headerFix"><h3 class="h3Fix">Edit profile</h3></div>
                 <table>
                     <tr class="spaceUnder">
                         <td><label for="edit_first_name">First Name*</label></td>
