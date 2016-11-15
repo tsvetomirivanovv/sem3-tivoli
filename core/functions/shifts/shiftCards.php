@@ -24,6 +24,7 @@ foreach ($shifts as $index => $shift) {
     $shifts[$index]['shift_id'] = (int)$shifts[$index]['shift_id'];
     $shifts[$index]['max_participants'] = (int)$shifts[$index]['max_participants'];
     $shifts[$index]['participants'] =  (int)getParticipantsByShiftId($shift['shift_id']);
+    $shifts[$index]['participants_perc'] = (100*(int)$shifts[$index]['participants'])/(int)$shifts[$index]['max_participants'];
 }
 
 function getParticipantsByShiftId($id) {
