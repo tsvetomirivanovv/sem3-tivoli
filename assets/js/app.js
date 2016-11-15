@@ -215,7 +215,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: 'core/functions/login/approve-accounts.php',
+            url: 'core/functions/profile/approve-accounts.php',
             dataType: "json",
         })
             .done(function (response) {
@@ -252,11 +252,11 @@ $(document).ready(function () {
     $(document).on('click', '.approve_button', function () {
         storageAccountId = $(this).attr('id');
     });
-    $(document).on('click', '.reject_button','.reject_button', function () {
+    $(document).on('click', '.reject_button', function () {
         accountId = $(this).attr('id');
     });
     $('#approveButton').click( function () {
-        $.ajax('core/functions/login/approve.php', {
+        $.ajax('core/functions/profile/approve.php', {
             type: 'POST',
             dataType: 'json',
             data: {
@@ -265,7 +265,7 @@ $(document).ready(function () {
         })
             .done(function (response) {
                 if (response.success) {
-                    var row = approveTable.row($('tr').filter("[id=" +storageAccountId + "]"));
+                    var row = approveTable.row($('tr').filter("[id=" + storageAccountId + "]"));
                     row.remove().draw(false);
                     updateUserCount();
                     $.growl.notice({title: "Success", message: response.message});
@@ -284,7 +284,7 @@ $(document).ready(function () {
         })
             .done(function (response) {
                 if (response.success) {
-                    var row = approveTable.row($('tr').filter("[id=" +accountId + "]"));
+                    var row = approveTable.row($('tr').filter("[id=" + accountId + "]"));
                     row.remove().draw(false);
                     updateUserCount();
                     $.growl.notice({title: "Success", message: response.message});

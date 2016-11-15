@@ -9,7 +9,7 @@ include 'views/shared/header.php';
     <div class="row">
         <?php
         if (logged_in() === true){
-            include 'views/login/approve-accounts.php';
+            include 'views/profile/approve-accounts.php';
             include 'views/login/logged-in.php';
         } else {
             include 'views/login/description.php';
