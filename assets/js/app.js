@@ -54,7 +54,7 @@ $(document).ready(function () {
                                 "                   <div class='mat_event_location'>" +
                                 "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                                 "                   </div>" +
-                                "                   <div class='mat_small mat_booked participants_count'> 3 out of " + shiftData['participants'] + " participants  </div>" +
+                                "                   <div class='mat_small mat_booked participants_count'> " + shiftData['participants'] + " out of " + shiftData['max_participants'] + " participants  </div>" +
                                 "                       <div class='progress_bar_margin'>" +
                                 "                           <div class='progress'>" +
                                 "                               <div class='progress-bar' style='width: 45%;'></div>" +
