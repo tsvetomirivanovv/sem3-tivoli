@@ -18,7 +18,7 @@
                         <span class="<?php echo $profile_status['dotColor'];?> profile_status"><span class="<?php echo $profile_status['dotClass'];?>"></span><?php echo $profile_status['isOnline'];?></span>
                         <span style="margin-left: 20px;"><a href="edit-profile.php?username=<?php echo $profile_data['username'];?>"> <button name="editProf" class="btn btn-default">Edit profile</button></a></span>
                         <span style="margin-left: 20px;"><a href="change-password.php"> <button name="editProf" class="btn btn-default">Change password</button></a></span>
-                        <span style="margin-left: 20px;"><a href="<?php echo $profile_data['cv'];?>"> <button name="viewCV" class="btn btn-default">CV</button></a></span>
+                        <span style="margin-left: 20px;"><a href="<?php echo $profile_data['cv'];?>" target="_blank"> <button name="viewCV" class="btn btn-default">CV</button></a></span>
                     </td>
                 </tr>
                 </tbody>

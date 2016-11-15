@@ -182,7 +182,7 @@ $(document).ready(function () {
     });
 
     $('#updateAccount').click(function () {
-        $.ajax('core/functions/login/edit-profile.php', {
+        $.ajax('core/functions/profile/edit-profile.php', {
             type: 'POST',
             dataType: 'json',
             data: {
@@ -214,7 +214,7 @@ $(document).ready(function () {
     });
     $.ajax({
         type: "POST",
-        url: 'core/functions/login/view-all-accounts.php',
+        url: 'core/functions/users/view-all-accounts.php',
         dataType: "json",
     })
         .done(function (response) {
