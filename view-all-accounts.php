@@ -8,7 +8,7 @@ include 'views/shared/header.php';
     <div class="container">
         <div class="row">
             <?php
-            include 'views/login/view-all-accounts.php';
+            include 'views/users/view-all-accounts.php';
             include 'views/login/logged-in.php';
             ?>
         </div>
