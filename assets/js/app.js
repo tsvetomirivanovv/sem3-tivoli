@@ -107,7 +107,6 @@ $(document).ready(function () {
     // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
     $('#createShiftForm').on('submit', function (e) {
         e.preventDefault();
-
         $.ajax({
             type: 'POST',
             url: 'core/functions/shifts/createShift.php',
@@ -180,7 +179,6 @@ $(document).ready(function () {
                 }
             })
     });
-
     $('#updateAccount').click(function () {
         $.ajax('core/functions/profile/edit-profile.php', {
             type: 'POST',
@@ -211,6 +209,10 @@ $(document).ready(function () {
     });
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
+    });
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
     });
     $.ajax({
         type: "POST",
@@ -253,6 +255,11 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
+=======
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
 });
 
 function getFileLink(url, elementId) {
