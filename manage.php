@@ -8,8 +8,13 @@ include 'views/shared/header.php';
 <div class="container">
     <div class="row">
         <?php
-            include 'views/login/change-password.php';
+        if (logged_in() === true){
+            include 'views/profile/approve-accounts.php';
             include 'views/shifts/shift-calendar.php';
+        } else {
+            include 'views/login/description.php';
+            include 'views/login/login.php';
+        }
         ?>
     </div>
 </div>

@@ -23,7 +23,7 @@ include 'views/shared/header.php';
         <div class="row">
             <?php
             include 'views/profile/edit-profile.php';
-            include 'views/login/logged-in.php';
+            include 'views/shifts/shift-calendar.php';
             ?>
         </div>
     </div>

@@ -20,6 +20,27 @@
 .updateButtonPos {
   float:right;
 }
-.profile_status{
+.profile_status {
   margin-left: 17px;
+}
+.cvLink {
+  text-decoration: none;
+}
+.approve_button {
+  padding: 0;
+  border: none;
+  background: none;
+  span {
+    color: #2ECC71;
+  }
+}
+.reject_button {
+  span {
+    color: #E74C3C;
+  }
+}
+
+.approve_button,
+.reject_button {
+  cursor: pointer;
 }

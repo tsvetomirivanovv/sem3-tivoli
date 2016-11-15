@@ -1,4 +1,12 @@
 <?php
+function reject_account($user_id){
+    $conn = getConnection();
+    mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
+}
+function approve_account($user_id){
+    $conn = getConnection();
+    mysqli_query($conn, "UPDATE users SET active = 1 WHERE user_id = $user_id");
+}
 function update_user_profile($user_id, $update_data) {
 
     $conn = getConnection();
@@ -68,6 +76,10 @@ function change_online_status($user_id, $status) {
 function user_count() {
     $conn = getConnection();
     return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 1"))[0];
+}
+function user_not_approved() {
+    $conn = getConnection();
+    return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 0"))[0];
 }
 
 function user_data($user_id) {

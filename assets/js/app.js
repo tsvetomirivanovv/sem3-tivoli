@@ -19,6 +19,28 @@ function parseTimestamp(date) {
 }
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/register/register.php',
+            data: $('form').serialize(),
+            success: function () {
+                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
+                window.setTimeout(function () {
+                    window.location.href = "index.php";
+                }, 3000);
+            },
+            error: function (resp) {
+                $.growl.error({title: "Failure", message: "Your account was not created!"});
+                console.log($('#usernameErr').val());
+
+                $("#registerForm").append($('#username').val());
+            }
+        });
+
+    });
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
@@ -53,7 +75,7 @@ $(document).ready(function () {
                                 "           <div class='mat_event_image'>" +
                                 "               <div class='mat_event_image_inner'>" +
                                 "                   <a title='" + shiftData['title'] + "' href='#'>" +
-                                "                       <img src='../../assets/images/logo.png' border='0'>" +
+                                "                       <img src='https://cdn.filestackcontent.com/FzeNGjAET2KXi936O7Lt' border='0'>" +
                                 "                   </a>" +
                                 "               </div>" +
                                 "           </div>" +
@@ -211,35 +233,88 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
-    $('.date').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true
-    });
-//register
-    $('#registerForm').on('submit', function (e) {
-        e.preventDefault();
 
         $.ajax({
-            type: 'POST',
-            url: 'core/functions/register/register.php',
-            data: $('form').serialize(),
-            success: function () {
-                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
-                window.setTimeout(function () {
-                    window.location.href = "index.php";
-                }, 3000);
-            },
-            error: function (resp) {
-                $.growl.error({title: "Failure", message: "Your account was not created!"});
-                console.log($('#usernameErr').val());
+            type: "POST",
+            url: 'core/functions/profile/approve-accounts.php',
+            dataType: "json",
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var approve_accounts = '';
+                    response.accounts.forEach(function (accountData) {
+                        approve_accounts += '<tr id="' + accountData['user_id'] + '">' +
+                            '   <th>' +
+                            '       <div>' +
+                            '           <span>' +
+                            '               <a href="profile-page.php?username=' + accountData['username'] + '">' +
+                            '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
+                            '               </a>' +
+                            '           </span>' +
+                            '       </div>' +
+                            '   </th>' +
+                            '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                            '   <td>' + accountData['email'] + '</td>' +
+                            '   <td><span><a class="cvLink" href="' + accountData['cv'] + '" target="_blank">CV</a></span>' +
+                            '       <div class="updateButtonPos"><a class="approve_button" type="button" data-toggle="modal" data-target="#approveUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></a>' +
+                            '       <div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
+                            '   </td>' +
+                            '</tr>';
+                    });
+                    $("#tableBodyApprove").append(approve_accounts);
 
-                $("#registerForm").append($('#username').val());
-            }
-        });
+                } else {
+                    console.error('Accounts unsuccessfully fetched');
+                }
+                approveTable = $('#approveTable').DataTable();
+            });
 
+
+    $(document).on('click', '.approve_button', function () {
+        storageAccountId = $(this).attr('id');
     });
+    $(document).on('click', '.reject_button', function () {
+        accountId = $(this).attr('id');
+    });
+    $('#approveButton').click( function () {
+        $.ajax('core/functions/profile/approve.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                account_id: storageAccountId
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var row = approveTable.row($('tr').filter("[id=" + storageAccountId + "]"));
+                    row.remove().draw(false);
+                    updateUserCount();
+                    $.growl.notice({title: "Success", message: response.message});
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
+    $('#rejectUserModal').click( function () {
+        $.ajax('core/functions/profile/reject-user.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                account_id: accountId
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var row = approveTable.row($('tr').filter("[id=" + accountId + "]"));
+                    row.remove().draw(false);
+                    updateUserCount();
+                    $.growl.notice({title: "Success", message: response.message});
 
-
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
     // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
     $(document).on('click', '.a_link_title_color',function () {
         var titleID = $(this).attr('id');
@@ -322,15 +397,25 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
-    $('.date').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true
-    });
+        $('.date').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            sideBySide: true
+        });
+
 });
 
 function getFileLink(url, elementId) {
-    var inputId = '#' +  elementId;
-    var linkId = '#' +  elementId + '-link';
+    var inputId = '#' + elementId;
+    var linkId = '#' + elementId + '-link';
     $(inputId).val(url);
     $(linkId).text(url);
-};
+}
+function updateUserCount() {
+    var x = Number($('#pendingUsers').text())-1;
+    var suffix = '';
+    if (x != 1){
+        suffix = 's';
+    }
+    $('#pendingUsers').text(x);
+    $('#suffix_id').text(suffix);
+}
