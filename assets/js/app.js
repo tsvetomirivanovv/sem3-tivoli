@@ -18,6 +18,7 @@ function parseTimestamp(date) {
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
@@ -58,7 +59,7 @@ $(document).ready(function () {
                                 "           </div>" +
                                 "       <div class='mat_event_content'>" +
                                 "           <div class='mat_event_content_inner'>" +
-                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='#'>" + shiftData['title'] + "</a></h4>" +
+                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='"+shiftData['shift_id']+"'>" + shiftData['title'] + "</a></h4>" +
                                 "                   <div class='mat_event_location'>" +
                                 "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                                 "                   </div>" +
@@ -179,6 +180,7 @@ $(document).ready(function () {
                 }
             })
     });
+
     $('#updateAccount').click(function () {
         $.ajax('core/functions/profile/edit-profile.php', {
             type: 'POST',
@@ -317,6 +319,109 @@ $(document).ready(function () {
                         '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
                         '   </td>' +
                         '</tr>';
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
+//register
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/register/register.php',
+            data: $('form').serialize(),
+            success: function () {
+                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
+                window.setTimeout(function () {
+                    window.location.href = "index.php";
+                }, 3000);
+            },
+            error: function (resp) {
+                $.growl.error({title: "Failure", message: "Your account was not created!"});
+                console.log($('#usernameErr').val());
+
+                $("#registerForm").append($('#username').val());
+            }
+        });
+
+    });
+
+
+    // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
+    $(document).on('click', '.a_link_title_color',function () {
+        var titleID = $(this).attr('id');
+        var titleName = $(this).text();
+        sessionStorage.setItem("titleID",titleID);
+        sessionStorage.setItem("titleName",titleName)
+    });
+
+    // VAR TO RETRIEVE SES. STORAGE ID
+    var storageID = sessionStorage.getItem("titleID");
+
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/shifts/shiftDetails.php',
+        dataType: "json",
+        data: {
+            shift_id_value: storageID
+        }
+    })
+        .done(function (response) {
+            if (response.success) {
+                response.shifts.forEach(function (shiftData) {
+                    shift_begin_id = shiftData['begin'];
+                    shift_end_id = shiftData['end'];
+                    shift_close_id = shiftData['close'];
+                    shift_manager_id = shiftData['duty_manager'];
+                    shift_category_id = shiftData['category'];
+                    shift_participants_id = shiftData['max_participants'];
+                });
+                $("#shift_begin_id").append(shift_begin_id);
+                $("#shift_end_id").append(shift_end_id);
+                $("#shift_close_id").append(shift_close_id);
+                $("#shift_organizer_id").append("Alex Petersen");
+                $("#shift_manager_id").append(shift_manager_id);
+                $("#shift_category_id").append(shift_category_id);
+                $("#shift_participants_id").append(shift_participants_id);
+            }
+        });
+
+    $('.titleClass').html(sessionStorage.getItem("titleName"));
+
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/users/view-all-accounts.php',
+        dataType: "json",
+    })
+        .done(function (response) {
+            if (response.success) {
+                var accounts = '';
+                var oddOrEven = 1;
+                var oddOrEvenText = '';
+                response.accounts.forEach(function (accountData) {
+                    if (oddOrEven % 2 == 1) {
+                        oddOrEvenText = 'odd';
+                    } else {
+                        oddOrEvenText = 'even';
+                    }
+                    accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
+                                '   <th class="sorting_1">' +
+                                '       <div>' +
+                                '           <span>' +
+                                '               <a href="profile-page.php?username='+ accountData['username']+'">' +
+                                '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
+                                '               </a>' +
+                                '           </span>' +
+                                '       </div>' +
+                                '   </th>' +
+                                '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                                '   <td>' + accountData['email'] + '</td>' +
+                                '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
+                                '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
+                                '   </td>' +
+                                '</tr>';
+                    oddOrEven++;
                 });
                 $("#tableBody").append(accounts);
 
@@ -329,6 +434,7 @@ $(document).ready(function () {
             format: 'YYYY-MM-DD HH:mm',
             sideBySide: true
         });
+
 });
 
 function getFileLink(url, elementId) {
