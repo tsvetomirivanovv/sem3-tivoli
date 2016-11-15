@@ -18,6 +18,7 @@ function parseTimestamp(date) {
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
@@ -100,7 +101,7 @@ $(document).ready(function () {
 
                 });
             } else {
-                console.error('Shifts unsuccessfuly fetched');
+                console.error('Shifts unsuccessfully fetched');
             }
         });
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
@@ -180,7 +181,7 @@ $(document).ready(function () {
             })
     });
     $('#updateAccount').click(function () {
-        $.ajax('core/functions/login/edit-profile.php', {
+        $.ajax('core/functions/profile/edit-profile.php', {
             type: 'POST',
             dataType: 'json',
             data: {
@@ -192,7 +193,8 @@ $(document).ready(function () {
                 edit_zip_code: $('#edit-zip-code').val(),
                 edit_city: $('#edit-city').val(),
                 edit_cv: $('#edit-cv').val(),
-                edit_profile_picture: $('#edit-profile-picture').val()
+                edit_profile_picture: $('#edit-profile-picture').val(),
+                edit_user_type: $('#edit-user-type').val()
             }
         })
             .done(function (response) {
@@ -212,6 +214,29 @@ $(document).ready(function () {
     $('.date').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
+    });
+//register
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/register/register.php',
+            data: $('form').serialize(),
+            success: function () {
+                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
+                window.setTimeout(function () {
+                    window.location.href = "index.php";
+                }, 3000);
+            },
+            error: function (resp) {
+                $.growl.error({title: "Failure", message: "Your account was not created!"});
+                console.log($('#usernameErr').val());
+
+                $("#registerForm").append($('#username').val());
+            }
+        });
+
     });
 
 
@@ -258,7 +283,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "POST",
-        url: 'core/functions/login/view-all-accounts.php',
+        url: 'core/functions/users/view-all-accounts.php',
         dataType: "json",
     })
         .done(function (response) {
@@ -273,21 +298,21 @@ $(document).ready(function () {
                         oddOrEvenText = 'even';
                     }
                     accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
-                        '   <th class="sorting_1">' +
-                        '       <div>' +
-                        '           <span>' +
-                        '               <a href="profile-page.php?username='+ accountData['username']+'">' +
-                        '                   <img class="avatarSize" src="assets/images/' + accountData['profile_picture'] + '">' +
-                        '               </a>' +
-                        '           </span>' +
-                        '       </div>' +
-                        '   </th>' +
-                        '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                        '   <td>' + accountData['email'] + '</td>' +
-                        '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
-                        '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
-                        '   </td>' +
-                        '</tr>';
+                                '   <th class="sorting_1">' +
+                                '       <div>' +
+                                '           <span>' +
+                                '               <a href="profile-page.php?username='+ accountData['username']+'">' +
+                                '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
+                                '               </a>' +
+                                '           </span>' +
+                                '       </div>' +
+                                '   </th>' +
+                                '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                                '   <td>' + accountData['email'] + '</td>' +
+                                '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
+                                '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
+                                '   </td>' +
+                                '</tr>';
                     oddOrEven++;
                 });
                 $("#tableBody").append(accounts);
@@ -297,4 +322,16 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
+=======
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
 });
+
+function getFileLink(url, elementId) {
+    var inputId = '#' +  elementId;
+    var linkId = '#' +  elementId + '-link';
+    $(inputId).val(url);
+    $(linkId).text(url);
+};

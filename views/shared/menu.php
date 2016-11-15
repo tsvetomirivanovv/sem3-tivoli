@@ -15,8 +15,11 @@
                         <li><a href="index.php">Home</a></li>
                     <?php } else {?>
                         <li><a href="shifts.php">Shifts</a></li>
+                        <li><a href="view-all-accounts.php">Users</a></li>
+                        <li><a href="profile-page.php?username=<?php echo $user_data['username'];?>">Profile</a></li>
+                        <li><a href="logout.php">Sign out</a></li>
                     <?php } ?>
-                        <li><a href="#fakelink">Contact</a></li>
+
                    </ul>
                 </div>
               </nav>

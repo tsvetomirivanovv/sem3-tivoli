@@ -1,6 +1,7 @@
 <?php
 include '../../init.php';
 
+
 if (!empty($_POST)) {
     $required_fields = array('edit_first_name', 'edit_email', 'edit_phone');
     foreach ($_POST as $key => $value) {
@@ -9,10 +10,10 @@ if (!empty($_POST)) {
             break 1;
         }
     }
-
+    $profile_data = user_data(user_id_from_email($_POST['edit_email']), 'user_id', 'username', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover', 'type' , 'online_status');
     if (!filter_var($_POST['edit_email'], FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'A valid email address is required.';
-    } else if (email_exists($_POST['edit_email']) && $user_data['email'] !== $_POST['edit_email']) {
+    } else if (email_exists($_POST['edit_email']) && $user_data['email'] !== $_POST['edit_email'] && $profile_data['email'] !== $_POST['edit_email'] ) {
         $errors[] = 'Sorry, the email \'' . $_POST['edit_email'] . '\' is already in use';
     }
 }
@@ -24,16 +25,18 @@ if (!empty($_POST) && empty($errors)) {
         'phone' => $_POST['edit_phone'],
         'address' => $_POST['edit_address'],
         'zip_code' => $_POST['edit_zip_code'],
-        'city' => $_POST['edit_city']
+        'city' => $_POST['edit_city'],
+        'type' => $_POST['edit_user_type']
     );
+
     if(!empty($_POST['edit_cv'])){
         $update_data['cv'] = $_POST['edit_cv'];
     }
     if (!empty($_POST['edit_profile_picture'])){
         $update_data['profile_picture'] = $_POST['edit_profile_picture'];
     }
-    $result = array('success' => true, 'message' => 'You successfully updated your account!');
-    update_user_profile($update_data);
+       $result = array('success' => true, 'message' => 'You successfully updated your account!');
+    update_user_profile(user_id_from_email($_POST['edit_email']), $update_data);
 } else {
     $result = array('success' => false, 'message' => output_errors($errors));
 }
