@@ -2,7 +2,7 @@
 include '../../init.php';
 
 if(isset($_POST['account_id'])){
-    //approve_account($_POST['account_id']);
+    approve_account($_POST['account_id']);
 } else {
     $errors[] = 'Data not provided!';
 }

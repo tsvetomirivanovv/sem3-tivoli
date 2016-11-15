@@ -10,7 +10,7 @@ include 'core/functions/profile/profile-page.php';
         <div class="row">
             <?php
             include 'views/profile/profile-page.php';
-            include 'views/login/shift-calendar.php';
+            include 'views/shifts/shift-calendar.php';
             ?>
         </div>
     </div>

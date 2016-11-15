@@ -17,7 +17,7 @@
                         style="width: 100%;background-color: #ecf0f1;border-radius: 5px; ">
                         <span class="<?php echo $profile_status['dotColor'];?> profile_status"><span class="<?php echo $profile_status['dotClass'];?>"></span><?php echo $profile_status['isOnline'];?></span>
                         <span style="margin-left: 20px;"><a href="edit-profile.php?username=<?php echo $profile_data['username'];?>"> <button name="editProf" class="btn btn-default">Edit profile</button></a></span>
-                        <span style="margin-left: 20px;"><a href="change-password.php"> <button name="editProf" class="btn btn-default">Change password</button></a></span>
+                        <span style="margin-left: 20px;"><a type="button" data-toggle="modal" data-target="#changePasswordModal"> <button name="editProf" class="btn btn-default">Change password</button></a></span>
                         <span style="margin-left: 20px;"><a href="<?php echo $profile_data['cv'];?>" target="_blank"> <button name="viewCV" class="btn btn-default">CV</button></a></span>
                     </td>
                 </tr>
@@ -68,6 +68,38 @@
                 </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="changePasswordModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="form-group">
+                        <input type="password" class="form-control" value="" placeholder="Current Password"
+                               id="current-pass"
+                               name="current-pass" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" value="" placeholder="New Password" id="new-pass"
+                               name="new-pass"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" value="" placeholder="Confirm Password"
+                               id="confirm-pass"
+                               name="confirm-pass" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input id="changePassword" type="submit" data-dismiss="modal" value="Change Password"
+                           class="btn btn-block btn-lg btn-default" />
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
