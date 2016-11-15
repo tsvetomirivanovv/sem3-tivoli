@@ -38,6 +38,14 @@ $(document).ready(function () {
                     } else bgStyle = '';
                     evenOdd++;
 
+                    // progress bar color
+                    var progress_bar_color = 'progress-bar-success';
+                    if(shiftData['participants_perc'] > 50 && shiftData['participants_perc'] <= 70) {
+                        progress_bar_color = 'progress-bar-warning';
+                    } else if (shiftData['participants_perc'] > 70 ) {
+                        progress_bar_color = 'progress-bar-danger';
+                    }
+
                     shifts +=   "<li style='list-style-type: none'>" +
                                 "   <div class='mat_single_event_holder " + bgStyle + "'>" +
                                 "       <div class='mat_single_event_holder_inner'>" +
@@ -52,12 +60,12 @@ $(document).ready(function () {
                                 "           <div class='mat_event_content_inner'>" +
                                 "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='"+shiftData['shift_id']+"'>" + shiftData['title'] + "</a></h4>" +
                                 "                   <div class='mat_event_location'>" +
-                                "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> " + parseTimestamp(shiftData['begin']) + "</strong>" +
+                                "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                                 "                   </div>" +
-                                "                   <div class='mat_small mat_booked participants_count'> 3 out of " + shiftData['max_participants'] + " participants  </div>" +
+                                "                   <div class='mat_small mat_booked participants_count'> " + shiftData['participants'] + " out of " + shiftData['max_participants'] + " participants  </div>" +
                                 "                       <div class='progress_bar_margin'>" +
                                 "                           <div class='progress'>" +
-                                "                               <div class='progress-bar' style='width: 45%;'></div>" +
+                                "                               <div class='progress-bar " + progress_bar_color + "' style='width: " + shiftData['participants_perc'] +"%;'></div>" +
                                 "                           </div>" +
                                 "                       </div>" +
                                 "                       <span class='mat_small mat_booked closing_date col-xs-10'>Closing date: " + parseTimestamp(shiftData['close']) + "</span>" +
