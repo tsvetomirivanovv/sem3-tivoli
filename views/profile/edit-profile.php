@@ -58,7 +58,11 @@
                                        onchange="getFileLink(event.fpfile.url, 'edit-cv')">
                                 <p class="fileName" id="edit-cv-link">
                                     <?php if (isset($profile_data['cv'])) {
-                                        echo $profile_data['username'] . " - CV.pdf";
+                                        ?>
+                                        <a href="<?php echo $profile_data['cv'];?>" target="_blank">
+                                        <?php echo $profile_data['username'] . " - CV.pdf";?>
+                                        </a>
+                                    <?php
                                     } else {
                                         echo 'No file chosen';
                                     } ?>
@@ -77,7 +81,11 @@
                                        onchange="getFileLink(event.fpfile.url, 'edit-profile-picture')">
                                 <p class="fileName" id="edit-profile-picture-link">
                                     <?php if (isset($profile_data['profile_picture'])) {
-                                        echo $profile_data['username'] . " - avatar";
+                                    ?>
+                                    <a href="<?php echo $profile_data['profile_picture'];?>" target="_blank">
+                                        <?php echo $profile_data['username'] . " - avatar";?>
+                                        </a>
+                                    <?php
                                     } else {
                                         echo 'No file chosen';
                                     } ?>
