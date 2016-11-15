@@ -1,7 +1,7 @@
 <?php
-function approve_account($username){
+function approve_account($user_id){
     $conn = getConnection();
-    mysqli_query($conn, "UPDATE users SET active = 1 WHERE username = $username");
+    mysqli_query($conn, "UPDATE users SET active = 1 WHERE user_id = $user_id");
 }
 function update_user_profile($user_id, $update_data) {
 
