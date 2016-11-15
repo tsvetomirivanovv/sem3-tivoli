@@ -273,8 +273,8 @@ $(document).ready(function () {
                         '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
                         '   <td>' + accountData['email'] + '</td>' +
                         '   <td><span><a class="cvLink" href="' + accountData['cv'] + '">CV</a></span>' +
-                        '       <div class="updateButtonPos"><a class="approve_button" type="button" data-toggle="modal" data-target="#myModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></a>' +
-                        /*to be changed*/         '       <a href="delete-account.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-remove" style="color: red;"></span></a></div>' +
+                        '       <div class="updateButtonPos"><a class="approve_button" type="button" data-toggle="modal" data-target="#approveUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></a>' +
+                        '       <div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
                         '   </td>' +
                         '</tr>';
                     oddOrEven++;
