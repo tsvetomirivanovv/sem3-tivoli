@@ -10,13 +10,13 @@ include '../../init.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn = getConnection();
-// CHECK IF THERE IS ERROR
+        // CHECK IF THERE IS ERROR
         if ($conn->connect_error) {
             die('Connection failed: ' . $conn->connect_error);
         }
 
         if (isset($_POST)) {
-//upload CV
+            //upload CV
             $cvFileOk = 1;
             $cvFile = $_FILES["cvFile"];
             if ($cvFile["error"] !== UPLOAD_ERR_OK) {
@@ -39,7 +39,7 @@ include '../../init.php';
                 $cvErr = "Unable to save your CV file";
                 $cvFileOk = 0;
             }
-//upload picture
+            //upload picture
             $pictureFileOk = 1;
             $pictureFile = $_FILES["pictureFile"];
             if ($pictureFile["error"] !== UPLOAD_ERR_OK) {
@@ -113,8 +113,6 @@ include '../../init.php';
 
                 }
                 echo form_errors();
-
-
             }
         }
 }

@@ -18,6 +18,7 @@ function parseTimestamp(date) {
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
