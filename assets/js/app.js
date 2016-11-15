@@ -203,6 +203,88 @@ $(document).ready(function () {
     $('#cancelUpdateAccount').click(function () {
         window.location.href = "index.php";
     });
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/login/approve-accounts.php',
+            dataType: "json",
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var approve_accounts = '';
+                    response.accounts.forEach(function (accountData) {
+                        approve_accounts += '<tr id="' + accountData['user_id'] + '">' +
+                            '   <th>' +
+                            '       <div>' +
+                            '           <span>' +
+                            '               <a href="profile-page.php?username=' + accountData['username'] + '">' +
+                            '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
+                            '               </a>' +
+                            '           </span>' +
+                            '       </div>' +
+                            '   </th>' +
+                            '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
+                            '   <td>' + accountData['email'] + '</td>' +
+                            '   <td><span><a class="cvLink" href="' + accountData['cv'] + '" target="_blank">CV</a></span>' +
+                            '       <div class="updateButtonPos"><a class="approve_button" type="button" data-toggle="modal" data-target="#approveUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></a>' +
+                            '       <div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
+                            '   </td>' +
+                            '</tr>';
+                    });
+                    $("#tableBodyApprove").append(approve_accounts);
+
+                } else {
+                    console.error('Accounts unsuccessfully fetched');
+                }
+                approveTable = $('#approveTable').DataTable();
+            });
+
+
+    $(document).on('click', '.approve_button', function () {
+        storageAccountId = $(this).attr('id');
+    });
+    $(document).on('click', '.reject_button','.reject_button', function () {
+        accountId = $(this).attr('id');
+    });
+    $('#approveButton').click( function () {
+        $.ajax('core/functions/login/approve.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                account_id: storageAccountId
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var row = approveTable.row($('tr').filter("[id=" +storageAccountId + "]"));
+                    row.remove().draw(false);
+                    updateUserCount();
+                    $.growl.notice({title: "Success", message: response.message});
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
+    $('#rejectUserModal').click( function () {
+        $.ajax('core/functions/profile/reject-user.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                account_id: accountId
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var row = approveTable.row($('tr').filter("[id=" +accountId + "]"));
+                    row.remove().draw(false);
+                    updateUserCount();
+                    $.growl.notice({title: "Success", message: response.message});
+
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
     $.ajax({
         type: "POST",
         url: 'core/functions/login/view-all-accounts.php',
@@ -211,16 +293,9 @@ $(document).ready(function () {
         .done(function (response) {
             if (response.success) {
                 var accounts = '';
-                var oddOrEven = 1;
-                var oddOrEvenText = '';
                 response.accounts.forEach(function (accountData) {
-                    if (oddOrEven % 2 == 1) {
-                        oddOrEvenText = 'odd';
-                    } else {
-                        oddOrEvenText = 'even';
-                    }
-                    accounts += '<tr role="row" class="' + oddOrEvenText + '">' +
-                        '   <th class="sorting_1">' +
+                    accounts += '<tr>' +
+                        '   <th>' +
                         '       <div>' +
                         '           <span>' +
                         '               <a href="profile-page.php?username=' + accountData['username'] + '">' +
@@ -235,7 +310,6 @@ $(document).ready(function () {
                         '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
                         '   </td>' +
                         '</tr>';
-                    oddOrEven++;
                 });
                 $("#tableBody").append(accounts);
 
@@ -244,72 +318,9 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
-    $.ajax({
-        type: "POST",
-        url: 'core/functions/login/approve-accounts.php',
-        dataType: "json",
-    })
-        .done(function (response) {
-            if (response.success) {
-                var approve_accounts = '';
-                var oddOrEven = 1;
-                var oddOrEvenText = '';
-                response.accounts.forEach(function (accountData) {
-                    if (oddOrEven % 2 == 1) {
-                        oddOrEvenText = 'odd';
-                    } else {
-                        oddOrEvenText = 'even';
-                    }
-                    approve_accounts += '<tr role="row" class="' + oddOrEvenText + ' ' + accountData['user_id'] + '">' +
-                        '   <th class="sorting_1">' +
-                        '       <div>' +
-                        '           <span>' +
-                        '               <a href="profile-page.php?username=' + accountData['username'] + '">' +
-                        '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
-                        '               </a>' +
-                        '           </span>' +
-                        '       </div>' +
-                        '   </th>' +
-                        '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                        '   <td>' + accountData['email'] + '</td>' +
-                        '   <td><span><a class="cvLink" href="' + accountData['cv'] + '">CV</a></span>' +
-                        '       <div class="updateButtonPos"><a class="approve_button" type="button" data-toggle="modal" data-target="#approveUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-ok" style="margin-right: 15px;"></span></a>' +
-                        '       <div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + accountData['user_id'] + '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
-                        '   </td>' +
-                        '</tr>';
-                    oddOrEven++;
-                });
-                $("#tableBodyApprove").append(approve_accounts);
 
-            } else {
-                console.error('Accounts unsuccessfully fetched');
-            }
-            var approveTable = $('#approveTable').DataTable();
-        });
-    var storageAccountId = '';
 
-    $(document).on('click', '.approve_button', function () {
-        storageAccountId = $(this).attr('id');
-    });
-    $('#approveButton').click(function () {
-        $.ajax('core/functions/login/approve.php', {
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                account_id: storageAccountId
-            }
-        })
-            .done(function (response) {
-                if (response.success) {
-                    /* should be changed to something dataTables related */
-                    $('.' + storageAccountId).remove();
-                    $.growl.notice({title: "Success", message: response.message});
 
-                } else {
-                    $.growl.error({title: "Error", message: response.message});
-                }
-            })
-    });
 });
 
 function getFileLink(url, elementId) {
@@ -317,4 +328,16 @@ function getFileLink(url, elementId) {
     var linkId = '#' + elementId + '-link';
     $(inputId).val(url);
     $(linkId).text(url);
-};
+}
+function updateUserCount() {
+    var x = $('#userCount').text();
+    var temp = x.match(/\d+/g)[0];
+    var new_count = temp - 1;
+    var suffix = '';
+    if (new_count != 1){
+        suffix = 's';
+    }
+    // I hate myself doing this ...
+    $('#userCount').text("Tivoli Hotel & Congress Center shift booking system has " + new_count + " pending member" + suffix + ".");
+    //x.replace(/\d+/g, new_count); - not working?
+}

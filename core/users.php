@@ -1,4 +1,8 @@
 <?php
+function reject_account($user_id){
+    $conn = getConnection();
+    mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
+}
 function approve_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "UPDATE users SET active = 1 WHERE user_id = $user_id");
