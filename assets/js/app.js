@@ -59,7 +59,7 @@ $(document).ready(function () {
                                 "           </div>" +
                                 "       <div class='mat_event_content'>" +
                                 "           <div class='mat_event_content_inner'>" +
-                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='#'>" + shiftData['title'] + "</a></h4>" +
+                                "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='"+shiftData['shift_id']+"'>" + shiftData['title'] + "</a></h4>" +
                                 "                   <div class='mat_event_location'>" +
                                 "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                                 "                   </div>" +
@@ -238,6 +238,49 @@ $(document).ready(function () {
         });
 
     });
+
+
+    // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
+    $(document).on('click', '.a_link_title_color',function () {
+        var titleID = $(this).attr('id');
+        var titleName = $(this).text();
+        sessionStorage.setItem("titleID",titleID);
+        sessionStorage.setItem("titleName",titleName)
+    });
+
+    // VAR TO RETRIEVE SES. STORAGE ID
+    var storageID = sessionStorage.getItem("titleID");
+
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/shifts/shiftDetails.php',
+        dataType: "json",
+        data: {
+            shift_id_value: storageID
+        }
+    })
+        .done(function (response) {
+            if (response.success) {
+                response.shifts.forEach(function (shiftData) {
+                    shift_begin_id = shiftData['begin'];
+                    shift_end_id = shiftData['end'];
+                    shift_close_id = shiftData['close'];
+                    shift_manager_id = shiftData['duty_manager'];
+                    shift_category_id = shiftData['category'];
+                    shift_participants_id = shiftData['max_participants'];
+                });
+                $("#shift_begin_id").append(shift_begin_id);
+                $("#shift_end_id").append(shift_end_id);
+                $("#shift_close_id").append(shift_close_id);
+                $("#shift_organizer_id").append("Alex Petersen");
+                $("#shift_manager_id").append(shift_manager_id);
+                $("#shift_category_id").append(shift_category_id);
+                $("#shift_participants_id").append(shift_participants_id);
+            }
+        });
+
+    $('.titleClass').html(sessionStorage.getItem("titleName"));
+
     $.ajax({
         type: "POST",
         url: 'core/functions/users/view-all-accounts.php',
@@ -279,7 +322,6 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
-=======
     $('.date').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
