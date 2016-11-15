@@ -322,7 +322,6 @@ $(document).ready(function () {
             }
             $('#usersTable').DataTable();
         });
-=======
     $('.date').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
