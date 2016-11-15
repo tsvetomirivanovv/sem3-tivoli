@@ -30,6 +30,7 @@ include '../../init.php';
             }
 
             $cvName = preg_replace("/[^A-Z0-9._-]/i", "_", $cvFile["name"]);
+            $success ="";
             // preserve file from temporary directory
             if ($cvFileOk == 1) {
                 $success = move_uploaded_file($cvFile["tmp_name"], $cvName);
@@ -98,17 +99,9 @@ include '../../init.php';
 
             if ($connectionOk == 1) {
                 $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
-                if ($conn->query($sql) === TRUE) {
-                    //header('Location: http://localhost:9090/index.php');
-                    $result = array('success' => true, 'message' => 'You successfully updated your account!');
-                    echo json_encode($result);
-
-                } else {
-                   // echo "New record failed!";
-                    $result = array('success' => false, 'message' => 'msg');
-                }
-
+                $conn->query($sql);
             } else {
+                var_dump(http_response_code(404));
                 function form_errors() {
                     $output = "";
                         $output .= "<div class=\"error\">";
@@ -118,6 +111,7 @@ include '../../init.php';
                     return $output;
                 }
                 echo form_errors();
+
 
             }
         }

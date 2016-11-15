@@ -2,10 +2,10 @@
    //require_once("core/functions/register/register.php");
 
     $passwordErr = "";
-    $usernameErr = "";
-    $cvErr = "";
-    $imageErr = "";
-    $emailErr = "";
+     $usernameErr ="";
+     $cvErr= "";
+     $imageErr= "";
+     $emailErr= "";
 
 ?>
 <style>
@@ -22,7 +22,8 @@
 
         <form method="post" action="register.php" id="registerForm" enctype="multipart/form-data">
             <label>Username:*</label>
-            <input type="text" name="username" id="username" class="form-control" required> <span class="error"> <?php echo $usernameErr;?></span> <br>
+                <input type="text" name="username" id="username" class="form-control" required>
+                    <span class="error"> <?php echo $usernameErr;?></span> <br>
             <label>First Name:*</label>
             <input type="text" name="firstname" id="firstname" class="form-control" required><br>
             <label>Last Name:*</label>
@@ -42,7 +43,7 @@
             <label>City:*</label>
             <input type="text" name="city" id="city" class="form-control" required/><br>
             <label>CV:*<span>(pdf | max 500KB)</span></label>
-            <input type="file" name="cvFile" id="cvFile" accept="application/pdf" class="form-control" required> <span class="error"> <?php echo $cvErr;?></span><br>
+            <input type="file" name="cvFile" id="cvFile" accept="application/pdf" class="form-control" > <span class="error"> <?php echo $cvErr;?></span><br>
             Select image to upload:<span>(jpeg/png | max 500KB)</span><br>
             <input type="file" name="pictureFile" id="pictureFile" accept="image/jpeg, image/png" class="form-control"> <span class="error"> <?php echo $imageErr;?></span><br>
             <button type="submit" name="submit" value="Submit" class="submitButton btn" id="register">Submit</button><br>

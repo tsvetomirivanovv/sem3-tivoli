@@ -206,34 +206,23 @@ $(document).ready(function () {
         sideBySide: true
     });
 //register
-    $('#register').click(function(){
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
 
         $.ajax({
             type: 'POST',
             url: 'core/functions/register/register.php',
-            dataType: 'json',
             data: $('form').serialize(),
             success: function () {
-               /* $.growl.notice({title: "Success", message: "Acc created"});*/
-                window.location.href = "http://localhost:9090/index.php";
+                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
+                window.setTimeout(function () {
+                    window.location.href = "index.php";
+                }, 5000);
+            },
+            error: function () {
+                $.growl.error({title: "Failure", message: "Your account blablabla!"});
             }
         });
 
-       /* $.ajax('core/functions/register/register.php', {
-            type: 'POST',
-            dataType: 'json',
-
-        })
-            .done(function (response) {
-                if (response.success) {
-                    $.growl.notice({title: "Success", message: "Acc created"});
-                    window.setTimeout(function () {
-                        window.location.href = "http://localhost:9090/index.php";
-                    }, 5000);
-                    console.log("acc created");
-                } else {
-                    $.growl.error({title: "Error", message: response.message});
-                }
-            })*/
     });
 });
