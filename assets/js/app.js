@@ -217,10 +217,13 @@ $(document).ready(function () {
                 $.growl.notice({title: "Success", message: "Your account was successfully created!"});
                 window.setTimeout(function () {
                     window.location.href = "index.php";
-                }, 5000);
+                }, 3000);
             },
-            error: function () {
-                $.growl.error({title: "Failure", message: "Your account blablabla!"});
+            error: function (resp) {
+                $.growl.error({title: "Failure", message: "Your account was not created!"});
+                console.log($('#usernameErr').val());
+
+                $("#registerForm").append($('#username').val());
             }
         });
 

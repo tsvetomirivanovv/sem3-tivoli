@@ -101,7 +101,8 @@ include '../../init.php';
                 $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
                 $conn->query($sql);
             } else {
-                var_dump(http_response_code(404));
+                var_dump(http_response_code(409));
+                echo json_encode($passwordErr);
                 function form_errors() {
                     $output = "";
                         $output .= "<div class=\"error\">";
@@ -109,6 +110,7 @@ include '../../init.php';
                         $output .= "</div>";
 
                     return $output;
+
                 }
                 echo form_errors();
 
