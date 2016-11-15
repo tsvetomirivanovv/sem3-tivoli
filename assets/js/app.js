@@ -19,6 +19,28 @@ function parseTimestamp(date) {
 }
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'core/functions/register/register.php',
+            data: $('form').serialize(),
+            success: function () {
+                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
+                window.setTimeout(function () {
+                    window.location.href = "index.php";
+                }, 3000);
+            },
+            error: function (resp) {
+                $.growl.error({title: "Failure", message: "Your account was not created!"});
+                console.log($('#usernameErr').val());
+
+                $("#registerForm").append($('#username').val());
+            }
+        });
+
+    });
     // AJAX TO GET THE DATA FROM THE PHP AND ON SUCCESS TO PUT IT INTO THE HTML shiftContaier
     $.ajax({
         type: "POST",
@@ -180,7 +202,6 @@ $(document).ready(function () {
                 }
             })
     });
-
     $('#updateAccount').click(function () {
         $.ajax('core/functions/profile/edit-profile.php', {
             type: 'POST',
@@ -294,60 +315,6 @@ $(document).ready(function () {
                 }
             })
     });
-    $.ajax({
-        type: "POST",
-        url: 'core/functions/users/view-all-accounts.php',
-        dataType: "json",
-    })
-        .done(function (response) {
-            if (response.success) {
-                var accounts = '';
-                response.accounts.forEach(function (accountData) {
-                    accounts += '<tr>' +
-                        '   <th>' +
-                        '       <div>' +
-                        '           <span>' +
-                        '               <a href="profile-page.php?username=' + accountData['username'] + '">' +
-                        '                   <img class="avatarSize" src="' + accountData['profile_picture'] + '">' +
-                        '               </a>' +
-                        '           </span>' +
-                        '       </div>' +
-                        '   </th>' +
-                        '   <td> ' + accountData['first_name'] + ' ' + accountData['last_name'] + '</td>' +
-                        '   <td>' + accountData['email'] + '</td>' +
-                        '   <td><span class="' + accountData['dotColor'] + '"><span class="' + accountData['dotClass'] + '"></span>' + accountData['isOnline'] + '</span>' +
-                        '       <a href="edit-profile.php?username=' + accountData['username'] + '"><span class="glyphicon glyphicon-edit updateButtonPos"></span></a>' +
-                        '   </td>' +
-                        '</tr>';
-    $('.date').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true
-    });
-//register
-    $('#registerForm').on('submit', function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: 'core/functions/register/register.php',
-            data: $('form').serialize(),
-            success: function () {
-                $.growl.notice({title: "Success", message: "Your account was successfully created!"});
-                window.setTimeout(function () {
-                    window.location.href = "index.php";
-                }, 3000);
-            },
-            error: function (resp) {
-                $.growl.error({title: "Failure", message: "Your account was not created!"});
-                console.log($('#usernameErr').val());
-
-                $("#registerForm").append($('#username').val());
-            }
-        });
-
-    });
-
-
     // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
     $(document).on('click', '.a_link_title_color',function () {
         var titleID = $(this).attr('id');
