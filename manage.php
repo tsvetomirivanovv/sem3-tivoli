@@ -10,7 +10,7 @@ include 'views/shared/header.php';
         <?php
         if (logged_in() === true){
             include 'views/profile/approve-accounts.php';
-            include 'views/login/logged-in.php';
+            include 'views/shifts/shift-calendar.php';
         } else {
             include 'views/login/description.php';
             include 'views/login/login.php';

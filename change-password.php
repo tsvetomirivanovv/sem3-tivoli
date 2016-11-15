@@ -9,7 +9,7 @@ include 'views/shared/header.php';
     <div class="row">
         <?php
             include 'views/login/change-password.php';
-            include 'views/login/logged-in.php';
+            include 'views/shifts/shift-calendar.php';
         ?>
     </div>
 </div>

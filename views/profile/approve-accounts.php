@@ -6,7 +6,7 @@
             $user_not_approved = user_not_approved();
             $suffix = ($user_not_approved != 1) ? 's' : '';
             ?>
-            <div id="userCount">Tivoli Hotel &amp; Congress Center shift booking system has <?php echo user_not_approved(); ?> pending member<?php echo $suffix; ?>.
+            <div id="userCount">Tivoli Hotel &amp; Congress Center shift booking system has <span id="pendingUsers"><?php echo user_not_approved(); ?></span> pending member<span id="suffix_id"><?php echo $suffix; ?></span>.
             </div>
         </div>
         <table id="approveTable" class="table table-striped table-hover">

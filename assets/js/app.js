@@ -336,14 +336,11 @@ function getFileLink(url, elementId) {
     $(linkId).text(url);
 }
 function updateUserCount() {
-    var x = $('#userCount').text();
-    var temp = x.match(/\d+/g)[0];
-    var new_count = temp - 1;
+    var x = Number($('#pendingUsers').text())-1;
     var suffix = '';
-    if (new_count != 1){
+    if (x != 1){
         suffix = 's';
     }
-    // I hate myself doing this ...
-    $('#userCount').text("Tivoli Hotel & Congress Center shift booking system has " + new_count + " pending member" + suffix + ".");
-    //x.replace(/\d+/g, new_count); - not working?
+    $('#pendingUsers').text(x);
+    $('#suffix_id').text(suffix);
 }
