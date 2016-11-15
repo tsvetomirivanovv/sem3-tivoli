@@ -13,7 +13,7 @@
     if (logged_in()){
         $session_user_id = $_SESSION['user_id'];
         change_online_status($session_user_id, 1);
-        $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover');
+        $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover', 'type' , 'online_status');
         if (!user_active($user_data['username'])){
             session_destroy();
             header('location: index.php');

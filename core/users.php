@@ -1,6 +1,6 @@
 <?php
-function update_user_profile($update_data) {
-    global $session_user_id;
+function update_user_profile($user_id, $update_data) {
+
     $conn = getConnection();
     $update = array();
     array_walk($update_data, 'array_sanitize');
@@ -8,7 +8,7 @@ function update_user_profile($update_data) {
     foreach ($update_data as $field => $data) {
         $update[] = '`' . $field . '` = \'' . $data . '\'';
     }
-    mysqli_query($conn, "UPDATE users SET " . implode(', ', $update) . " WHERE user_id  = $session_user_id");
+    mysqli_query($conn, "UPDATE users SET " . implode(', ', $update) . " WHERE user_id  = $user_id");
 }
 
 function sendMail($to, $subject, $message) {
