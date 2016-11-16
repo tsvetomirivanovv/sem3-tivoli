@@ -4,7 +4,7 @@
     error_reporting(E_ALL);
     require $root . '/core/database/connect.php';
     require $root . '/core/functions/general.php';
-    require $root . '/core/functions/users.php';
+    require $root . '/core/users.php';
     require $root . '/vendor/autoload.php';
 
     $current_file = explode('/', $_SERVER['SCRIPT_NAME']);
@@ -12,7 +12,8 @@
 
     if (logged_in()){
         $session_user_id = $_SESSION['user_id'];
-        $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover');
+        change_online_status($session_user_id, 1);
+        $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover', 'type' , 'online_status');
         if (!user_active($user_data['username'])){
             session_destroy();
             header('location: index.php');

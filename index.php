@@ -8,7 +8,7 @@ include 'views/shared/header.php';
     <div class="row">
         <?php
         if (logged_in() === true){
-            include 'views/login/logged-in.php';
+           header('Location: shifts.php');
         } else {
             include 'views/login/description.php';
             include 'views/login/login.php';

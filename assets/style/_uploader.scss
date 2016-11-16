@@ -1,0 +1,22 @@
+.customUploader {
+    font-size: 15px;
+    color: #34495e;
+    border-radius: 10px;
+    padding:  0 5px;
+    background: #fff;
+    border: 1px dashed #bdc3c7;
+    display: inline-block;
+    float: left;
+}
+
+.fileName {
+    font-size: 15px;
+    margin: 0 0 0 5px;
+    display: inline-block;
+    line-height: 22px;
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    float: left;
+}

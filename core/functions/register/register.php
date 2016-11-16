@@ -1,4 +1,5 @@
 <?php
+include '../../init.php';
     $errors = "";
 
     $passwordErr = "";
@@ -9,13 +10,13 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn = getConnection();
-// CHECK IF THERE IS ERROR
+        // CHECK IF THERE IS ERROR
         if ($conn->connect_error) {
             die('Connection failed: ' . $conn->connect_error);
         }
 
         if (isset($_POST)) {
-//upload CV
+            //upload CV
             $cvFileOk = 1;
             $cvFile = $_FILES["cvFile"];
             if ($cvFile["error"] !== UPLOAD_ERR_OK) {
@@ -29,6 +30,7 @@
             }
 
             $cvName = preg_replace("/[^A-Z0-9._-]/i", "_", $cvFile["name"]);
+            $success ="";
             // preserve file from temporary directory
             if ($cvFileOk == 1) {
                 $success = move_uploaded_file($cvFile["tmp_name"], $cvName);
@@ -37,7 +39,7 @@
                 $cvErr = "Unable to save your CV file";
                 $cvFileOk = 0;
             }
-//upload picture
+            //upload picture
             $pictureFileOk = 1;
             $pictureFile = $_FILES["pictureFile"];
             if ($pictureFile["error"] !== UPLOAD_ERR_OK) {
@@ -97,12 +99,10 @@
 
             if ($connectionOk == 1) {
                 $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
-                if ($conn->query($sql) === TRUE) {
-                    header('Location: http://localhost:9090/index.php');
-                } else {
-                    echo "New record failed!";
-                }
+                $conn->query($sql);
             } else {
+                var_dump(http_response_code(409));
+                echo json_encode($passwordErr);
                 function form_errors() {
                     $output = "";
                         $output .= "<div class=\"error\">";
@@ -110,10 +110,11 @@
                         $output .= "</div>";
 
                     return $output;
+
                 }
                 echo form_errors();
-
             }
         }
 }
+
 ?>

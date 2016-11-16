@@ -1,5 +1,6 @@
 <?php
 include 'core/init.php';
+protect_page();
 include 'views/shared/header.php';
 ?>
 
@@ -9,7 +10,7 @@ include 'views/shared/header.php';
         <?php
         if (logged_in() === true){
             include 'views/shifts/manageShiftMenu.php';
-            include 'views/login/logged-in.php';
+            include 'views/shifts/shift-calendar.php';
         } else {
             include 'views/login/description.php';
             include 'views/login/login.php';
