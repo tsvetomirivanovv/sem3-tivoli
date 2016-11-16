@@ -99,7 +99,6 @@
                            class="btn btn-block btn-lg btn-default" />
                 </div>
             </div>
-
         </div>
     </div>
 </div>

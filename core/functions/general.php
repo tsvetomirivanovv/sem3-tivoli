@@ -1,4 +1,5 @@
 <?php
+
 function logged_in_redirect(){
     if(logged_in()){
         header('Location: index.php');
@@ -25,7 +26,6 @@ function output_errors($errors){
         $output[] = $error . '<br>';
     }
     return implode('', $output);
-
 }
 ?>
 

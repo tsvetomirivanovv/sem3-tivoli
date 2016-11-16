@@ -8,7 +8,6 @@ $conn = getConnection();
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
-
 // BUILD QUERY
 $query = "SELECT * FROM shifts";
 

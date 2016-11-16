@@ -1,6 +1,6 @@
 <div class="col-xs-9">
     <div class="jumbotron jumbo_edit_profile">
-        <div class="clearfix">
+        <div class="clearfix" style="margin-right: 40px;">
             <div class="page-header headerFix"><h3 style="text-align: center;" class="h3Fix">Tivoli Hotel & Congress
                     Center - On Caller Waiters Shift Booking System</h3></div>
             <div class="container">
@@ -18,7 +18,7 @@
                         if you are accepted.</p>
                             </article>
                     </div>
-                    <div class="col-xs-3" style="top: 50px;">
+                    <div class="col-xs-3" style="top: 60px;">
                         <iframe
                             width="300"
                             height="240"

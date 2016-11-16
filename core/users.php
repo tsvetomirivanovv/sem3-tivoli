@@ -1,4 +1,5 @@
 <?php
+
 function reject_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
@@ -18,7 +19,6 @@ function update_user_profile($user_id, $update_data) {
     }
     mysqli_query($conn, "UPDATE users SET " . implode(', ', $update) . " WHERE user_id  = $user_id");
 }
-
 function sendMail($to, $subject, $message) {
     $mail = new PHPMailer;
 
@@ -39,7 +39,6 @@ function sendMail($to, $subject, $message) {
     $mail->Body = $message;
     $mail->send();
 }
-
 function update_user($user_id, $update_data) {
     $conn = getConnection();
     $update = array();
@@ -49,7 +48,6 @@ function update_user($user_id, $update_data) {
     }
     mysqli_query($conn, "UPDATE users SET " . implode(', ', $update) . " WHERE user_id = $user_id");
 }
-
 function recover($email) {
     $email = sanitize($email);
     $user_data = user_data(user_id_from_email($email), 'user_id', 'first_name', 'username');
@@ -58,21 +56,18 @@ function recover($email) {
     update_user($user_data['user_id'], array('password_recover' => '1'));
     sendMail($email, 'Tivoli password recovery', "Hello " . $user_data['first_name'] . ",\n\nYour new password is: " . $generated_password . "\n\nTivoli Hotel and Congress Center");
 }
-
 function change_password($user_id, $password) {
     $conn = getConnection();
     $user_id = (int)$user_id;
     $password = md5($password);
     mysqli_query($conn, "UPDATE users SET password = '$password', password_recover = 0 WHERE user_id = $user_id");
 }
-
 function change_online_status($user_id, $status) {
     $conn = getConnection();
     $user_id = (int)$user_id;
     $status = (int)$status;
     mysqli_query($conn, "UPDATE users SET online_status = '$status' WHERE user_id = $user_id");
 }
-
 function user_count() {
     $conn = getConnection();
     return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 1"))[0];
@@ -81,7 +76,6 @@ function user_not_approved() {
     $conn = getConnection();
     return mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE active = 0"))[0];
 }
-
 function user_data($user_id) {
     $conn = getConnection();
     $data = array();
@@ -95,11 +89,9 @@ function user_data($user_id) {
     $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT $fields FROM users WHERE user_id = $user_id"));
     return $data;
 }
-
 function logged_in() {
     return (isset($_SESSION['user_id'])) ? true : false;
 }
-
 function user_exists($username) {
     $conn = getConnection();
     $username = sanitize($username);
@@ -107,7 +99,6 @@ function user_exists($username) {
     $row = mysqli_fetch_assoc($query);
     return ($row['COUNT(user_id)'] == 1) ? true : false;
 }
-
 function email_exists($email) {
     $conn = getConnection();
     $email = sanitize($email);
@@ -115,7 +106,6 @@ function email_exists($email) {
     $row = mysqli_fetch_assoc($query);
     return ($row['COUNT(user_id)'] == 1) ? true : false;
 }
-
 function user_active($username) {
     $conn = getConnection();
     $username = sanitize($username);
@@ -123,7 +113,6 @@ function user_active($username) {
     $row = mysqli_fetch_assoc($query);
     return ($row['COUNT(user_id)'] == 1) ? true : false;
 }
-
 function user_id_from_username($username) {
     $conn = getConnection();
     $username = sanitize($username);
@@ -131,7 +120,6 @@ function user_id_from_username($username) {
     $row = mysqli_fetch_assoc($query);
     return $row['user_id'];
 }
-
 function user_id_from_email($email) {
     $conn = getConnection();
     $email = sanitize($email);
@@ -139,7 +127,6 @@ function user_id_from_email($email) {
     $row = mysqli_fetch_assoc($query);
     return $row['user_id'];
 }
-
 function login($username, $password) {
     $conn = getConnection();
     $user_id = user_id_from_username($username);
@@ -149,7 +136,6 @@ function login($username, $password) {
     $row = mysqli_fetch_assoc($query);
     return ($row['COUNT(user_id)'] == 1) ? $user_id : false;
 }
-
 function user_online($user_id) {
     $conn = getConnection();
     $user_id = sanitize($user_id);

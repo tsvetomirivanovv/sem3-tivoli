@@ -2,7 +2,6 @@
     <div class="jumbotron jumbo_edit_profile">
         <div class="clearfix">
             <div class="col-xs-7">
-
                 <div class="page-header headerFix"><h3 class="h3Fix">Edit profile</h3></div>
                 <table>
                     <tr class="spaceUnder">

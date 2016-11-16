@@ -7,16 +7,13 @@ $conn = getConnection();
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
-
-
 if (isset($_POST['shift_id_value'])) {
 
     $id = $_POST['shift_id_value'];
 
-// BUILD QUERY
+    // BUILD QUERY
     $query = "SELECT * FROM shifts WHERE shift_id = '$id' ";
-
-// EXECUTES QUERY
+    // EXECUTES QUERY
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -25,7 +22,5 @@ if (isset($_POST['shift_id_value'])) {
 
     $response = array('success' => true, 'shifts' => $shifts);
     echo json_encode($response);
-
-
 }
 
