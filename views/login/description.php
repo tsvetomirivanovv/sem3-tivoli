@@ -1,55 +1,36 @@
-<!--Shitty html-->
-<div class="col-xs-6">
-<div class="login-form" >
-<article class="item-page">
-    <div class="clear"></div>
-    <table style="height: 281px;" width="442">
-        <tbody>
-        <tr>
-            <td>
-                <h1><span
-                        style="font-family: verdana,geneva; font-size: 18pt; color: #000000;">Welcome to Shift Taker.</span>
-                </h1>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <p>&nbsp;</p>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td style="text-align: justify;">
-                                <span style="font-size: 12pt;">
-                                    <strong>Shift Taker</strong> is an flexible booking system for all businesses. Let your employees choose when they want to work.</span>
-                <br><br>
-                <span style="font-size: 12pt;">
-                    Using Shift Taker you get the opportunity to invite
-                </span>
-                <br>
-                <span style="font-size: 12pt;">
-                    selected employees in project groups to make sure you're using <strong>competencies</strong> where it's needed.
-                </span>
-                <br><br>
-                <span style="font-size: 12pt;">
-                    The platform frequently and <strong>automatically</strong> distribut shifts via social media, sms and e-mail.
-                </span>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
-        </tbody>
-    </table>
-    <p>&nbsp;</p>
-</article>
+<div class="col-xs-9">
+    <div class="jumbotron jumbo_edit_profile">
+        <div class="clearfix" style="margin-right: 40px;">
+            <div class="page-header headerFix"><h3 style="text-align: center;" class="h3Fix">Tivoli Hotel & Congress
+                    Center - On Caller Waiters Shift Booking System</h3></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <article>
+                        <p align="justify" style="font-size: 20px;">As a member of Tivoli Hotel & Congress Center - On Caller Waiters Shift Booking System
+                        you will automatically be offered the shifts where your personal and professional skills
+                        are adequate.</p>
+                        <p></p>
+                        <p align="justify" style="font-size: 20px;">Apply for membership of Tivoli Hotel & Congress Center - On Caller Waiters
+                        Shift Booking System by uploading your CV application now.</p>
+                        <p></p>
+                        <p align="justify" style="font-size: 20px;">The client treat your application as soon as possible and you will get an answer by e-mail
+                        if you are accepted.</p>
+                            </article>
+                    </div>
+                    <div class="col-xs-3" style="top: 60px;">
+                        <iframe
+                            width="300"
+                            height="240"
+                            frameborder="0"
+                            scrolling="no"
+                            marginheight="0"
+                            marginwidth="0"
+                            src="https://maps.google.com/maps?q=55.666383,12.5641598&hl=en&z=8&output=embed">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-<div class="col-xs-3"> </div>

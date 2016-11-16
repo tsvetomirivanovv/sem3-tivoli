@@ -1,6 +1,6 @@
 <?php
 include 'core/init.php';
-logged_in_redirect();
+protect_page();
 include 'views/shared/header.php';
 ?>
 
@@ -8,8 +8,8 @@ include 'views/shared/header.php';
     <div class="container">
         <div class="row">
             <?php
-                include 'views/login/description.php';
-                include 'views/login/login.php';
+            include 'views/users/view-all-accounts.php';
+            include 'views/shifts/shift-calendar.php';
             ?>
         </div>
     </div>
