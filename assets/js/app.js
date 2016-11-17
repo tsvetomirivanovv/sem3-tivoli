@@ -429,16 +429,3 @@ function updateUserCount() {
     $('#pendingUsers').text(x);
     $('#suffix_id').text(suffix);
 }
-function isManager() {
-    $.ajax('core/functions/profile/permissions/is-manager.php', {
-        type: 'POST',
-        dataType: 'json',
-    })
-        .done(function (response) {
-            if (response.success) {
-
-            } else {
-
-            }
-        })
-}
