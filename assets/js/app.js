@@ -1,3 +1,6 @@
+// Global vars
+var selectedShiftToCancel = 0;
+
 function timeLeadingZeros(value) {
     if (value < 10) {
         return '0' + value;
@@ -5,6 +8,7 @@ function timeLeadingZeros(value) {
         return value;
     }
 }
+
 function parseTimestamp(date) {
     var now = new Date(date);
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -69,6 +73,17 @@ $(document).ready(function () {
                         progress_bar_color = 'progress-bar-danger';
                     }
 
+                    // check if shift is canceled
+                    var status = "";
+                    var cancelBtn = "";
+                    if(parseInt(shiftData['canceled']) === 1) {
+                        status = "<span class='canceledShift'>(Canceled)</span>";
+                    } else {
+                        cancelBtn = "                       <a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>" +
+                                    "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
+                                    "                       </a>";
+                    }
+
                     shifts += "<li style='list-style-type: none'>" +
                         "   <div class='mat_single_event_holder " + bgStyle + "'>" +
                         "       <div class='mat_single_event_holder_inner'>" +
@@ -81,7 +96,7 @@ $(document).ready(function () {
                         "           </div>" +
                         "       <div class='mat_event_content'>" +
                         "           <div class='mat_event_content_inner'>" +
-                        "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='" + shiftData['shift_id'] + "'>" + shiftData['title'] + "</a></h4>" +
+                        "               <h4 class='h4_shift_link'><a class='a_link_title_color shiftId' href='fullShiftDetails.php' id='" + shiftData['shift_id'] + "'>" + shiftData['title'] + "</a>" + status + "</h4>" +
                         "                   <div class='mat_event_location'>" +
                         "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                         "                   </div>" +
@@ -99,9 +114,7 @@ $(document).ready(function () {
                         "                       <a class='edit_shift_glyphicon' href='#'>" +
                         "                           <div class='glyphicon glyphicon-edit'></div>" +
                         "                       </a>" +
-                        "                       <a class='cancel_shift_glyphicon' href='#'>" +
-                        "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
-                        "                       </a>" +
+                                            cancelBtn +
                         "                   </div>" +
                         "               </div>" +
                         "                   <div style='clear:both'></div>" +
@@ -137,6 +150,38 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $('body').on('click', '.cancel_shift', function(e) {
+        // Get parent element for the cancel button and find the closest element that has shift id.
+        selectedShiftToCancel = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
+    });
+
+    $('body').on('click', '.cancelShiftButton', function(e) {
+        console.info('To be canceled', selectedShiftToCancel);
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/cancelShift.php',
+            dataType: "json",
+            data: {
+                shift_id: selectedShiftToCancel
+            }
+        })
+        .done(function (response) {
+            if (response.success) {
+                var id = '#' + selectedShiftToCancel;
+                // Add cancel label next to the title
+                $(id).append("<span class='canceledShift'>(Canceled)</span>");
+                // Remove 'Cancel' button
+                $(id).parents('.mat_event_content')[0].getElementsByClassName('cancel_shift')[0].remove();
+                console.info('Success');
+            } else {
+                $.growl.error({title: "Error", message: response.message});
+            }
+        });
+    });
+
     $('#loginButton').click(function () {
         $.ajax('core/functions/login/login.php', {
             type: 'POST',
