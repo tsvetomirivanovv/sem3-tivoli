@@ -124,34 +124,7 @@ $(document).ready(function () {
             }
         });
 
-    //participants list
-   // $(".buttonFromChosenShift").click(function () {
 
-        $.ajax({
-            type: "POST",
-            url: 'core/functions/shifts/participantsList.php',
-            dataType: "json",
-        })
-            .done(function (response) {
-                if (response.success) {
-                    var participantRow = "";
-                    response.participants.forEach(function (participantData) {
-
-                        participantRow +=
-                            "<tr>"+
-                            "   <td>"+ participantData['name'] +"</td>"+
-                            "   <td>"+ participantData['phone'] +"</td>"+
-                            "   <td>"+ participantData['date_of_booking'] +"</td>"+
-                            "</tr>";
-                    });
-
-                    $("#participantsTable").append(participantRow);
-                } else {
-                    console.error('Participants unsuccessfuly fetched');
-                }
-            });
-
-  //  });
 
 
     // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
@@ -340,6 +313,7 @@ $(document).ready(function () {
                 }
             })
     });
+
     // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
     $(document).on('click', '.a_link_title_color', function () {
         var titleID = $(this).attr('id');
@@ -380,6 +354,40 @@ $(document).ready(function () {
         });
 
     $('.titleClass').html(sessionStorage.getItem("titleName"));
+
+    //participants list
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/shifts/participantsList.php',
+        dataType: "json",
+    })
+        .done(function (response) {
+            console.log("Success");
+            console.log("storegeid: " + storageID);
+            if (response.success) {
+                var participantRow = "";
+                response.participants.forEach(function (participantData) {
+                    if (storageID == participantData['shift_id']) {
+                        console.log("shift id: " + participantData['shift_id']);
+
+                        participantRow +=
+                            "<tr>" +
+                            "   <td>" + participantData['username'] + "</td>" +
+                            "   <td>" + participantData['user_id'] + "</td>" +
+                            "   <td>" + participantData['date_of_booking'] + "</td>" +
+                            "</tr>";
+
+                        $("#participantsTable").append(participantRow);
+                    }
+                    else {
+                        console.log("not working");
+                    }
+                });
+            } else {
+                console.error('Participants unsuccessfuly fetched');
+            }
+        });
+
 
     $.ajax({
         type: "POST",
