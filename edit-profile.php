@@ -5,6 +5,12 @@ if(isset($_GET['username']) && !empty($_GET['username'])) {
     $username = $_GET['username'];
     if(user_exists($username)) {
         $user_id = user_id_from_username($username);
+        global $session_user_id;
+        if (!has_access($session_user_id, 'Manager') && $user_id !== $session_user_id){
+            // to be changed with appropriate message
+            header('Location: protected.php');
+            exit();
+        }
         $profile_data = user_data($user_id, 'user_id', 'username', 'first_name', 'last_name', 'email', 'phone', 'address', 'zip_code', 'city', 'cv', 'profile_picture', 'password_recover', 'type' , 'online_status');
     } else {
         // TODO
