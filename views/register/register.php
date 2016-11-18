@@ -7,6 +7,13 @@ $imageErr = "";
 $emailErr = "";
 
 ?>
+<style>
+    .customUploader{
+        float: none;
+    }
+
+</style>
+
 <div class="col-xs-9">
     <div class="jumbotron jumboFix">
         <div class="clearfix">
@@ -48,15 +55,43 @@ $emailErr = "";
                     <input type="text" name="city" id="city"
                            class="form-control registerfield inputStyle formControlChange" required/><br>
                     <label class="labelStyle" data-toggle="tooltip" data-placement="top"
-                           title="pdf | max 500KB">CV:*</label>
-                    <input type="file" name="cvFile" id="cvFile" accept="application/pdf" style="display: inline;"
-                           class="form-control registerfield inputStyle formControlChange">
-                    <span class="error"> <?php echo $cvErr; ?></span><br>
-                    <label class="labelStyle" data-toggle="tooltip" data-placement="top" title="jpeg/png | max 500KB">
+                           title=".pdf | max 10MB">CV:*</label>
+                    <div  class="form-control registerfield inputStyle formControlChange">
+                        <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+                            <input  type="filepicker" name="upload_cv" id="upload-cv" data-fp-button-text="Choose file"
+                                   data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-maxSize="10485760"
+                                   data-fp-mimetypes="/*" data-fp-extension=".pdf" data-fp-container="modal" data-fp-services="COMPUTER"
+                                   onchange="getFileLink(event.fpfile.url, 'upload-cv')" required>
+                            <p style="display: inline;" class="" id="upload-cv-link">
+                                <?php if (isset($profile_data['cv'])) {
+                                    ?>
+                                    <a href="<?php echo $profile_data['cv'];?>" target="_blank">
+                                        <?php echo $profile_data['username'] . " - CV.pdf";?>
+                                    </a>
+                                    <?php
+                                } else {
+                                    echo 'No file chosen';
+                                } ?>
+                        </p></div><br>
+                    <label class="labelStyle" data-toggle="tooltip" data-placement="top" title=".jpeg/.png | max 800x600">
                         Profile picture:</label>
-                    <input type="file" name="pictureFile" id="pictureFile" accept="image/jpeg, image/png"
-                           style="display: inline;" class="form-control registerfield inputStyle formControlChange ">
-                    <span class="error"> <?php echo $imageErr; ?></span><br>
+                    <div class="form-control registerfield inputStyle formControlChange">
+                        <input  type="filepicker" name="upload_picture" id="upload-picture" data-fp-button-text="Choose file"
+                                data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz"
+                                data-fp-mimetypes="image/*" data-fp-image-max="800, 600"
+                                data-fp-container="modal" data-fp-services="COMPUTER"
+                                onchange="getFileLink(event.fpfile.url, 'upload-profile-picture')">
+                        <p style="display: inline;" class="" id="upload-profile-picture-link">
+                            <?php if (isset($profile_data['profile_picture'])) {
+                                ?>
+                                <a href="<?php echo $profile_data['profile_picture'];?>" target="_blank">
+                                    <?php echo $profile_data['username'] . " - avatar";?>
+                                </a>
+                                <?php
+                            } else {
+                                echo 'No file chosen';
+                            } ?>
+                    </p></div><br>
                     <button type="submit" name="submit" value="Submit" class="submitButton btn registerButtonFloat"
                             id="register">Submit
                     </button>
