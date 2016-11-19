@@ -377,20 +377,19 @@ $(document).ready(function () {
             if (response.success) {
                 var shiftData = response.shift;
 
-                var shift_begin_id = shiftData['begin'];
-                var shift_end_id = shiftData['end'];
-                var shift_close_id = shiftData['close'];
-                var shift_manager_id = shiftData['duty_manager'];
-                var shift_category_id = shiftData['category'];
-                var shift_participants_id = shiftData['max_participants'];
-
-                $("#shift_begin_id").append(shift_begin_id);
-                $("#shift_end_id").append(shift_end_id);
-                $("#shift_close_id").append(shift_close_id);
+                $("#shift_begin_id").append(shiftData['begin']);
+                $("#shift_end_id").append(shiftData['end']);
+                $("#shift_close_id").append(shiftData['close']);
                 $("#shift_organizer_id").append("Alex Petersen");
-                $("#shift_manager_id").append(shift_manager_id);
-                $("#shift_category_id").append(shift_category_id);
-                $("#shift_participants_id").append(shift_participants_id);
+                $("#shift_manager_id").append(shiftData['duty_manager']);
+                $("#shift_category_id").append(shiftData['category']);
+                $("#shift_participants_id").append(shiftData['max_participants']);
+
+                if(parseInt(shiftData['canceled']) === 1) {
+                    $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
+                } else {
+                    $('.cancelShiftBtn').append("<div class='glyphicon glyphicon-remove-circle'></div>");
+                }
             }
         });
 
