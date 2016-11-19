@@ -158,8 +158,6 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.cancelShiftButton', function(e) {
-        console.info('To be canceled', selectedShiftToCancel);
-
         $.ajax({
             type: "POST",
             url: 'core/functions/shifts/cancelShift.php',
@@ -175,6 +173,28 @@ $(document).ready(function () {
                 $(id).append("<span class='canceledShift'>(Canceled)</span>");
                 // Remove 'Cancel' button
                 $(id).parents('.mat_event_content')[0].getElementsByClassName('cancel_shift')[0].remove();
+                console.info('Success');
+            } else {
+                $.growl.error({title: "Error", message: response.message});
+            }
+        });
+    });
+
+    $('body').on('click', '.cancelSelectedShiftButton', function(e) {
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/cancelShift.php',
+            dataType: "json",
+            data: {
+                shift_id: parseInt(sessionStorage.getItem('titleID'))
+            }
+        })
+        .done(function (response) {
+            if (response.success) {
+                // Add cancel label next to the title
+                $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
+                // Remove 'Cancel' button
+                $('.cancelShiftIcon').remove();
                 console.info('Success');
             } else {
                 $.growl.error({title: "Error", message: response.message});
@@ -388,7 +408,7 @@ $(document).ready(function () {
                 if(parseInt(shiftData['canceled']) === 1) {
                     $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
                 } else {
-                    $('.cancelShiftBtn').append("<div class='glyphicon glyphicon-remove-circle'></div>");
+                    $('.cancelShiftBtn').append("<div class='glyphicon glyphicon-remove-circle cancelShiftIcon'></div>");
                 }
             }
         });

@@ -45,7 +45,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <input type="submit" value="Confirm" class="btn btn-block btn-lg btn-default cancelShiftButton"
+                <input type="submit" value="Confirm" class="btn btn-block btn-lg btn-default cancelSelectedShiftButton"
                        data-dismiss="modal"/>
             </div>
         </div>
