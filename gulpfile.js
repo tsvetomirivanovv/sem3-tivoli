@@ -60,7 +60,7 @@ gulp.task('scripts', function() {
 
   return gulp.src(src.scripts.all)
     .pipe(sourcemaps.init())
-    .pipe(babel())
+    .pipe(babel()).on('error', errorHandler)
     .pipe(ngAnnotate()).on('error', errorHandler)
     .pipe(concat(src.scripts.out))
     .pipe(sourcemaps.write('./', {
