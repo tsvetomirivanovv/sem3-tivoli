@@ -375,14 +375,15 @@ $(document).ready(function () {
     })
         .done(function (response) {
             if (response.success) {
-                response.shifts.forEach(function (shiftData) {
-                    shift_begin_id = shiftData['begin'];
-                    shift_end_id = shiftData['end'];
-                    shift_close_id = shiftData['close'];
-                    shift_manager_id = shiftData['duty_manager'];
-                    shift_category_id = shiftData['category'];
-                    shift_participants_id = shiftData['max_participants'];
-                });
+                var shiftData = response.shift;
+
+                var shift_begin_id = shiftData['begin'];
+                var shift_end_id = shiftData['end'];
+                var shift_close_id = shiftData['close'];
+                var shift_manager_id = shiftData['duty_manager'];
+                var shift_category_id = shiftData['category'];
+                var shift_participants_id = shiftData['max_participants'];
+
                 $("#shift_begin_id").append(shift_begin_id);
                 $("#shift_end_id").append(shift_end_id);
                 $("#shift_close_id").append(shift_close_id);
