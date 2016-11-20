@@ -162,15 +162,30 @@ $(document).ready(function () {
 
     $('body').on('click', '.openUpdateShift', function(e) {
         clearUpdateModalValues();
+
         // Get parent element for the cancel button and find the closest element that has shift id.
         selectedShiftToUpdate = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
 
+        fetchShiftDataModal(selectedShiftToUpdate);
+    });
+
+    $('body').on('click', '.openUpdateSelectedShift', function(e) {
+        clearUpdateModalValues();
+
+        // Get parent element for the cancel button and find the closest element that has shift id.
+        selectedShiftToUpdate = parseInt(sessionStorage.getItem('titleID'));
+
+        fetchShiftDataModal(selectedShiftToUpdate);
+
+    });
+
+    function fetchShiftDataModal(id) {
         $.ajax({
             type: "POST",
             url: 'core/functions/shifts/shiftDetails.php',
             dataType: "json",
             data: {
-                shift_id_value: selectedShiftToUpdate
+                shift_id_value: id
             }
         })
             .done(function (response) {
@@ -197,7 +212,7 @@ $(document).ready(function () {
                     }
                 }
             });
-    });
+    }
 
     $('body').on('click', '.updateShiftBtn', function(e) {
         var isSelected = 0;
@@ -253,6 +268,63 @@ $(document).ready(function () {
                     } else {
                         if(isSelected) {
                             $(title).append("<span class='canceledShift'>(Canceled)</span>");
+                            $(cancelBtn).remove();
+                        }
+                    }
+                    $.growl.notice({title: "Success", message: response.message});
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+
+
+            });
+    });
+
+    $('body').on('click', '.updateSelectedShiftBtn', function(e) {
+        var isSelected = 0;
+
+        if($("#shift-canceled option:selected").val() === "Yes") {
+            isSelected = 1;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/updateShift.php',
+            dataType: "json",
+            data: {
+                shift_id: selectedShiftToUpdate,
+                title: $('#shift-title').val(),
+                begin: $("#shift-begin-date").val(),
+                end: $("#shift-end-date").val(),
+                close: $("#shift-closing-date").val(),
+                duty_manager: $("#shift-duty-manager").val(),
+                max_participants: $("#shift-participants").val(),
+                category: $('#shift-category option:selected').val(),
+                canceled: isSelected
+            }
+        })
+            .done(function (response) {
+                if(response.success) {
+                    var canceledLabel = $('.canceledShift');
+                    var cancelBtn = $('.cancelShiftIcon');
+                    var cancelBtnWrapper = $('.cancelShiftBtn');
+
+                    sessionStorage.setItem("titleName", $('#shift-title').val());
+                    $('.titleClass').html($('#shift-title').val());
+                    $('#shift_begin_id').html($("#shift-begin-date").val());
+                    $('#shift_close_id').html($("#shift-closing-date").val());
+                    $('#shift_participants_id').html($("#shift-participants").val());
+                    $('#shift_manager_id').html($("#shift-duty-manager").val());
+                    $('#shift_category_id').html($('#shift-category option:selected').val());
+
+                    if(canceledLabel.length) {
+                        if(!isSelected) {
+                            $(canceledLabel).remove();
+                            $(cancelBtnWrapper).append(`<div class="glyphicon glyphicon-remove-circle cancelShiftIcon"></div>`);
+                        }
+                    } else {
+                        if(isSelected) {
+                            $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
                             $(cancelBtn).remove();
                         }
                     }
