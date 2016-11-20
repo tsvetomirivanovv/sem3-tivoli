@@ -54,19 +54,16 @@ $(document).on('click', '.updateShiftBtn', function(e) {
                 $(dutyMngr).html($("#shift-duty-manager").val());
                 $(category).html($('#shift-category option:selected').val());
 
-                if(canceledLabel.length) {
-                    if(!isSelected) {
-                        $(canceledLabel).remove();
-                        $(cancelBtnWrapper).append(`<a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>
-                                                        <div class='glyphicon glyphicon-remove-circle'></div>
-                                                    </a>`);
-                    }
+                if(isSelected) {
+                    $(title).append("<span class='canceledShift'>(Canceled)</span>");
+                    $(cancelBtn).remove();
                 } else {
-                    if(isSelected) {
-                        $(title).append("<span class='canceledShift'>(Canceled)</span>");
-                        $(cancelBtn).remove();
-                    }
+                    $(canceledLabel).remove();
+                    $(cancelBtnWrapper).append(`<a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>
+                                                    <div class='glyphicon glyphicon-remove-circle'></div>
+                                                </a>`);
                 }
+                
                 $.growl.notice({title: "Success", message: response.message});
             } else {
                 $.growl.error({title: "Error", message: response.message});
