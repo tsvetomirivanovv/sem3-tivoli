@@ -18,6 +18,10 @@ if (isset($_POST['shift_id_value'])) {
 
     $row = $result->fetch_assoc();
 
-    $response = array('success' => true, 'shift' => $row);
+    if($row) {
+        $response = array('success' => true, 'shift' => $row);
+    } else {
+        $response = array('success' => false);
+    }
     echo json_encode($response);
 }
