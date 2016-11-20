@@ -3,12 +3,14 @@
         <div class="page-header headerFix">
             <h3 class="h3Fix">
                 <span class="titleClass" style="width: 20% "> </span>
+                <?php if (has_access($user_data['user_id'], 'Manager')) { ?>
                 <div class="buttonsWrapper" style="float: right ">
                     <a class='cancel_shift_glyphicon cancelShiftBtn' style="float: right " data-toggle='modal' data-target='#cancelShift'></a>
                     <a class='edit_shift_glyphicon openUpdateSelectedShift' data-toggle='modal' data-target='#updateShift'>
                         <div class='glyphicon glyphicon-edit' style="float: right"></div>
                     </a>
                 </div>
+                <?php } ?>
                 <button class="btn btn-success book-button" style="float: right">Book Now</button>
             </h3>
         </div>
