@@ -16,11 +16,12 @@ if (isset($_POST['shift_id_value'])) {
     // EXECUTES QUERY
     $result = $conn->query($query);
 
-    while ($row = $result->fetch_assoc()) {
-        $shifts[] = $row;
-    }
+    $row = $result->fetch_assoc();
 
-    $response = array('success' => true, 'shifts' => $shifts);
+    if($row) {
+        $response = array('success' => true, 'shift' => $row);
+    } else {
+        $response = array('success' => false);
+    }
     echo json_encode($response);
 }
-
