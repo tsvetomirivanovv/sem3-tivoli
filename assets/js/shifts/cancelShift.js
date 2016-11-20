@@ -2,11 +2,11 @@
 ------------------Cancel shift cards------------------
 =====================================================*/
 
-$('body').on('click', '.cancel_shift', function(e) {
+$(document).on('click', '.cancel_shift', function(e) {
     selectedShiftToCancel = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
 });
 
-$('body').on('click', '.cancelShiftButton', function(e) {
+$(document).on('click', '.cancelShiftButton', function(e) {
     $.ajax({
         type: "POST",
         url: 'core/functions/shifts/cancelShift.php',
@@ -33,7 +33,7 @@ $('body').on('click', '.cancelShiftButton', function(e) {
 ------------------Cancel selected shift---------------
 =====================================================*/
 
-$('body').on('click', '.cancelSelectedShiftButton', function(e) {
+$(document).on('click', '.cancelSelectedShiftButton', function(e) {
     $.ajax({
         type: "POST",
         url: 'core/functions/shifts/cancelShift.php',

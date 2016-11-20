@@ -28,6 +28,7 @@ $.ajax({
         $("#shift_manager_id").append(shiftData['duty_manager']);
         $("#shift_category_id").append(shiftData['category']);
         $("#shift_participants_id").append(shiftData['max_participants']);
+        $('.titleClass').html(sessionStorage.getItem("titleName"));
 
         if(parseInt(shiftData['canceled']) === 1) {
             $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
@@ -36,5 +37,3 @@ $.ajax({
         }
     }
 });
-
-$('.titleClass').html(sessionStorage.getItem("titleName"));

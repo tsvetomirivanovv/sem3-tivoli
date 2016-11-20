@@ -1,6 +1,7 @@
 // 'form' - INDICATES THE TYPE OF THE HTML ELEMENT
 // '#createShiftForm' - IS THE ID OF THE FORM THAT IS RESETED
-$('#createShiftForm').on('submit', function (e) {
+$(document).on('submit', '#createShiftForm', function (e) {
+
     e.preventDefault();
     $.ajax({
         type: 'POST',

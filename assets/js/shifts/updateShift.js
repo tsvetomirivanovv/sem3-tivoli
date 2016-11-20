@@ -2,7 +2,7 @@
 ------------------Update shift cards------------------
 =====================================================*/
 
-$('body').on('click', '.openUpdateShift', function(e) {
+$(document).on('click', '.openUpdateShift', function(e) {
     clearUpdateModalValues();
 
     selectedShiftToUpdate = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
@@ -10,7 +10,7 @@ $('body').on('click', '.openUpdateShift', function(e) {
     fetchShiftDataModal(selectedShiftToUpdate);
 });
 
-$('body').on('click', '.updateShiftBtn', function(e) {
+$(document).on('click', '.updateShiftBtn', function(e) {
     var isSelected = 0;
 
     if($("#shift-canceled option:selected").val() === "Yes") {
@@ -80,7 +80,7 @@ $('body').on('click', '.updateShiftBtn', function(e) {
 ------------------Update selected shift---------------
 =====================================================*/
 
-$('body').on('click', '.openUpdateSelectedShift', function(e) {
+$(document).on('click', '.openUpdateSelectedShift', function(e) {
     clearUpdateModalValues();
 
     selectedShiftToUpdate = parseInt(sessionStorage.getItem('titleID'));
@@ -89,7 +89,7 @@ $('body').on('click', '.openUpdateSelectedShift', function(e) {
 
 });
 
-$('body').on('click', '.updateSelectedShiftBtn', function(e) {
+$(document).on('click', '.updateSelectedShiftBtn', function(e) {
     var isSelected = 0;
 
     if($("#shift-canceled option:selected").val() === "Yes") {

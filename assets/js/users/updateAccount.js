@@ -1,4 +1,4 @@
-$('#updateAccount').click(function () {
+$(document).on('click', '#updateAccount', function () {
     $.ajax('core/functions/profile/edit-profile.php', {
         type: 'POST',
         dataType: 'json',
@@ -27,6 +27,6 @@ $('#updateAccount').click(function () {
         })
 });
 
-$('#cancelUpdateAccount').click(function () {
+$(document).on('click', '#cancelUpdateAccount', function () {
     window.location.href = "index.php";
 });
