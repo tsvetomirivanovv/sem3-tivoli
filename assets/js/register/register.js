@@ -1,5 +1,4 @@
-$('#registerForm').on('submit', function (e) {
-    // $(document).on('click', '#changePassword', function () {
+$(document).on('submit', '#registerForm', function (e) {
 
     e.preventDefault();
 
