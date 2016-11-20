@@ -30,7 +30,7 @@ $.ajax({
     } else {
         console.error('Accounts unsuccessfully fetched');
     }
-    var approveTable = $('#approveTable').DataTable();
+    approveTable = $('#approveTable').DataTable();
 });
 
 $(document).on('click', '.approve_button', function () {

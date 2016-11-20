@@ -9,6 +9,7 @@ $('.date').datetimepicker({
 var selectedShiftToCancel = 0;
 var selectedShiftToUpdate = 0;
 var storageAccountId = 0;
+var approveTable = '';
 
 function timeLeadingZeros(value) {
     if (value < 10) {
