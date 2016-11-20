@@ -1,5 +1,6 @@
 // Global vars
 var selectedShiftToCancel = 0;
+var selectedShiftToUpdate = 0;
 
 function timeLeadingZeros(value) {
     if (value < 10) {
@@ -98,23 +99,25 @@ $(document).ready(function () {
                         "           <div class='mat_event_content_inner'>" +
                         "               <h4 class='h4_shift_link'><a class='a_link_title_color shiftId' href='fullShiftDetails.php' id='" + shiftData['shift_id'] + "'>" + shiftData['title'] + "</a>" + status + "</h4>" +
                         "                   <div class='mat_event_location'>" +
-                        "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
+                        "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> <span class='beginDate'>" + parseTimestamp(shiftData['begin']) + "</span></strong>" +
                         "                   </div>" +
-                        "                   <div class='mat_small mat_booked participants_count'> " + shiftData['participants'] + " out of " + shiftData['max_participants'] + " participants  </div>" +
+                        "                   <div class='mat_small mat_booked participants_count'> " + shiftData['participants'] + " out of <span class='maxPart'>" + shiftData['max_participants'] + "</span> participants  </div>" +
                         "                       <div class='progress_bar_margin'>" +
                         "                           <div class='progress'>" +
                         "                               <div class='progress-bar " + progress_bar_color + "' style='width: " + shiftData['participants_perc'] + "%;'></div>" +
                         "                           </div>" +
                         "                       </div>" +
-                        "                       <span class='mat_small mat_booked closing_date col-xs-10'>Closing date: " + parseTimestamp(shiftData['close']) + "</span>" +
+                        "                       <span class='mat_small mat_booked closing_date col-xs-10'>Closing date: <span class='closeDate'>" + parseTimestamp(shiftData['close']) + "</span></span>" +
                         "                           <div class='mat_event_infoline duty_manager col-xs-8'>" +
                         "                               <span class='mat_small'>" +
-                        "                               <span>Duty manager: " + shiftData['duty_manager'] + " - </span>Category: " + shiftData['category'] + " </span>" +
+                        "                               <span>Duty manager: <span class='dutyMngr'>" + shiftData['duty_manager'] + "</span> - </span>Category: <span class='category'>" + shiftData['category'] + "</span> </span>" +
                         "                           </div>" +
-                        "                       <a class='edit_shift_glyphicon' href='#'>" +
+                        "                     <div class='buttonsWrapper'> " +
+                        "                       <a class='edit_shift_glyphicon openUpdateShift' data-toggle='modal' data-target='#updateShift'>" +
                         "                           <div class='glyphicon glyphicon-edit'></div>" +
                         "                       </a>" +
                                             cancelBtn +
+                        "                    </div>   " +
                         "                   </div>" +
                         "               </div>" +
                         "                   <div style='clear:both'></div>" +
@@ -156,6 +159,114 @@ $(document).ready(function () {
         // Get parent element for the cancel button and find the closest element that has shift id.
         selectedShiftToCancel = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
     });
+
+    $('body').on('click', '.openUpdateShift', function(e) {
+        clearUpdateModalValues();
+        // Get parent element for the cancel button and find the closest element that has shift id.
+        selectedShiftToUpdate = parseInt(e.target.offsetParent.getElementsByClassName('shiftId')[0].getAttribute('id'));
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/shiftDetails.php',
+            dataType: "json",
+            data: {
+                shift_id_value: selectedShiftToUpdate
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var shiftData = response.shift;
+
+                    $('#shift-title').val(shiftData['title'])
+                    $("#shift-begin-date").val(shiftData['begin']);
+                    $("#shift-end-date").val(shiftData['end']);
+                    $("#shift-closing-date").val(shiftData['close']);
+                    $("#shift-duty-manager").val(shiftData['duty_manager']);
+                    $("#shift-participants").val(shiftData['max_participants']);
+
+                    if(shiftData['category'] === "A-Waiter") {
+                        $('#shift-category option:eq(0)').prop('selected', true);
+                    } else {
+                        $('#shift-category option:eq(1)').prop('selected', true);
+                    }
+
+                    if(shiftData['canceled'] === "1") {
+                        $('#shift-canceled option:eq(0)').prop('selected', true);
+                    } else {
+                        $('#shift-canceled option:eq(1)').prop('selected', true);
+                    }
+                }
+            });
+    });
+
+    $('body').on('click', '.updateShiftBtn', function(e) {
+        var isSelected = 0;
+
+        if($("#shift-canceled option:selected").val() === "Yes") {
+            isSelected = 1;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: 'core/functions/shifts/updateShift.php',
+            dataType: "json",
+            data: {
+                shift_id: selectedShiftToUpdate,
+                title: $('#shift-title').val(),
+                begin: $("#shift-begin-date").val(),
+                end: $("#shift-end-date").val(),
+                close: $("#shift-closing-date").val(),
+                duty_manager: $("#shift-duty-manager").val(),
+                max_participants: $("#shift-participants").val(),
+                category: $('#shift-category option:eq(0)').val(),
+                canceled: isSelected
+            }
+        })
+            .done(function (response) {
+                var id = '#' + selectedShiftToUpdate;
+                var e = $(id).parents('.mat_event_content')[0];
+                var title = e.getElementsByClassName('shiftId');
+                var beginDate = e.getElementsByClassName('beginDate');
+                var closeDate = e.getElementsByClassName('closeDate');
+                var maxPart = e.getElementsByClassName('maxPart');
+                var dutyMngr = e.getElementsByClassName('dutyMngr');
+                var category = e.getElementsByClassName('category');
+                var canceledLabel = e.getElementsByClassName('canceledShift');
+                var cancelBtn = e.getElementsByClassName('cancel_shift');
+                var cancelBtnWrapper = e.getElementsByClassName('buttonsWrapper');
+
+                $(title).html($('#shift-title').val());
+                $(beginDate).html(parseTimestamp($("#shift-begin-date").val()));
+                $(closeDate).html(parseTimestamp($("#shift-closing-date").val()));
+                $(maxPart).html($("#shift-participants").val());
+                $(dutyMngr).html($("#shift-duty-manager").val());
+                $(category).html($('#shift-category option:eq(0)').val());
+
+                if(canceledLabel.length) {
+                    if(!isSelected) {
+                        $(canceledLabel).remove();
+                        $(cancelBtnWrapper).append(`<a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>
+                                                        <div class='glyphicon glyphicon-remove-circle'></div>
+                                                    </a>`);
+                    }
+                } else {
+                    if(isSelected) {
+                        $(title).append("<span class='canceledShift'>(Canceled)</span>");
+                        $(cancelBtn).remove();
+                    }
+                }
+            });
+    });
+
+    function clearUpdateModalValues() {
+        $('#shift-title').val('')
+        $("#shift-begin-date").val('');
+        $("#shift-end-date").val('');
+        $("#shift-closing-date").val('');
+        $("#shift-duty-manager").val('');
+        $("#shift-participants").val('');
+        $('#shift-category option:eq(0)').prop('selected', true);
+    }
 
     $('body').on('click', '.cancelShiftButton', function(e) {
         $.ajax({

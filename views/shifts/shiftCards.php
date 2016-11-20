@@ -28,4 +28,82 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="updateShift" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update shift</h4>
+                </div>
+                <div class="modal-body" >
+                    <form id="createShiftForm">
+                    <table>
+                        <tr class="spaceUnder">
+                            <td><label>Title*</label></td>
+                            <td><input type="text" class="form-control" name="shiftTitle" id="shift-title" maxlength="200" placeholder="200 characters" required/></td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label>Begin date*</label></td>
+                            <td><div class='input-group date'>
+                                    <input type="text" class="form-control" name="shiftBeginDate" id="shift-begin-date" required >
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label>End date*</label></td>
+                            <td><div class='input-group date'>
+                                    <input type="text" class="form-control" name="shiftEndDate" id="shift-end-date" required >
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label>Closing date*</label></td>
+                            <td><div class='input-group date'>
+                                    <input type="text" class="form-control" name="shiftClosingDate" id="shift-closing-date" required >
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label for="edit_address">Duty manager*</label></td>
+                            <td><input type="text" class="form-control" name="shiftDutyManager" id="shift-duty-manager" maxlength="50" placeholder="Name of the manager" required/></td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label>Category*</label></td>
+                            <td> <select  class="form-control" name="shiftCategory" id="shift-category" required>
+                                    <option>A-Waiter</option>
+                                    <option>B-Waiter</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label for="edit_city">Maximum participants*</label></td>
+                            <td><input type="number" class="form-control" name="shiftParticipants" id="shift-participants" minlength="1" maxlength="3" max="100" placeholder="1-100" required></td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td><label>Canceled*</label></td>
+                            <td> <select  class="form-control" name="shiftCanceled" id="shift-canceled" required>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Confirm" class="btn btn-block btn-lg btn-default updateShiftBtn"
+                           data-dismiss="modal"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
