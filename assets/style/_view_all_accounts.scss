@@ -8,6 +8,12 @@
 }
 .h3Fix {
   margin-bottom: -10px;
+  position: relative;
+
+  .canceledShift {
+     font-size: 25px;
+    top: 10px;
+  }
 }
 #userCount {
   padding-bottom: 30px;
