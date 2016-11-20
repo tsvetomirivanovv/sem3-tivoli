@@ -22,8 +22,6 @@ if (isset($_POST)) {
     // BUILD QUERY
     $query = "UPDATE shifts SET title='$title', begin='$begin', end='$end', close='$close', duty_manager='$duty_manager', category='$category', max_participants=$max_participants, canceled=$canceled WHERE shift_id = '$id' ";
 
-    //print $query;
-    //die;
     // EXECUTES QUERY
     $result = $conn->query($query);
 

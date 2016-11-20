@@ -218,7 +218,7 @@ $(document).ready(function () {
                 close: $("#shift-closing-date").val(),
                 duty_manager: $("#shift-duty-manager").val(),
                 max_participants: $("#shift-participants").val(),
-                category: $('#shift-category option:eq(0)').val(),
+                category: $('#shift-category option:selected').val(),
                 canceled: isSelected
             }
         })
@@ -241,7 +241,7 @@ $(document).ready(function () {
                     $(closeDate).html(parseTimestamp($("#shift-closing-date").val()));
                     $(maxPart).html($("#shift-participants").val());
                     $(dutyMngr).html($("#shift-duty-manager").val());
-                    $(category).html($('#shift-category option:eq(0)').val());
+                    $(category).html($('#shift-category option:selected').val());
 
                     if(canceledLabel.length) {
                         if(!isSelected) {
