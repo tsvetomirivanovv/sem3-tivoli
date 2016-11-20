@@ -363,24 +363,50 @@ $(document).ready(function () {
         .done(function (response) {
             if (response.success) {
                 var participantRow = "";
-                response.participants.forEach(function (participantData) {
-                    if (storageID == participantData['shift_id']) {
+                var evenOdd = 1;
+                var maxParticipants = "";
+                var participants = 0;
 
-                        participantRow +=
-                            "<tr>" +
+                // progress bar color
+                var progress_bar_color = 'progress-bar-success';
+
+
+                response.participants.forEach(function (participantData) {
+                    maxParticipants = participantData['max_participants'];
+                    if (storageID == participantData['shift_id']) {
+                        participants += 1;
+                        var bgStyle;
+                        if (evenOdd % 2 == 1) {
+                            bgStyle = 'mat_single_odd';
+                        } else bgStyle = '';
+                        evenOdd++;
+
+                        participantRow =
+                            "<tr class=' " + bgStyle + "'>" +
                             "   <td>" + participantData['first_name'] + "</td>" +
                             "   <td>" + participantData['last_name'] + "</td>" +
                             "   <td>" + participantData['phone'] + "</td>" +
                             "   <td>" + participantData['date_of_booking'] + "</td>" +
-                            "   <td>" + '<div class="updateButtonPos">' +
-                            '            <a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + participantData['user_id'] + '">' +
-                            '               <span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
-                            + "</td>" +
+                            "   <td>" + '<div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + participantData['user_id'] +  '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>'+ "</td>" +
                             "</tr>";
 
                         $("#participantsTable").append(participantRow);
                     }
                 });
+                //calculate the percentage of participants
+                var percentage = (participants * 100)/maxParticipants;
+                if (percentage > 50 && percentage <= 70) {
+                 progress_bar_color = 'progress-bar-warning';
+                 } else if (percentage > 70) {
+                 progress_bar_color = 'progress-bar-danger';
+                 }
+                var progressBar =
+                    "<div class='mat_small mat_booked participants_count'>" + participants + " out of " + maxParticipants + " participants" + "</div>" +
+                    "   <div class='progress'>" +
+                    "           <div class='progress-bar " + progress_bar_color + "' style='width: " + maxParticipants + "%;'></div>" +
+                    "               </div>";
+                $("#participantsBar").append(progressBar);
+
             } else {
                 console.error('Participants unsuccessfully fetched');
             }

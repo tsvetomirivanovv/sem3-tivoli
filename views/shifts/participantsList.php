@@ -1,7 +1,7 @@
 <div class="clearfix">
     <div class="col-xs-9" style="background: whitesmoke; border-radius: 7px;">
         <div class="col-xs-12">
-            <table class="participantsTable table table-striped table-hover" id="participantsTable">
+            <table class="participantsTable table table-striped" id="participantsTable">
                 <thead>
                 <tr>
                     <th>First name</th>
@@ -12,7 +12,8 @@
                 </thead>
 
             </table>
-            <div id="progressBar"></div>
+
+            <div class="participantsBar" id="participantsBar"></div>
         </div>
     </div>
 </div>
