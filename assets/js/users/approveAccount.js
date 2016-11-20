@@ -37,7 +37,7 @@ $(document).on('click', '.approve_button', function () {
     storageAccountId = $(this).attr('id');
 });
 
-$(document).on('click', '#approveButton', function () {
+$(document).on('click', '#approveUserButton', function () {
     $.ajax('core/functions/profile/approve.php', {
         type: 'POST',
         dataType: 'json',

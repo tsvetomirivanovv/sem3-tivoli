@@ -2,7 +2,7 @@ $(document).on('click', '.reject_button', function () {
     accountId = $(this).attr('id');
 });
 
-$(document).on('click', '#rejectUserModal', function () {
+$(document).on('click', '#rejectUserButton', function () {
     $.ajax('core/functions/profile/reject-user.php', {
         type: 'POST',
         dataType: 'json',
