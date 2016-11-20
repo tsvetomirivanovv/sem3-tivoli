@@ -34,7 +34,6 @@ $(document).ready(function () {
             },
             error: function (resp) {
                 $.growl.error({title: "Failure", message: "Your account was not created!"});
-                console.log($('#usernameErr').val());
 
                 $("#registerForm").append($('#username').val());
             }
@@ -362,29 +361,28 @@ $(document).ready(function () {
         dataType: "json",
     })
         .done(function (response) {
-            console.log("Success");
-            console.log("storegeid: " + storageID);
             if (response.success) {
                 var participantRow = "";
                 response.participants.forEach(function (participantData) {
                     if (storageID == participantData['shift_id']) {
-                        console.log("shift id: " + participantData['shift_id']);
 
                         participantRow +=
                             "<tr>" +
-                            "   <td>" + participantData['username'] + "</td>" +
-                            "   <td>" + participantData['user_id'] + "</td>" +
+                            "   <td>" + participantData['first_name'] + "</td>" +
+                            "   <td>" + participantData['last_name'] + "</td>" +
+                            "   <td>" + participantData['phone'] + "</td>" +
                             "   <td>" + participantData['date_of_booking'] + "</td>" +
+                            "   <td>" + '<div class="updateButtonPos">' +
+                            '            <a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + participantData['user_id'] + '">' +
+                            '               <span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>' +
+                            + "</td>" +
                             "</tr>";
 
                         $("#participantsTable").append(participantRow);
                     }
-                    else {
-                        console.log("not working");
-                    }
                 });
             } else {
-                console.error('Participants unsuccessfuly fetched');
+                console.error('Participants unsuccessfully fetched');
             }
         });
 
