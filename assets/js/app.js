@@ -223,38 +223,45 @@ $(document).ready(function () {
             }
         })
             .done(function (response) {
-                var id = '#' + selectedShiftToUpdate;
-                var e = $(id).parents('.mat_event_content')[0];
-                var title = e.getElementsByClassName('shiftId');
-                var beginDate = e.getElementsByClassName('beginDate');
-                var closeDate = e.getElementsByClassName('closeDate');
-                var maxPart = e.getElementsByClassName('maxPart');
-                var dutyMngr = e.getElementsByClassName('dutyMngr');
-                var category = e.getElementsByClassName('category');
-                var canceledLabel = e.getElementsByClassName('canceledShift');
-                var cancelBtn = e.getElementsByClassName('cancel_shift');
-                var cancelBtnWrapper = e.getElementsByClassName('buttonsWrapper');
+                if(response.success) {
+                    var id = '#' + selectedShiftToUpdate;
+                    var e = $(id).parents('.mat_event_content')[0];
+                    var title = e.getElementsByClassName('shiftId');
+                    var beginDate = e.getElementsByClassName('beginDate');
+                    var closeDate = e.getElementsByClassName('closeDate');
+                    var maxPart = e.getElementsByClassName('maxPart');
+                    var dutyMngr = e.getElementsByClassName('dutyMngr');
+                    var category = e.getElementsByClassName('category');
+                    var canceledLabel = e.getElementsByClassName('canceledShift');
+                    var cancelBtn = e.getElementsByClassName('cancel_shift');
+                    var cancelBtnWrapper = e.getElementsByClassName('buttonsWrapper');
 
-                $(title).html($('#shift-title').val());
-                $(beginDate).html(parseTimestamp($("#shift-begin-date").val()));
-                $(closeDate).html(parseTimestamp($("#shift-closing-date").val()));
-                $(maxPart).html($("#shift-participants").val());
-                $(dutyMngr).html($("#shift-duty-manager").val());
-                $(category).html($('#shift-category option:eq(0)').val());
+                    $(title).html($('#shift-title').val());
+                    $(beginDate).html(parseTimestamp($("#shift-begin-date").val()));
+                    $(closeDate).html(parseTimestamp($("#shift-closing-date").val()));
+                    $(maxPart).html($("#shift-participants").val());
+                    $(dutyMngr).html($("#shift-duty-manager").val());
+                    $(category).html($('#shift-category option:eq(0)').val());
 
-                if(canceledLabel.length) {
-                    if(!isSelected) {
-                        $(canceledLabel).remove();
-                        $(cancelBtnWrapper).append(`<a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>
-                                                        <div class='glyphicon glyphicon-remove-circle'></div>
-                                                    </a>`);
+                    if(canceledLabel.length) {
+                        if(!isSelected) {
+                            $(canceledLabel).remove();
+                            $(cancelBtnWrapper).append(`<a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>
+                                                            <div class='glyphicon glyphicon-remove-circle'></div>
+                                                        </a>`);
+                        }
+                    } else {
+                        if(isSelected) {
+                            $(title).append("<span class='canceledShift'>(Canceled)</span>");
+                            $(cancelBtn).remove();
+                        }
                     }
+                    $.growl.notice({title: "Success", message: response.message});
                 } else {
-                    if(isSelected) {
-                        $(title).append("<span class='canceledShift'>(Canceled)</span>");
-                        $(cancelBtn).remove();
-                    }
+                    $.growl.error({title: "Error", message: response.message});
                 }
+
+
             });
     });
 
@@ -284,7 +291,7 @@ $(document).ready(function () {
                 $(id).append("<span class='canceledShift'>(Canceled)</span>");
                 // Remove 'Cancel' button
                 $(id).parents('.mat_event_content')[0].getElementsByClassName('cancel_shift')[0].remove();
-                console.info('Success');
+                $.growl.notice({title: "Success", message: response.message});
             } else {
                 $.growl.error({title: "Error", message: response.message});
             }
@@ -306,7 +313,7 @@ $(document).ready(function () {
                 $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
                 // Remove 'Cancel' button
                 $('.cancelShiftIcon').remove();
-                console.info('Success');
+                $.growl.notice({title: "Success", message: response.message});
             } else {
                 $.growl.error({title: "Error", message: response.message});
             }

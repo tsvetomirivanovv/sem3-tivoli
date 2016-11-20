@@ -28,9 +28,9 @@ if (isset($_POST)) {
     $result = $conn->query($query);
 
     if($result) {
-        $response = array('success' => true);
+        $response = array('success' => true, 'message' => 'The shift has been updated successfully!');
     } else {
-        $response = array('success' => false);
+        $response = array('success' => false, 'message' => 'Something went wrong.');
     }
 
 

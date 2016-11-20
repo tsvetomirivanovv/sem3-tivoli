@@ -18,7 +18,7 @@ if (isset($_POST['shift_id'])) {
     $result = $conn->query($query);
 
     if($result) {
-        $response = array('success' => true);
+        $response = array('success' => true, 'message' => 'The shift has been canceled successfully!');
     }
 } else {
     $response = array('success' => false, 'message' => 'Something went wrong!');
