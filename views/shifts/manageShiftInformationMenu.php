@@ -29,6 +29,9 @@
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="shift_participants">
+                    <?php
+                    include 'participantsList.php';
+                    ?>
                 </div>
             </div>
         </div>

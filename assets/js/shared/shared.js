@@ -1,8 +1,10 @@
 $('[data-toggle="tooltip"]').tooltip();
 
-$('.date').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm',
-    sideBySide: true
+$(document).on('click', '.date', function(e) {
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
 });
 
 // Global vars
@@ -10,7 +12,9 @@ var selectedShiftToCancel = 0;
 var selectedShiftToUpdate = 0;
 var storageAccountId = 0;
 var approveTable = '';
+var participantsTable = '';
 var accountId = 0;
+var userID = 0;
 
 function timeLeadingZeros(value) {
     if (value < 10) {
@@ -33,12 +37,21 @@ function parseTimestamp(date) {
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 
+function parseTimestampParticipants(date) {
+    var now = new Date(date);
+    var h = now.getHours();
+    var m = now.getMinutes();
+
+    return now.getDate() + "-" + now.getMonth() +"-" + now.getFullYear() + ", " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+}
+
 function getFileLink(url, elementId) {
     var inputId = '#' + elementId;
     var linkId = '#' + elementId + '-link';
     $(inputId).val(url);
     $(linkId).text(url);
 }
+
 function updateUserCount() {
     var x = Number($('#pendingUsers').text()) - 1;
     var suffix = '';

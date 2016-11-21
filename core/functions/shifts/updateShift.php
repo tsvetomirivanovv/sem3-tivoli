@@ -30,7 +30,5 @@ if (isset($_POST)) {
     } else {
         $response = array('success' => false, 'message' => 'Something went wrong.');
     }
-
-
     echo json_encode($response);
 }
