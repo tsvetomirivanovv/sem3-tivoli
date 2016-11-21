@@ -60,7 +60,7 @@ $emailErr = "";
                         <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
                             <input  type="filepicker" name="upload_cv" id="upload-cv" data-fp-button-text="Choose file"
                                    data-fp-button-class="customUploader" data-fp-apikey="AdqLfcsUSRWZiP8XVuUgAz" data-fp-maxSize="10485760"
-                                   data-fp-mimetypes="/*" data-fp-extension=".pdf" data-fp-container="modal" data-fp-services="COMPUTER"
+                                   data-fp-extension=".pdf" data-fp-container="modal" data-fp-services="COMPUTER"
                                    onchange="getFileLink(event.fpfile.url, 'upload-cv')" required>
                             <p style="display: inline;" class="" id="upload-cv-link">
                                 <?php if (isset($profile_data['cv'])) {
