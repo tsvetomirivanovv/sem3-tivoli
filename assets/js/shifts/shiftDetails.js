@@ -18,45 +18,35 @@ $.ajax({
 })
     .done(function (response) {
         if (response.success) {
-            response.shifts.forEach(function (shiftData) {
-                shift_begin_id = parseTimestampParticipants(shiftData['begin']);
-                shift_end_id = parseTimestampParticipants(shiftData['end']);
-                shift_close_id = parseTimestampParticipants(shiftData['close']);
-                shift_manager_id = shiftData['duty_manager'];
-                shift_category_id = shiftData['category'];
-                shift_participants_booked = shiftData['participants'];
-                shift_participants_id = shiftData['max_participants'];
-                shift_progress_perc = shiftData['participants_perc'];
-                shift_cancelled = shiftData['canceled'];
-                // progress bar color
-                var progress_bar_color = 'progress-bar-success';
-                if (shiftData['participants_perc'] > 50 && shiftData['participants_perc'] <= 70) {
-                    progress_bar_color = 'progress-bar-warning';
-                } else if (shiftData['participants_perc'] > 70) {
-                    progress_bar_color = 'progress-bar-danger';
-                }
+            var shiftData = response.shift;
 
-                progress_bar = "<div class='mat_small mat_booked participants_count'>" + shiftData['participants'] +
-                    " out of " + shiftData['max_participants'] + " participants " +
-                    "</div>" +
-                    "    <div class='progress_bar_margin'> "+
-                    "        <div class='progress'>" +
-                    "            <div class='progress-bar " + progress_bar_color + "' style='width:" + shift_progress_perc + "%;'></div>"+
-                    "        </div>" +
-                    "    </div>";
+            // progress bar color
+            var progress_bar_color = 'progress-bar-success';
+            if (shiftData['participants_perc'] > 50 && shiftData['participants_perc'] <= 70) {
+                progress_bar_color = 'progress-bar-warning';
+            } else if (shiftData['participants_perc'] > 70) {
+                progress_bar_color = 'progress-bar-danger';
+            }
+            var progress_bar = "<div class='mat_small mat_booked participants_count'>" + shiftData['participants'] +
+                " out of " + shiftData['max_participants'] + " participants " +
+                "</div>" +
+                "    <div class='progress_bar_margin'> "+
+                "        <div class='progress'>" +
+                "            <div class='progress-bar " + progress_bar_color + "' style='width:" + shiftData['participants_perc'] + "%;'></div>"+
+                "        </div>" +
+                "    </div>";
 
-            });
-            $("#shift_begin_id").append(shift_begin_id);
-            $("#shift_end_id").append(shift_end_id);
-            $("#shift_close_id").append(shift_close_id);
-            $("#shift_manager_id").append(shift_manager_id);
-            $("#shift_category_id").append(shift_category_id);
-            $("#shift_participants_booked_id").append(shift_participants_booked);
-            $("#shift_participants_id").append(shift_participants_id);
+            $("#shift_begin_id").append(parseTimestampParticipants(shiftData['begin']));
+            $("#shift_end_id").append(parseTimestampParticipants(shiftData['end']));
+            $("#shift_close_id").append(parseTimestampParticipants(shiftData['close']));
+            $("#shift_manager_id").append(shiftData['duty_manager']);
+            $("#shift_category_id").append(shiftData['category']);
+            $("#shift_participants_booked_id").append(shiftData['participants']);
+            $("#shift_participants_id").append(shiftData['max_participants']);
             $('.progressContainer').append(progress_bar);
             $('.titleClass').html(sessionStorage.getItem("titleName"));
 
-            if(parseInt(shift_cancelled) === 1) {
+            if(parseInt(shiftData['canceled']) === 1) {
                 $('.titleClass').append("<span class='canceledShift'>(Canceled)</span>");
             } else {
                 $('.cancelShiftBtn').append("<div class='glyphicon glyphicon-remove-circle cancelShiftIcon'></div>");

@@ -1,13 +1,13 @@
 <div class="clearfix">
-    <div class="col-xs-9" style="border: 1px solid #ccc; border-radius: 7px;">
+    <div class="col-xs-12" style="border: 1px solid #ccc; border-radius: 7px;">
         <div class="col-xs-12">
             <div id="userCount" style="text-align: center; margin-top: 25px;">The users below are booked for the event:</div>
             <table id="participantsTable" class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 37%;">Name</th>
+                    <th style="width: 42%;">Name</th>
                     <th style="width: 18%;">Phone</th>
-                    <th style="width: 45%;">Date of booking</th>
+                    <th style="width: 40%;">Date of booking</th>
                 </tr>
                 </thead>
                 <tbody id="tableBodyParticipantsList">

@@ -15,16 +15,6 @@ var approveTable = '';
 var participantsTable = '';
 var accountId = 0;
 var userID = 0;
-var shift_begin_id = '';
-var shift_end_id = '';
-var shift_close_id = '';
-var shift_manager_id = '';
-var shift_category_id = '';
-var shift_participants_booked = '';
-var shift_participants_id = '';
-var shift_progress_perc = '';
-var shift_cancelled = '';
-var progress_bar = '';
 
 function timeLeadingZeros(value) {
     if (value < 10) {

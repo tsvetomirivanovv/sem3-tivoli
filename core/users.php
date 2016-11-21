@@ -1,4 +1,15 @@
 <?php
+function getParticipantsByShiftId($id) {
+    $conn = getConnection();
+
+    // BUILD QUERY
+    $query = "SELECT count(*) AS participants FROM participants WHERE shift_id = " . $id . " ";
+
+    // EXECUTES QUERY
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+    return $row['participants'];
+}
 function cancel_user_booking($user_id, $shift_id){
     $conn = getConnection();
     $query = mysqli_query($conn, "DELETE FROM participants WHERE user_id ='$user_id' AND shift_id='$shift_id'");

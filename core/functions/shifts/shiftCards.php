@@ -1,7 +1,6 @@
 <?php
-
+include '../../init.php';
 // GET DB CONNECTION
-require '../../database/connect.php';
 $conn = getConnection();
 
 // CHECK IF THERE IS ERROR
@@ -24,18 +23,6 @@ foreach ($shifts as $index => $shift) {
     $shifts[$index]['max_participants'] = (int)$shifts[$index]['max_participants'];
     $shifts[$index]['participants'] =  (int)getParticipantsByShiftId($shift['shift_id']);
     $shifts[$index]['participants_perc'] = (100*(int)$shifts[$index]['participants'])/(int)$shifts[$index]['max_participants'];
-}
-
-function getParticipantsByShiftId($id) {
-    $conn = getConnection();
-
-    // BUILD QUERY
-    $query = "SELECT count(*) AS participants FROM participants WHERE shift_id = " . $id . " ";
-
-    // EXECUTES QUERY
-    $result = $conn->query($query);
-    $row = $result->fetch_assoc();
-    return $row['participants'];
 }
 
 $response = array('success' => true, 'shifts' => $shifts );
