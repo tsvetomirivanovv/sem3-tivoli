@@ -19,9 +19,9 @@ $.ajax({
     .done(function (response) {
         if (response.success) {
             response.shifts.forEach(function (shiftData) {
-                shift_begin_id = shiftData['begin'];
-                shift_end_id = shiftData['end'];
-                shift_close_id = shiftData['close'];
+                shift_begin_id = parseTimestampParticipants(shiftData['begin']);
+                shift_end_id = parseTimestampParticipants(shiftData['end']);
+                shift_close_id = parseTimestampParticipants(shiftData['close']);
                 shift_manager_id = shiftData['duty_manager'];
                 shift_category_id = shiftData['category'];
                 shift_participants_booked = shiftData['participants'];

@@ -6,7 +6,8 @@ if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
 if(isset($_POST['shift_id'])){
-$shift_id = $_POST['shift_id'];
+
+    $shift_id = $_POST['shift_id'];
     $query = "SELECT users.user_id, participants.shift_id,  users.first_name, users.last_name, users.phone,
 		                  participants.date_of_booking
 	                      FROM users

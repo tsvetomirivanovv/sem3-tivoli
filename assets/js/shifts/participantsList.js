@@ -1,6 +1,38 @@
+var storageID = sessionStorage.getItem("titleID");
+
+$.ajax({
+    type: "POST",
+    url: 'core/functions/shifts/participantsList.php',
+    dataType: "json",
+    data: {
+        shift_id: storageID
+    }
+})
+    .done(function (response) {
+        if (response.success) {
+            var participants = "";
+
+            response.participants.forEach(function (participantData) {
+
+                participants +=
+                    "<tr id='" + participantData['user_id'] + "'>" +
+                    "   <td>" + participantData['first_name'] + ' ' + participantData['last_name'] + "</td>" +
+                    "   <td>" + participantData['phone'] + "</td>" +
+                    "   <td>" + parseTimestampParticipants(participantData['date_of_booking']) + "<div class='updateButtonPos'><a class='cancel_user_booking_button' type='button' data-toggle='modal' data-target='#cancelUserBooking' id='" + participantData['user_id'] + "'><span class='glyphicon glyphicon-remove'></span></a>" + "</td>" +
+                    "</tr>";
+            });
+
+            $("#tableBodyParticipantsList").append(participants);
+        } else {
+            console.error('Participants unsuccessfully fetched');
+        }
+        participantsTable = $("#participantsTable").DataTable();
+    });
+
 $(document).on('click', '.cancel_user_booking_button', function () {
     userID = $(this).attr('id');
 });
+
 $('#cancelUserBookingButton').click(function () {
     $.ajax('core/functions/shifts/cancel-user-booking.php', {
         type: 'POST',
@@ -20,32 +52,3 @@ $('#cancelUserBookingButton').click(function () {
             }
         })
 });
-$.ajax({
-    type: "POST",
-    url: 'core/functions/shifts/participantsList.php',
-    dataType: "json",
-    data: {
-        shift_id: storageID
-    }
-})
-    .done(function (response) {
-        if (response.success) {
-            var participants = "";
-
-            response.participants.forEach(function (participantData) {
-
-                participants +=
-                    "<tr id='" + participantData['user_id'] + "'>" +
-                    "   <td>" + participantData['first_name'] + ' ' + participantData['last_name'] + "</td>" +
-                    "   <td>" + participantData['phone'] + "</td>" +
-                    "   <td>" + parseTimestampParticipants(participantData['date_of_booking']) + '<div class="updateButtonPos"><a class="cancel_user_booking_button" type="button" data-toggle="modal" data-target="#cancelUserBooking" id="' + participantData['user_id'] + '"><span class="glyphicon glyphicon-remove"></span></a>' + "</td>" +
-                    "</tr>";
-            });
-
-            $("#tableBodyParticipantsList").append(participants);
-        } else {
-            console.error('Participants unsuccessfully fetched');
-        }
-        participantsTable = $("#participantsTable").DataTable();
-    });
-

@@ -5,9 +5,9 @@
             <table id="participantsTable" class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 38%;">Name</th>
+                    <th style="width: 37%;">Name</th>
                     <th style="width: 18%;">Phone</th>
-                    <th style="width: 44%;">Date of booking</th>
+                    <th style="width: 45%;">Date of booking</th>
                 </tr>
                 </thead>
                 <tbody id="tableBodyParticipantsList">
