@@ -40,4 +40,3 @@ if (isset($_POST['shift_id_value'])) {
     $response = array('success' => true, 'shifts' => $shifts);
     echo json_encode($response);
 }
-

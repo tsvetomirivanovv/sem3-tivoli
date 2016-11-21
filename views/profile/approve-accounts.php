@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button id="approveButton" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                    <button id="approveUserButton" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button id="rejectButton" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                    <button id="rejectUserButton" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
                 </div>
             </div>
 

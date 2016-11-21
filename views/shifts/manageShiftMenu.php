@@ -7,8 +7,10 @@
             <ul class="nav nav-pills" role="tablist">
                 <li role="presentation" class="active"><a href="#all_Shifts" aria-controls="all_Sifts" role="tab" data-toggle="tab">All shifts</a></li>
                 <li role="presentation"><a href="#my_Shifts" aria-controls="my_Shifts" role="tab" data-toggle="tab">My shift(s)</a></li>
+                <?php if (has_access($user_data['user_id'], 'Manager')) { ?>
                 <li role="presentation"><a href="#create_Shift" aria-controls="create_Shift" role="tab" data-toggle="tab">Create shift</a></li>
                 <li role="presentation"><a href="#my_Offer" aria-controls="my_Offer" role="tab" data-toggle="tab">My offer(s)</a></li>
+                <?php } ?>
             </ul>
 
             <!-- Tab panes -->
@@ -23,16 +25,19 @@
 
                     ?>
                 </div>
+                <?php if (has_access($user_data['user_id'], 'Manager')) { ?>
                 <div role="tabpanel" class="tab-pane fade" id="create_Shift">
                     <?php
                     include 'createShift.php';
                     ?>
                 </div>
+
                 <div role="tabpanel" class="tab-pane fade" id="my_Offer">
                     <?php
 
                     ?>
                 </div>
+                <?php } ?>
             </div>
 
         </div>
