@@ -139,7 +139,16 @@ $.ajax({
                 } else if (shiftData['participants_perc'] > 70) {
                     progress_bar_color = 'progress-bar-danger';
                 }
-
+                // check if shift is canceled
+                var status = "";
+                var cancelBtn = "";
+                if(parseInt(shiftData['canceled']) === 1) {
+                    status = "<span class='canceledShift'>(Canceled)</span>";
+                } else {
+                    cancelBtn = "                       <a class='cancel_shift_glyphicon cancel_shift' data-toggle='modal' data-target='#cancelShift'>" +
+                        "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
+                        "                       </a>";
+                }
                 shifts += "<li style='list-style-type: none'>" +
                     "   <div class='mat_single_event_holder " + bgStyle + "'>" +
                     "       <div class='mat_single_event_holder_inner'>" +
@@ -167,9 +176,6 @@ $.ajax({
                     "                               <span class='mat_small'>" +
                     "                               <span>Duty manager: " + shiftData['duty_manager'] + " - </span>Category: " + shiftData['category'] + " </span>" +
                     "                           </div>" +
-                    "                       <a class='edit_shift_glyphicon' href='#'>" +
-                    "                           <div class='glyphicon glyphicon-edit'></div>" +
-                    "                       </a>" +
                     "                       <a class='cancel_shift_glyphicon' href='#'>" +
                     "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
                     "                       </a>" +
@@ -178,7 +184,7 @@ $.ajax({
                     "                   <div style='clear:both'></div>" +
                     "       </div>" +
                     "   </div>" +
-                    "</li>"
+                    "</li>";
             });
             $("#myShiftContainer").append(shifts);
             $("#myShiftContainer").easyPaginate({
