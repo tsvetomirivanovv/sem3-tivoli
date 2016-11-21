@@ -34,13 +34,15 @@
     color: #2ECC71;
   }
 }
-.reject_button {
+.reject_button,
+.cancel_user_booking_button {
   span {
     color: #E74C3C;
   }
 }
 
 .approve_button,
-.reject_button {
+.reject_button,
+.cancel_user_booking_button {
   cursor: pointer;
 }

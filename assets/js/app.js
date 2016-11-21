@@ -17,6 +17,13 @@ function parseTimestamp(date) {
 
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
+function parseTimestampParticipants(date) {
+    var now = new Date(date);
+    var h = now.getHours();
+    var m = now.getMinutes();
+
+    return now.getDate() + "-" + now.getMonth() +"-" + now.getFullYear() + ", " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+}
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     $('#registerForm').on('submit', function (e) {
@@ -273,6 +280,9 @@ $(document).ready(function () {
     $(document).on('click', '.reject_button', function () {
         accountId = $(this).attr('id');
     });
+    $(document).on('click', '.cancel_user_booking_button', function () {
+        userID = $(this).attr('id');
+    });
     $('#approveButton').click(function () {
         $.ajax('core/functions/profile/approve.php', {
             type: 'POST',
@@ -312,6 +322,25 @@ $(document).ready(function () {
                 }
             })
     });
+    $('#cancelUserBookingButton').click(function () {
+        $.ajax('core/functions/shifts/cancel-user-booking.php', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                user_id: userID,
+                shift_id: storageID
+            }
+        })
+            .done(function (response) {
+                if (response.success) {
+                    var row = participantsTable.row($('tr').filter("[id=" + userID + "]"));
+                    row.remove().draw(false);
+                    $.growl.notice({title: "Success", message: response.message});
+                } else {
+                    $.growl.error({title: "Error", message: response.message});
+                }
+            })
+    });
 
     // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
     $(document).on('click', '.a_link_title_color', function () {
@@ -340,15 +369,35 @@ $(document).ready(function () {
                     shift_close_id = shiftData['close'];
                     shift_manager_id = shiftData['duty_manager'];
                     shift_category_id = shiftData['category'];
+                    shift_participants_booked = shiftData['participants'];
                     shift_participants_id = shiftData['max_participants'];
+                    shift_progress_perc = shiftData['participants_perc'];
+                    // progress bar color
+                    var progress_bar_color = 'progress-bar-success';
+                    if (shiftData['participants_perc'] > 50 && shiftData['participants_perc'] <= 70) {
+                        progress_bar_color = 'progress-bar-warning';
+                    } else if (shiftData['participants_perc'] > 70) {
+                        progress_bar_color = 'progress-bar-danger';
+                    }
+
+                    progress_bar = "<div class='mat_small mat_booked participants_count'>" + shiftData['participants'] +
+                                   " out of " + shiftData['max_participants'] + " participants " +
+                                   "</div>" +
+                                   "    <div class='progress_bar_margin'> "+
+                                   "        <div class='progress'>" +
+                                   "            <div class='progress-bar " + progress_bar_color + "' style='width:" + shift_progress_perc + "%;'></div>"+
+                                   "        </div>" +
+                                   "    </div>";
+
                 });
                 $("#shift_begin_id").append(shift_begin_id);
                 $("#shift_end_id").append(shift_end_id);
                 $("#shift_close_id").append(shift_close_id);
-                $("#shift_organizer_id").append("Alex Petersen");
                 $("#shift_manager_id").append(shift_manager_id);
                 $("#shift_category_id").append(shift_category_id);
+                $("#shift_participants_booked_id").append(shift_participants_booked);
                 $("#shift_participants_id").append(shift_participants_id);
+                $('.progressContainer').append(progress_bar);
             }
         });
 
@@ -359,57 +408,29 @@ $(document).ready(function () {
         type: "POST",
         url: 'core/functions/shifts/participantsList.php',
         dataType: "json",
+        data: {
+            shift_id: storageID
+        }
     })
         .done(function (response) {
             if (response.success) {
-                var participantRow = "";
-                var evenOdd = 1;
-                var maxParticipants = "";
-                var participants = 0;
-
-                // progress bar color
-                var progress_bar_color = 'progress-bar-success';
-
+                var participants = "";
 
                 response.participants.forEach(function (participantData) {
-                    maxParticipants = participantData['max_participants'];
-                    if (storageID == participantData['shift_id']) {
-                        participants += 1;
-                        var bgStyle;
-                        if (evenOdd % 2 == 1) {
-                            bgStyle = 'mat_single_odd';
-                        } else bgStyle = '';
-                        evenOdd++;
 
-                        participantRow =
-                            "<tr class=' " + bgStyle + "'>" +
-                            "   <td>" + participantData['first_name'] + "</td>" +
-                            "   <td>" + participantData['last_name'] + "</td>" +
+                        participants +=
+                            "<tr id='"+ participantData['user_id'] +"'>" +
+                            "   <td>" + participantData['first_name'] + ' ' + participantData['last_name'] + "</td>" +
                             "   <td>" + participantData['phone'] + "</td>" +
-                            "   <td>" + participantData['date_of_booking'] + "</td>" +
-                            "   <td>" + '<div class="updateButtonPos"><a class="reject_button" type="button" data-toggle="modal" data-target="#rejectUserModal" id="' + participantData['user_id'] +  '"><span class="glyphicon glyphicon-remove" style="margin-right: 15px;"></span></a>'+ "</td>" +
+                            "   <td>" + parseTimestampParticipants(participantData['date_of_booking']) + '<div class="updateButtonPos"><a class="cancel_user_booking_button" type="button" data-toggle="modal" data-target="#cancelUserBooking" id="' + participantData['user_id'] +  '"><span class="glyphicon glyphicon-remove"></span></a>'+ "</td>" +
                             "</tr>";
-
-                        $("#participantsTable").append(participantRow);
-                    }
                 });
-                //calculate the percentage of participants
-                var percentage = (participants * 100)/maxParticipants;
-                if (percentage > 50 && percentage <= 70) {
-                 progress_bar_color = 'progress-bar-warning';
-                 } else if (percentage > 70) {
-                 progress_bar_color = 'progress-bar-danger';
-                 }
-                var progressBar =
-                    "<div class='mat_small mat_booked participants_count'>" + participants + " out of " + maxParticipants + " participants" + "</div>" +
-                    "   <div class='progress'>" +
-                    "           <div class='progress-bar " + progress_bar_color + "' style='width: " + maxParticipants + "%;'></div>" +
-                    "               </div>";
-                $("#participantsBar").append(progressBar);
 
+                $("#tableBodyParticipantsList").append(participants);
             } else {
                 console.error('Participants unsuccessfully fetched');
             }
+            participantsTable = $("#participantsTable").DataTable();
         });
 
 

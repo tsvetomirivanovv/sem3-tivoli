@@ -1,5 +1,9 @@
 <?php
-
+function cancel_user_booking($user_id, $shift_id){
+    $conn = getConnection();
+    $query = mysqli_query($conn, "DELETE FROM participants WHERE user_id ='$user_id' AND shift_id='$shift_id'");
+    return $query;
+}
 function reject_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
