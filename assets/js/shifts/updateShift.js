@@ -39,6 +39,7 @@ $(document).on('click', '.updateShiftBtn', function(e) {
                 var e = $(id).parents('.mat_event_content')[0];
                 var title = e.getElementsByClassName('shiftId');
                 var beginDate = e.getElementsByClassName('beginDate');
+                var endDate = e.getElementsByClassName('endDate');
                 var closeDate = e.getElementsByClassName('closeDate');
                 var maxPart = e.getElementsByClassName('maxPart');
                 var dutyMngr = e.getElementsByClassName('dutyMngr');
@@ -49,6 +50,7 @@ $(document).on('click', '.updateShiftBtn', function(e) {
 
                 $(title).html($('#shift-title').val());
                 $(beginDate).html(parseTimestamp($("#shift-begin-date").val()));
+                $(endDate).html(parseTimestamp($("#shift-end-date").val()));
                 $(closeDate).html(parseTimestamp($("#shift-closing-date").val()));
                 $(maxPart).html($("#shift-participants").val());
                 $(dutyMngr).html($("#shift-duty-manager").val());
@@ -117,8 +119,9 @@ $(document).on('click', '.updateSelectedShiftBtn', function(e) {
 
             sessionStorage.setItem("titleName", $('#shift-title').val());
             $('.titleClass').html($('#shift-title').val());
-            $('#shift_begin_id').html($("#shift-begin-date").val());
-            $('#shift_close_id').html($("#shift-closing-date").val());
+            $('#shift_begin_id').html(parseTimestampParticipants($("#shift-begin-date").val()));
+            $('#shift_end_id').html(parseTimestampParticipants($("#shift-end-date").val()));
+            $('#shift_close_id').html(parseTimestampParticipants($("#shift-closing-date").val()));
             $('#shift_participants_id').html($("#shift-participants").val());
             $('#shift_manager_id').html($("#shift-duty-manager").val());
             $('#shift_category_id').html($('#shift-category option:selected').val());
@@ -143,7 +146,7 @@ $(document).on('click', '.updateSelectedShiftBtn', function(e) {
 
 // Clear input fields when open updateShift modal.
 function clearUpdateModalValues() {
-    $('#shift-title').val('')
+    $('#shift-title').val('');
     $("#shift-begin-date").val('');
     $("#shift-end-date").val('');
     $("#shift-closing-date").val('');
@@ -166,7 +169,7 @@ function fetchShiftDataModal(id) {
         if (response.success) {
             var shiftData = response.shift;
 
-            $('#shift-title').val(shiftData['title'])
+            $('#shift-title').val(shiftData['title']);
             $("#shift-begin-date").val(shiftData['begin']);
             $("#shift-end-date").val(shiftData['end']);
             $("#shift-closing-date").val(shiftData['close']);
