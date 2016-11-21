@@ -1,5 +1,9 @@
 var storageID = sessionStorage.getItem("titleID");
-
+$.ajax('core/functions/profile/permissions/is-manager.php', {
+    type: 'POST',
+    dataType: 'json',
+})
+    .done(function (response1) {
 $.ajax({
     type: "POST",
     url: 'core/functions/shifts/participantsList.php',
@@ -18,8 +22,13 @@ $.ajax({
                     "<tr id='" + participantData['user_id'] + "'>" +
                     "   <td>" + participantData['first_name'] + ' ' + participantData['last_name'] + "</td>" +
                     "   <td>" + participantData['phone'] + "</td>" +
-                    "   <td>" + parseTimestampParticipants(participantData['date_of_booking']) + "<div class='updateButtonPos'><a class='cancel_user_booking_button' type='button' data-toggle='modal' data-target='#cancelUserBooking' id='" + participantData['user_id'] + "'><span class='glyphicon glyphicon-remove'></span></a>" + "</td>" +
-                    "</tr>";
+                    "   <td>" + parseTimestampParticipants(participantData['date_of_booking']);
+                if (!response1.success) {
+                    participants += "</tr>";
+                }else {
+                    participants += "<div class='updateButtonPos'><a class='cancel_user_booking_button' type='button' data-toggle='modal' data-target='#cancelUserBooking' id='" + participantData['user_id'] + "'><span class='glyphicon glyphicon-remove'></span></a>" + "</td>" +
+                                    "</tr>";
+                }
             });
 
             $("#tableBodyParticipantsList").append(participants);
@@ -28,7 +37,7 @@ $.ajax({
         }
         participantsTable = $("#participantsTable").DataTable();
     });
-
+});
 $(document).on('click', '.cancel_user_booking_button', function () {
     userID = $(this).attr('id');
 });
