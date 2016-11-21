@@ -1,9 +1,11 @@
 .labelStyle {
   padding-bottom: 0.5em;
   width: 150px;
+  float: left;
 }
 .inputStyle {
   padding-right: 10px;
+  float: left;
 }
 .registerButtonFloat {
   float: right;
@@ -12,9 +14,14 @@
   width: 324px;
   display: inline;
   padding-right: 92px;
-  padding-bottom: 13px;
+  padding-bottom: 9px;
   overflow: hidden;
 }
 #upload-cv, #upload-picture{
   overflow: hidden;
+}
+
+.inputUploader {
+    width: 324px;
+    float: left; 
 }
