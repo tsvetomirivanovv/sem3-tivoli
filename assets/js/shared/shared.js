@@ -1,8 +1,10 @@
 $('[data-toggle="tooltip"]').tooltip();
 
-$('.date').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm',
-    sideBySide: true
+$(document).on('click', '.date', function(e) {
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
 });
 
 // Global vars
