@@ -10,7 +10,19 @@ var selectedShiftToCancel = 0;
 var selectedShiftToUpdate = 0;
 var storageAccountId = 0;
 var approveTable = '';
+var participantsTable = '';
 var accountId = 0;
+var userID = 0;
+var shift_begin_id = '';
+var shift_end_id = '';
+var shift_close_id = '';
+var shift_manager_id = '';
+var shift_category_id = '';
+var shift_participants_booked = '';
+var shift_participants_id = '';
+var shift_progress_perc = '';
+var shift_cancelled = '';
+var progress_bar = '';
 
 function timeLeadingZeros(value) {
     if (value < 10) {
@@ -33,12 +45,21 @@ function parseTimestamp(date) {
     return day + ", " + now.getDate() + ". " + month + " " + now.getFullYear() + " - " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 
+function parseTimestampParticipants(date) {
+    var now = new Date(date);
+    var h = now.getHours();
+    var m = now.getMinutes();
+
+    return now.getDate() + "-" + now.getMonth() +"-" + now.getFullYear() + ", " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+}
+
 function getFileLink(url, elementId) {
     var inputId = '#' + elementId;
     var linkId = '#' + elementId + '-link';
     $(inputId).val(url);
     $(linkId).text(url);
 }
+
 function updateUserCount() {
     var x = Number($('#pendingUsers').text()) - 1;
     var suffix = '';

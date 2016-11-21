@@ -19,8 +19,8 @@ $shift_id = $_POST['shift_id'];
     while($row = $result->fetch_assoc()){
         $participants[] = $row;
     }
+    $response = array('success' => true, 'participants' => $participants );
+    echo json_encode($response);
 } else {
     $errors[] = 'Data not provided!';
 }
-$response = array('success' => true, 'participants' => $participants );
-echo json_encode($response);
