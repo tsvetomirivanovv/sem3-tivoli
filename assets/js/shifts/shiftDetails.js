@@ -1,9 +1,24 @@
 // WHEN CLICK ON TITLE, SET SESSION STORAGE TITLE AND ID VAR
-$(document).on('click', '.a_link_title_color', function () {
+$(document).on('click', '.a_link_title_color', function (e) {
+    e.preventDefault();
+    var currentTime = new Date().toISOString();
     var titleID = $(this).attr('id');
     var titleName = $(this).text();
     sessionStorage.setItem("titleID", titleID);
-    sessionStorage.setItem("titleName", titleName)
+    sessionStorage.setItem("titleName", titleName);
+
+    $.ajax({
+        type: "POST",
+        url: 'core/functions/general.php',
+        data: {
+            shift_id_value: titleID,
+            current_time_value: currentTime
+        }
+    })
+        .done(function () {
+            window.location.href = "fullShiftDetails.php"
+        });
+
 });
 
 // VAR TO RETRIEVE SES. STORAGE ID
