@@ -17,7 +17,7 @@
                 <h4 class="modal-title">Cancel booking</h4>
             </div>
             <div class="modal-body">
-                <p>Do you want to cancle your booking for this shift?</p>
+                <p>Do you want to cancel your booking for this shift?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>

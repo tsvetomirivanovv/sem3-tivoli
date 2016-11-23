@@ -148,7 +148,7 @@ function fetchMyShifts(userid) {
                             "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
                             "                       </a>";
                     }
-                    shifts += "<li style='list-style-type: none'>" +
+                    shifts += "<li style='list-style-type: none' id='" + shiftData['shift_id'] + "'>" +
                         "   <div class='mat_single_event_holder " + bgStyle + "'>" +
                         "       <div class='mat_single_event_holder_inner'>" +
                         "           <div class='mat_event_image'>" +
@@ -160,7 +160,7 @@ function fetchMyShifts(userid) {
                         "           </div>" +
                         "       <div class='mat_event_content'>" +
                         "           <div class='mat_event_content_inner'>" +
-                        "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='fullShiftDetails.php' id='" + shiftData['shift_id'] + "'>" + shiftData['title'] + "</a></h4>" +
+                        "               <h4 class='h4_shift_link'><a class='a_link_title_color' href='#' id='" + shiftData['shift_id'] + "'>" + shiftData['title'] + "</a></h4>" +
                         "                   <div class='mat_event_location'>" +
                         "                       <strong><a class='a_link_tivoli_location' href='#'>Tivoli Hotel &amp; Congress Center</a> <br> " + parseTimestamp(shiftData['begin']) + "</strong>" +
                         "                   </div>" +
@@ -175,7 +175,7 @@ function fetchMyShifts(userid) {
                         "                               <span class='mat_small'>" +
                         "                               <span>Duty manager: " + shiftData['duty_manager'] + " - </span>Category: " + shiftData['category'] + " </span>" +
                         "                           </div>" +
-                        "                       <a class='cancel_shift_glyphicon' data-toggle='modal' data-target='#cancelBookingModal'  href='#'>" +
+                        "                       <a class='cancel_my_shift cancel_shift_glyphicon' data-toggle='modal' data-target='#cancelBookingModal'  href='#' id='" + shiftData['shift_id'] + "'>" +
                         "                           <div class='glyphicon glyphicon-remove-circle'></div>" +
                         "                       </a>" +
                         "                   </div>" +
@@ -200,6 +200,9 @@ function fetchMyShifts(userid) {
             }
         });
 }
+$(document).on('click', '.cancel_my_shift', function () {
+    myShiftId = $(this).attr('id');
+});
 
 
 // ON CLICK CANCEL BUTTON SEND AJAX REMOVE BOOKING
@@ -209,11 +212,13 @@ $(document).on('click', '#cancelBookingButton', function (e) {
         type: 'POST',
         dataType: 'json',
         data: {
-            account_id: sessionStorage.getItem("user_id")
+            user_id: sessionStorage.getItem("user_id"),
+            shift_id: myShiftId
         }
     })
         .done(function (response) {
             if (response.success) {
+                $('li').filter("[id=" + myShiftId + "]").remove();
                 $.growl.notice({title: "Success", message: response.message});
             } else {
                 $.growl.error({title: "Error", message: response.message});
