@@ -11,7 +11,7 @@
                     </a>
                 </div>
                 <?php } ?>
-                <button class="btn btn-success book-button" style="float: right">Book Now</button>
+                <button class="btn btn-success book-button" <?php booking_exists() ?> value="<?php echo $_SESSION ['user_id'] ?>" >Book Now</button>
             </h3>
         </div>
         <div>

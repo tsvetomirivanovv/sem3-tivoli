@@ -41,7 +41,6 @@ $.ajax({
 $(document).on('click', '.cancel_user_booking_button', function () {
     userID = $(this).attr('id');
 });
-
 $(document).on('click', '#cancelUserBookingButton', function () {
     $.ajax('core/functions/shifts/cancel-user-booking.php', {
         type: 'POST',

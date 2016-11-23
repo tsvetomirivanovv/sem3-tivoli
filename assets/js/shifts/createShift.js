@@ -13,3 +13,12 @@ $(document).on('submit', '#createShiftForm', function (e) {
         }
     });
 });
+
+$(document).ready(function () {
+
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
+    });
+
+});

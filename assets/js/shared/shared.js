@@ -14,6 +14,7 @@ var storageAccountId = 0;
 var approveTable = '';
 var participantsTable = '';
 var accountId = 0;
+var myShiftId = 0;
 var userID = 0;
 
 function timeLeadingZeros(value) {
