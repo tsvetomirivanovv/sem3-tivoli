@@ -186,15 +186,7 @@ function fetchMyShifts(userid) {
                         "</li>";
                 });
                 $("#myShiftContainer").append(shifts);
-                $("#myShiftContainer").easyPaginate({
-                    paginateElement: 'li',
-                    elementsPerPage: 8,
-                    effect: 'climb',
-                    firstButton: false,
-                    prevButtonText: 'Prev',
-                    nextButtonText: 'Next',
-                    lastButton: false
-                });
+                
             } else {
                 console.error('Shifts unsuccessfully fetched');
             }
