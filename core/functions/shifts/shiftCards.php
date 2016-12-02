@@ -9,6 +9,9 @@ if ($conn->connect_error) {
 }
 // BUILD QUERY
 $query = "SELECT * FROM shifts";
+if($user_data['type'] == "B-Waiter"){
+    $query = "SELECT * FROM shifts WHERE category='B-Waiter'";
+}
 
 // EXECUTES QUERY
 $result = $conn->query($query);
