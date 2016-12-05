@@ -15,6 +15,7 @@ $(document).on('click', '.book-button', function(e) {
         },
         success: function () {
             $.growl.notice({title: "Success", message: "You successfully booked this shift!"});
+            window.location.reload();
         }
     });
 });
