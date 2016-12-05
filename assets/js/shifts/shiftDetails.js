@@ -3,7 +3,7 @@ $(document).on('click', '.a_link_title_color', function (e) {
     e.preventDefault();
     var currentTime = new Date().toISOString();
     var titleID = $(this).attr('id');
-    var titleName = $(this).text();
+    var titleName = $(e.target).text();
     sessionStorage.setItem("titleID", titleID);
     sessionStorage.setItem("titleName", titleName);
 
