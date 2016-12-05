@@ -14,8 +14,6 @@ $(document).on('submit', '#registerForm', function (e) {
         },
         error: function (resp) {
             $.growl.error({title: "Failure", message: "Your account was not created!"});
-
-            $("#registerForm").append($('#username').val());
         }
     });
 });
