@@ -43,7 +43,7 @@ $.ajax({
                 progress_bar_color = 'progress-bar-danger';
             }
             var progress_bar = "<div class='mat_small mat_booked participants_count'>" + shiftData['participants'] +
-                " out of " + shiftData['max_participants'] + " participants " +
+                " out of <span class='maxParticipants'>" + shiftData['max_participants'] + "</span> participants " +
                 "</div>" +
                 "    <div class='progress_bar_margin'> "+
                 "        <div class='progress'>" +

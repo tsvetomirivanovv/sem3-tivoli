@@ -129,7 +129,7 @@ $(document).on('click', '.updateSelectedShiftBtn', function(e) {
             $('#shift_begin_id').html(parseTimestampParticipants($("#shift-begin-date").val()));
             $('#shift_end_id').html(parseTimestampParticipants($("#shift-end-date").val()));
             $('#shift_close_id').html(parseTimestampParticipants($("#shift-closing-date").val()));
-            $('#shift_participants_id').html($("#shift-participants").val());
+            $('.maxParticipants').html($("#shift-participants").val());
             $('#shift_manager_id').html($("#shift-duty-manager").val());
             $('#shift_category_id').html($('#shift-category option:selected').val());
 
