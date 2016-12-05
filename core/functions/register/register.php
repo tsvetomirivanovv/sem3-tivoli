@@ -63,11 +63,13 @@ include '../../init.php';
             }
 
             if ($connectionOk == 1) {
-                $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cv', '$picture', $active)";
+                if(strlen($picture)) {
+                    $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cv', '$picture', $active)";
+                } else {
+                    $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cv', $active)";
+                }
                 $conn->query($sql);
             } else {
-                var_dump(http_response_code(409));
-                echo json_encode($passwordErr);
                 function form_errors() {
                     $output = "";
                         $output .= "<div class=\"error\">";

@@ -14,7 +14,7 @@ $emailErr = "";
             <div class="page-header headerFix"><h3 class="h3Fix">Sign up</h3></div>
             <div class="col-xs-12" id="registerForm">
 
-                <form method="post" action="register.php" id="registerForm" enctype="multipart/form-data">
+                <form id="registerForm" enctype="multipart/form-data">
                     <label class="labelStyle">Username:*</label>
                     <input type="text" name="username" id="username"
                            class="form-control registerfield formControlChange" required>
