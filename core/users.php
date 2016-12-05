@@ -1,12 +1,37 @@
 <?php
+function getParticipantsByShiftId($id) {
+    $conn = getConnection();
 
+    // BUILD QUERY
+    $query = "SELECT count(*) AS participants FROM participants WHERE shift_id = " . $id . " ";
+
+    // EXECUTES QUERY
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+    return $row['participants'];
+}
+function cancel_user_booking($user_id, $shift_id){
+    $conn = getConnection();
+    $query = mysqli_query($conn, "DELETE FROM participants WHERE user_id ='$user_id' AND shift_id='$shift_id'");
+    return $query;
+}
+function has_access($user_id, $type){
+    $conn = getConnection();
+    $user_id = (int)$user_id;
+    $type = sanitize($type);
+    $query = mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE user_id = '$user_id' AND type='$type'");
+    $row = mysqli_fetch_assoc($query);
+    return ($row['COUNT(user_id)'] == 1) ? true : false;
+}
 function reject_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
+    sendMail(email_from_user_id($user_id), 'Tivoli Application Rejection', "Dear Applicant, \n\nYour application has been rejected!\n\nTivoli Hotel");
 }
 function approve_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "UPDATE users SET active = 1 WHERE user_id = $user_id");
+    sendMail(email_from_user_id($user_id), 'Tivoli Account Approval', "Dear Applicant, \n\nYour account has been successfully approved!\n\nNow you can login and start booking shifts!\n\nTivoli Hotel");
 }
 function update_user_profile($user_id, $update_data) {
 
@@ -126,6 +151,13 @@ function user_id_from_email($email) {
     $query = mysqli_query($conn, "SELECT user_id FROM users WHERE email = '$email'");
     $row = mysqli_fetch_assoc($query);
     return $row['user_id'];
+}
+function email_from_user_id($user_id) {
+    $conn = getConnection();
+    $user_id = sanitize($user_id);
+    $query = mysqli_query($conn, "SELECT email FROM users WHERE user_id = '$user_id'");
+    $row = mysqli_fetch_assoc($query);
+    return $row['email'];
 }
 function login($username, $password) {
     $conn = getConnection();

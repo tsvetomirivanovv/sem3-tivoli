@@ -8,6 +8,12 @@
 }
 .h3Fix {
   margin-bottom: -10px;
+  position: relative;
+
+  .canceledShift {
+     font-size: 25px;
+    top: 10px;
+  }
 }
 #userCount {
   padding-bottom: 30px;
@@ -34,13 +40,15 @@
     color: #2ECC71;
   }
 }
-.reject_button {
+.reject_button,
+.cancel_user_booking_button {
   span {
     color: #E74C3C;
   }
 }
 
 .approve_button,
-.reject_button {
+.reject_button,
+.cancel_user_booking_button {
   cursor: pointer;
 }

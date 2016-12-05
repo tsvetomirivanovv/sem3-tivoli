@@ -95,11 +95,15 @@
                     <tr class="spaceUnder">
                         <td><label for="edit-user-type">User status</label></td>
                         <td id="user_category" class="<?php echo $profile_data['type']; ?>">
+                            <?php if (has_access($user_data['user_id'], 'Manager')) { ?>
                             <select class="select" id="edit-user-type" name="edit_user_type">
                                 <option value="B-Waiter">B-Waiter</option>
                                 <option value="A-Waiter">A-Waiter</option>
                                 <option value="Manager">Manager</option>
                             </select>
+                            <?php } else { ?>
+                                (You are not authorized to change user status.)
+                            <?php } ?>
                         </td>
                     </tr>
                 </table>

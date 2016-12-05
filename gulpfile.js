@@ -7,6 +7,8 @@ var ngAnnotate = require('gulp-ng-annotate');
 var bundle = require('gulp-bundle-assets');
 var sequence = require('gulp-sequence');
 var notify = require('gulp-notify');
+var babel = require("gulp-babel");
+var concat = require("gulp-concat");
 
 /**
 * Paths
@@ -57,9 +59,10 @@ gulp.task('sass', function() {
 gulp.task('scripts', function() {
 
   return gulp.src(src.scripts.all)
-    .pipe(ngAnnotate()).on('error', errorHandler)
-    .pipe(rename(src.scripts.out))
     .pipe(sourcemaps.init())
+    .pipe(babel()).on('error', errorHandler)
+    .pipe(ngAnnotate()).on('error', errorHandler)
+    .pipe(concat(src.scripts.out))
     .pipe(sourcemaps.write('./', {
       includeContent: true
     })).on('error', errorHandler)
