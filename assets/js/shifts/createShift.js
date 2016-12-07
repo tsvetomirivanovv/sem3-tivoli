@@ -10,6 +10,7 @@ $(document).on('submit', '#createShiftForm', function (e) {
         success: function () {
             $('#createShiftForm')[0].reset();
             $.growl.notice({title: "Success", message: "You successfully created the shift!"});
+            window.location.reload();
         }
     });
 });
