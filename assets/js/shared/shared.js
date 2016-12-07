@@ -43,7 +43,7 @@ function parseTimestampParticipants(date) {
     var h = now.getHours();
     var m = now.getMinutes();
 
-    return timeLeadingZeros(now.getDate()) + "-" + timeLeadingZeros(now.getMonth()) +"-" + now.getFullYear() + ", " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
+    return timeLeadingZeros(now.getDate()) + "-" + timeLeadingZeros(now.getMonth()+1) +"-" + now.getFullYear() + ", " + timeLeadingZeros(now.getHours()) + ":" + timeLeadingZeros(now.getMinutes());
 }
 
 function getFileLink(url, elementId) {
