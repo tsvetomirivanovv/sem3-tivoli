@@ -1,6 +1,5 @@
 <?php
-
-require '../../database/connect.php';
+include '../../init.php';
 $conn = getConnection();
 
 // CHECK IF THERE IS ERROR
@@ -15,12 +14,15 @@ if (isset($_POST['shift_id_value'])) {
     $query = "SELECT * FROM shifts WHERE shift_id = '$id' ";
     // EXECUTES QUERY
     $result = $conn->query($query);
+    $row = $result->fetch_assoc();
 
-    while ($row = $result->fetch_assoc()) {
-        $shifts[] = $row;
+    $row['participants'] =  (int)getParticipantsByShiftId($row['shift_id']);
+    $row['participants_perc'] = (100*(int)$row['participants'])/(int)$row['max_participants'];
+
+    if($row) {
+        $response = array('success' => true, 'shift' => $row);
+    } else {
+        $response = array('success' => false);
     }
-
-    $response = array('success' => true, 'shifts' => $shifts);
     echo json_encode($response);
 }
-

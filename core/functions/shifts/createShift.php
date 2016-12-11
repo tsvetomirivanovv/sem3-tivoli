@@ -34,7 +34,7 @@ if (isset(
     $participants = $_POST['shiftParticipants'];
 
     // BUILD QUERY
-    $query = "INSERT INTO shifts (title,begin,end,close,duty_manager,category,participants) VALUES ('$sanitizedTitle', '$beginDate', '$endDate', '$closingDate', '$sanitizedDutyManager', '$sanitizedCategory', '$participants')";
+    $query = "INSERT INTO shifts (title,begin,end,close,duty_manager,category,max_participants) VALUES ('$sanitizedTitle', '$beginDate', '$endDate', '$closingDate', '$sanitizedDutyManager', '$sanitizedCategory', '$participants')";
 
     // EXECUTES QUERY
     $result = $conn->query($query);

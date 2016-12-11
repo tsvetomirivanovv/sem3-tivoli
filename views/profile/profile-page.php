@@ -16,8 +16,10 @@
                     <td class="fieldCell" colspan="2"
                         style="width: 100%;background-color: #ecf0f1;border-radius: 5px; ">
                         <span class="<?php echo $profile_status['dotColor'];?> profile_status"><span class="<?php echo $profile_status['dotClass'];?>"></span><?php echo $profile_status['isOnline'];?></span>
-                        <span style="margin-left: 20px;"><a href="edit-profile.php?username=<?php echo $profile_data['username'];?>"> <button name="editProf" class="btn btn-default">Edit profile</button></a></span>
-                        <span style="margin-left: 20px;"><a type="button" data-toggle="modal" data-target="#changePasswordModal"> <button name="editProf" class="btn btn-default">Change password</button></a></span>
+                        <?php if (user_id_from_username($_GET['username']) === $_SESSION['user_id'] || has_access($_SESSION['user_id'], 'Manager')) { ?>
+                            <span style="margin-left: 20px;"><a href="edit-profile.php?username=<?php echo $profile_data['username'];?>"> <button name="editProf" class="btn btn-default">Edit profile</button></a></span>
+                            <span style="margin-left: 20px;"><a type="button" data-toggle="modal" data-target="#changePasswordModal"> <button name="editProf" class="btn btn-default">Change password</button></a></span>
+                                       <?php } ?>
                         <span style="margin-left: 20px;"><a href="<?php echo $profile_data['cv'];?>" target="_blank"> <button name="viewCV" class="btn btn-default">CV</button></a></span>
                     </td>
                 </tr>

@@ -18,47 +18,10 @@ include '../../init.php';
         if (isset($_POST)) {
             //upload CV
             $cvFileOk = 1;
-            $cvFile = $_FILES["cvFile"];
-            if ($cvFile["error"] !== UPLOAD_ERR_OK) {
-                $cvErr = "An error occurred while uploading your CV";
-                $cvFileOk = 0;
-            }
-            // Check file size
-            if ($_FILES["cvFile"]["size"] > 500000) {
-                $cvErr = "Your CV file is too large.";
-                $cvFileOk = 0;
-            }
 
-            $cvName = preg_replace("/[^A-Z0-9._-]/i", "_", $cvFile["name"]);
-            $success ="";
-            // preserve file from temporary directory
-            if ($cvFileOk == 1) {
-                $success = move_uploaded_file($cvFile["tmp_name"], $cvName);
-            }
-            if (!$success) {
-                $cvErr = "Unable to save your CV file";
-                $cvFileOk = 0;
-            }
             //upload picture
             $pictureFileOk = 1;
-            $pictureFile = $_FILES["pictureFile"];
-            if ($pictureFile["error"] !== UPLOAD_ERR_OK) {
-                $imageErr = "An error occurred while uploading your picture";
-                $pictureFileOk = 0;
-            }
-            // Check file size max 500KB
-            if ($_FILES["pictureFile"]["size"] > 500000) {
-                $imageErr = "Your picture file is too large";
-                $pictureFileOk = 0;
-            }
-            $pictureName = preg_replace("/[^A-Z0-9._-]/i", "_", $pictureFile["name"]);
-            // preserve file from temporary directory
-            if ($pictureFileOk == 1) {
-                $success = move_uploaded_file($pictureFile["tmp_name"], $pictureName);
-            }
-            if (!$success) {
-                $pictureFileOk = 0;
-            }
+
 
             $username = $_POST['username'];
             $first_name = $_POST['firstname'];
@@ -70,6 +33,8 @@ include '../../init.php';
             $address = $_POST['address'];
             $zip = $_POST['zip'];
             $city = $_POST['city'];
+            $cv = $_POST['upload_cv'];
+            $picture = $_POST['upload_picture'];
 
             $active = 0;
             $conn = getConnection();
@@ -98,11 +63,13 @@ include '../../init.php';
             }
 
             if ($connectionOk == 1) {
-                $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cvName', '$pictureName', $active)";
+                if(strlen($picture)) {
+                    $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, profile_picture, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cv', '$picture', $active)";
+                } else {
+                    $sql = "INSERT INTO users (username, password, first_name, last_name, email, phone, address, zip_code, city, cv, active) VALUES ('$username', '" . MD5($password) . "', '$first_name', '$last_name', '$email', '$phone', '$address', '$zip', '$city', '$cv', $active)";
+                }
                 $conn->query($sql);
             } else {
-                var_dump(http_response_code(409));
-                echo json_encode($passwordErr);
                 function form_errors() {
                     $output = "";
                         $output .= "<div class=\"error\">";

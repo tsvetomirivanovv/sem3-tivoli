@@ -1,16 +1,44 @@
 <?php
+function getParticipantsByShiftId($id) {
+    $conn = getConnection();
+
+    // BUILD QUERY
+    $query = "SELECT count(*) AS participants FROM participants WHERE shift_id = " . $id . " ";
+
+    // EXECUTES QUERY
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+    return $row['participants'];
+}
+function cancel_user_booking($user_id, $shift_id){
+    $conn = getConnection();
+    $query = mysqli_query($conn, "DELETE FROM participants WHERE user_id ='$user_id' AND shift_id='$shift_id'");
+    return $query;
+}
+function has_access($user_id, $type){
+    $conn = getConnection();
+    $user_id = (int)$user_id;
+    $type = sanitize($type);
+    $query = mysqli_query($conn, "SELECT COUNT(user_id) FROM users WHERE user_id = '$user_id' AND type='$type'");
+    $row = mysqli_fetch_assoc($query);
+    return ($row['COUNT(user_id)'] == 1) ? true : false;
+}
 function reject_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "DELETE FROM users WHERE user_id = $user_id");
+    sendMail(email_from_user_id($user_id), 'Tivoli Application Rejection', "Dear Applicant, \n\nYour application has been rejected!\n\nTivoli Hotel");
 }
 function approve_account($user_id){
     $conn = getConnection();
     mysqli_query($conn, "UPDATE users SET active = 1 WHERE user_id = $user_id");
+    sendMail(email_from_user_id($user_id), 'Tivoli Account Approval', "Dear Applicant, \n\nYour account has been successfully approved!\n\nNow you can login and start booking shifts!\n\nTivoli Hotel");
 }
 function update_user_profile($user_id, $update_data) {
+
     $conn = getConnection();
     $update = array();
     array_walk($update_data, 'array_sanitize');
+
     foreach ($update_data as $field => $data) {
         $update[] = '`' . $field . '` = \'' . $data . '\'';
     }
@@ -18,16 +46,20 @@ function update_user_profile($user_id, $update_data) {
 }
 function sendMail($to, $subject, $message) {
     $mail = new PHPMailer;
+
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.mailgun.org';                     // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'postmaster@tivoliapp.c0dex.co';   // SMTP username
     $mail->Password = '25706daf439527e125efdb0d97c6cf26';                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable encryption, only 'tls' is accepted
+
     $mail->From = 'teodor@tivoliapp.c0dex.co';
     $mail->FromName = 'Tivoli App';
     $mail->addAddress($to);                 // Add a recipient
+
     $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+
     $mail->Subject = $subject;
     $mail->Body = $message;
     $mail->send();
@@ -120,6 +152,13 @@ function user_id_from_email($email) {
     $row = mysqli_fetch_assoc($query);
     return $row['user_id'];
 }
+function email_from_user_id($user_id) {
+    $conn = getConnection();
+    $user_id = sanitize($user_id);
+    $query = mysqli_query($conn, "SELECT email FROM users WHERE user_id = '$user_id'");
+    $row = mysqli_fetch_assoc($query);
+    return $row['email'];
+}
 function login($username, $password) {
     $conn = getConnection();
     $user_id = user_id_from_username($username);
@@ -136,4 +175,5 @@ function user_online($user_id) {
     $row = mysqli_fetch_assoc($query);
     return ($row['COUNT(user_id)'] == 1) ? true : false;
 }
+
 ?>
